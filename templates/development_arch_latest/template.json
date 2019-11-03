@@ -43,10 +43,18 @@
           "{{user `mouse`}}",
           "--natpf1",
           "SSH,tcp,,22,,22",
+          "--rtcuseutc",
+          "on",
           "--usbxhci",
           "on",
           "--vram",
           "{{user `vram`}}"
+        ],
+        [
+          "setextradata",
+          "global",
+          "GUI/SuppressMessages",
+          "all"
         ]
       ],
       "vm_name": "{{user `vm_name`}}"
@@ -56,6 +64,7 @@
     {
       "environment_vars": [
         "MEMORY={{user `memory`}}",
+        "NETWORK_INTERFACE={{user `network_interface`}}",
         "PACSTRAP_PACKAGES={{user `pacstrap_packages`}}",
         "ROOT_PASSWORD={{user `root_password`}}",
         "VM_NAME={{user `vm_name`}}",

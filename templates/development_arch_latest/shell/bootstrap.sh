@@ -80,6 +80,7 @@ EOF
 
 function exec_chroot {
   export -f chroot_command
+  export NETWORK_INTERFACE
   export ROOT_PASSWORD
   export sed_human_input
   export VM_NAME
@@ -120,8 +121,23 @@ EOF
 EOF
 
   echo_title 'Boot loader'
+  sed -e 's/GRUB_TIMEOUT=5/GRUB_TIMEOUT=0\nGRUB_HIDDEN_TIMEOUT=0/' \
+    < /etc/default/grub \
+    > /tmp/grub
+  mv /tmp/grub /etc/default/grub
   grub-install --target=x86_64-efi --efi-directory=/efi --bootloader-id=GRUB --removable
   grub-mkconfig -o /boot/grub/grub.cfg
+
+  echo_title 'Networking'
+  cat << EOF > /etc/systemd/network/20-wired.network
+[Match]
+Name=$NETWORK_INTERFACE
+
+[Network]
+DHCP=ipv4
+EOF
+  systemctl enable systemd-networkd
+  systemctl enable systemd-resolved
 }
 
 function echo_title {
@@ -129,3 +145,4 @@ function echo_title {
 }
 
 main "$@"
+
