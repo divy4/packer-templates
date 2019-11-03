@@ -71,6 +71,11 @@ EOF
 
   echo_title 'Chroot'
   exec_chroot
+
+  echo_title 'Unmount partitions'
+  umount -R /mnt
+
+  echo_title 'Done'
 }
 
 function exec_chroot {
@@ -100,7 +105,7 @@ function chroot_command {
   echo 'LANG=en_US.UTF-8' > /etc/locale.conf
 
   echo_title 'Network configuration'
-  echo '$VM_NAME' > /etc/hostname
+  echo "$VM_NAME" > /etc/hostname
   cat << EOF > /etc/hosts
 127.0.0.1 localhost
 ::1       localhost
@@ -113,6 +118,10 @@ EOF
   $ROOT_PASSWORD  # Enter password
   $ROOT_PASSWORD  # Confirm password
 EOF
+
+  echo_title 'Boot loader'
+  grub-install --target=x86_64-efi --efi-directory=/efi --bootloader-id=GRUB --removable
+  grub-mkconfig -o /boot/grub/grub.cfg
 }
 
 function echo_title {
