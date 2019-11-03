@@ -1,0 +1,81 @@
+{
+  "builders": [
+    {
+      "boot_command": [
+        "passwd<enter>",
+        "{{user `root_password`}}<enter>",
+        "{{user `root_password`}}<enter>",
+        "systemctl start sshd<enter>"
+      ],
+      "boot_wait": "40s",
+      "cpus": "{{user `cpus`}}",
+      "disk_size": "{{user `disk_size`}}",
+      "format": "{{user `format`}}",
+      "guest_os_type": "ArchLinux_64",
+      "hard_drive_discard": true,
+      "hard_drive_interface": "sata",
+      "hard_drive_nonrotational": true,
+      "iso_checksum": "{{user `iso_checksum`}}",
+      "iso_checksum_type": "{{user `iso_checksum_type`}}",
+      "iso_interface": "sata",
+      "iso_url": "{{user `iso_url`}}",
+      "keep_registered": true,
+      "memory": "{{user `memory`}}",
+      "output_directory": "{{user `output_base_directory`}}/{{user `vm_name`}}",
+      "post_shutdown_delay": "10s",
+      "shutdown_command": "shutdown now",
+      "shutdown_timeout": "60s",
+      "skip_export": true,
+      "ssh_password": "{{user `root_password`}}",
+      "ssh_username": "root",
+      "type": "virtualbox-iso",
+      "vboxmanage": [
+        [
+          "modifyvm",
+          "{{.Name}}",
+          "--clipboard",
+          "{{user `clipboard`}}",
+          "--draganddrop",
+          "{{user `draganddrop`}}",
+          "--firmware",
+          "{{user `firmware`}}",
+          "--mouse",
+          "{{user `mouse`}}",
+          "--natpf1",
+          "SSH,tcp,,22,,22",
+          "--rtcuseutc",
+          "on",
+          "--usbxhci",
+          "on",
+          "--vram",
+          "{{user `vram`}}"
+        ],
+        [
+          "setextradata",
+          "global",
+          "GUI/SuppressMessages",
+          "all"
+        ]
+      ],
+      "vm_name": "{{user `vm_name`}}"
+    }
+  ],
+  "provisioners": [
+    {
+      "environment_vars": [
+        "MEMORY={{user `memory`}}",
+        "NETWORK_INTERFACE={{user `network_interface`}}",
+        "PACSTRAP_PACKAGES={{user `pacstrap_packages`}}",
+        "ROOT_PASSWORD={{user `root_password`}}",
+        "VM_NAME={{user `vm_name`}}",
+        "ZONE_CITY={{user `zone_city`}}",
+        "ZONE_REGION={{user `zone_region`}}"
+      ],
+      "script": "shell/bootstrap.sh",
+      "type": "shell"
+    }
+  ],
+  "sensitive-variables": [
+    "root_password"
+  ]
+}
