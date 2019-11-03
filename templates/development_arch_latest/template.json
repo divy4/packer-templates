@@ -2,30 +2,25 @@
   "builders": [
     {
       "boot_command": [
-        "<wait60>",
+        "<wait40>",
         "passwd<enter>",
         "{{user `root_password`}}<enter>",
         "{{user `root_password`}}<enter>",
         "systemctl start sshd<enter>"
       ],
-      "cpus": 8,
-      "disk_size": 10240,
-      "export_opts": [
-        "--description",
-        "{{user `vm_description`}}",
-        "--output",
-        "{{user `output_dir`}}/{{user `vm_name`}}/{{user `vm_name`}}.{{user `output_format`}}"
-      ],
+      "cpus": "{{user `cpus`}}",
+      "disk_size": "{{user `disk_size`}}",
       "format": "{{user `output_format`}}",
       "guest_os_type": "ArchLinux_64",
       "hard_drive_discard": true,
       "hard_drive_interface": "sata",
       "hard_drive_nonrotational": true,
-      "iso_checksum": "eaa165edab76243cd30a64db472a7a09c9c98a31",
-      "iso_checksum_type": "sha1",
+      "iso_checksum": "{{user `iso_checksum`}}",
+      "iso_checksum_type": "{{user `iso_checksum_type`}}",
       "iso_interface": "sata",
-      "iso_url": "http://mirrors.edge.kernel.org/archlinux/iso/2019.11.01/archlinux-2019.11.01-x86_64.iso",
-      "memory": 8192,
+      "iso_url": "{{user `iso_url`}}",
+      "memory": "{{user `memory`}}",
+      "output_directory": "{{user `output_base_directory`}}/{{user `vm_name`}}",
       "post_shutdown_delay": "10s",
       "shutdown_command": "shutdown now",
       "shutdown_timeout": "60s",
@@ -44,15 +39,15 @@
           "efi64",
           "--mouse",
           "usbtablet",
-          "--natpf",
+          "--natpf1",
           "SSH,tcp,,22,,22",
           "--usbxhci",
           "on",
           "--vram",
-          "128"
+          "{{user `vram`}}"
         ]
       ],
-      "vm_name": "development-arch-linux"
+      "vm_name": "{{user `vm_name`}}"
     }
   ],
   "sensitive-variables": [
