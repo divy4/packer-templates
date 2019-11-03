@@ -1,6 +1,4 @@
 {
-  "admin_password": "password",
-  "admin_username": "root",
   "clipboard": "bidirectional",
   "cpus": "8",
   "disk_size": "10240",
@@ -13,7 +11,11 @@
   "memory": "8192",
   "mouse": "usbtablet",
   "output_base_directory": "../../output/",
+  "pacstrap_packages": "base efibootmgr grub linux linux-firmware",
+  "root_password": "password",
   "vm_description": "Generated with Packer",
   "vm_name": "development-arch-linux",
-  "vram": "128"
+  "vram": "128",
+  "zone_city": "Chicago",
+  "zone_region": "America"
 }
