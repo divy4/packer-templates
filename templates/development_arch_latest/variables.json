@@ -1,0 +1,22 @@
+{
+  "clipboard": "bidirectional",
+  "cpus": "8",
+  "disk_size": "102400",
+  "draganddrop": "bidirectional",
+  "firmware": "efi64",
+  "format": "ovf",
+  "iso_checksum": "eaa165edab76243cd30a64db472a7a09c9c98a31",
+  "iso_checksum_type": "sha1",
+  "iso_url": "http://mirrors.edge.kernel.org/archlinux/iso/2019.11.01/archlinux-2019.11.01-x86_64.iso",
+  "memory": "8192",
+  "mouse": "usbtablet",
+  "network_interface": "enp0s3",
+  "output_base_directory": "C:\\vms",
+  "pacstrap_packages": "base efibootmgr grub iputils linux linux-firmware",
+  "root_password": "password",
+  "vm_description": "Generated with Packer",
+  "vm_name": "dev-arch",
+  "vram": "128",
+  "zone_city": "Chicago",
+  "zone_region": "America"
+}
