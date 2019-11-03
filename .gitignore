@@ -2,7 +2,4 @@
 **/packer_cache/
 
 # For built boxes
-*.vdi
-*.ovf
-*.vmdk
 output/

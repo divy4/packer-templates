@@ -9,7 +9,7 @@ function main {
   fi
   cd "$1"
   packer validate -var-file=variables.json template.json
-  packer build -var-file=variables.json template.json
+  packer build -force -var-file=variables.json template.json
 }
 
 function echo_err {
