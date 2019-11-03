@@ -1,7 +1,7 @@
 {
   "clipboard": "bidirectional",
   "cpus": "8",
-  "disk_size": "10240",
+  "disk_size": "102400",
   "draganddrop": "bidirectional",
   "firmware": "efi64",
   "format": "ovf",
