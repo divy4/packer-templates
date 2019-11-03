@@ -1,2 +1,7 @@
 {
+  "root_password": "password",
+  "output_dir": "/c/vms/templates/",
+  "output_format": "ovf",
+  "vm_description": "Generated with Packer",
+  "vm_name": "development-arch-linux"
 }
