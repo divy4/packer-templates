@@ -1,7 +1,14 @@
 {
-  "root_password": "password",
-  "output_dir": "/c/vms/templates/",
+  "cpus": "8",
+  "disk_size": "10240",
+  "iso_checksum": "eaa165edab76243cd30a64db472a7a09c9c98a31",
+  "iso_checksum_type": "sha1",
+  "iso_url": "http://mirrors.edge.kernel.org/archlinux/iso/2019.11.01/archlinux-2019.11.01-x86_64.iso",
+  "memory": "8192",
+  "output_base_directory": "../../output/",
   "output_format": "ovf",
+  "root_password": "password",
   "vm_description": "Generated with Packer",
-  "vm_name": "development-arch-linux"
+  "vm_name": "development-arch-linux",
+  "vram": "128"
 }

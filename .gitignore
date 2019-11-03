@@ -1,5 +1,8 @@
 # Cache objects
-packer_cache/
+**/packer_cache/
 
 # For built boxes
-*.box
+*.vdi
+*.ovf
+*.vmdk
+output/
