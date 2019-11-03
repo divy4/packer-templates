@@ -2,18 +2,15 @@
 
 A collection of Packer templates
 
-## File Structure
+## Repo File Structure
 
-- common/
-- scripts/
-      - `SCRIPT-NAME-1`
-      - ...
+- output/ - The default output directory (ignored by git)
 - templates/
   - `TEMPLATE-NAME-1` - The name of the template to build
-    - `PROVISIONER`/ - A directory of files used by a provisioner
+    - `PROVISIONER`/ - A directory of template-specific files used by a specific provisioner
       - ...
-    - template.json - The main template
-    - variables.json - All non-secret variables template.json depends on
+    - template.json - The template
+    - variables.json - Template-specific variables
   - ...
 
 ### Template Directory Naming
@@ -30,6 +27,6 @@ TECHNOLOGY-OS-OSVERSION
 
 All template names should be lowercase and only have 2 hyphens in it. i.e. remove all non-alphanumeric characters and convert all uppercase letters to lowercase.
 
-### Provisioner Directory Naming
+### Builder and Provisioner Directory Naming
 
-The provisioners should be named after the `type` value in the corresponding `template.json` and should only contain lowercase letters, numbers, and/or hyphens.
+The builder and provisioner directories should be named after the `type` value in the corresponding `template.json`, removing all non-alphanumeric, non-hyphen characters and converting to lowercase.
