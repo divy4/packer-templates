@@ -6,7 +6,24 @@ set -e
 
 sed_human_input='s/\s*\([\+0-9a-zA-Z]*\).*/\1/'
 
-base_packages=(base efibootmgr grub iputils linux linux-firmware)
+# base - Base packages
+# efibootmgr - EFI mode support
+# grub - Bootloader
+# haveged - Random number generator, needed to generate session keys for ssh to start properly (see https://bbs.archlinux.org/viewtopic.php?id=241346)
+# iputils - Networking tools
+# linux - You know, probably want this one
+# linux-firmware - Firmware is pretty nice too
+# openssh - ssh server, needed to continue provisioning tools after initial run
+base_packages=(\
+  base \
+  efibootmgr \
+  grub \
+  haveged \
+  iputils \
+  linux \
+  linux-firmware \
+  openssh \
+)
 
 function main {
   echo_title 'Update the system clock'
@@ -77,11 +94,13 @@ EOF
   echo_title 'Unmount partitions'
   umount -R /mnt
 
-  echo_title 'Done!'
+  echo_title 'Done! Rebooting...'
+  sleep 1 && reboot &
 }
 
 function exec_chroot {
   export -f chroot_command
+  export -f replace
   export NETWORK_INTERFACE
   export ROOT_PASSWORD
   export sed_human_input
@@ -140,6 +159,15 @@ DHCP=ipv4
 EOF
   systemctl enable systemd-networkd
   systemctl enable systemd-resolved
+
+  echo_title 'SSH'
+  replace /etc/ssh/sshd_config '#\s*PermitRootLogin.*' 'PermitRootLogin yes'
+  systemctl enable sshd
+  systemctl enable haveged
+}
+
+function replace {
+  sed --in-place --regexp-extended "s/$2/$3/g" "$1"
 }
 
 function echo_title {
