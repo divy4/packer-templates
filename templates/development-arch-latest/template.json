@@ -33,6 +33,16 @@
         [
           "modifyvm",
           "{{.Name}}",
+          "--biosbootmenu",
+          "{{user `biosbootmenu`}}",
+          "--boot1",
+          "disk",
+          "--boot2",
+          "none",
+          "--boot3",
+          "none",
+          "--boot4",
+          "none",
           "--clipboard",
           "{{user `clipboard`}}",
           "--draganddrop",
@@ -71,7 +81,14 @@
         "ZONE_CITY={{user `zone_city`}}",
         "ZONE_REGION={{user `zone_region`}}"
       ],
+      "pause_after": "30s",
       "script": "../../common/provisioners/shell/arch_bootstrap_os.sh",
+      "type": "shell"
+    },
+    {
+      "inline": [
+        "echo 'Done!'"
+      ],
       "type": "shell"
     }
   ],
