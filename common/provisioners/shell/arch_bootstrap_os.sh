@@ -6,6 +6,8 @@ set -e
 
 sed_human_input='s/\s*\([\+0-9a-zA-Z]*\).*/\1/'
 
+base_packages=(base efibootmgr grub iputils linux linux-firmware)
+
 function main {
   echo_title 'Update the system clock'
   timedatectl set-ntp true
@@ -63,7 +65,7 @@ EOF
   cat /etc/pacman.d/mirrorlist
 
   echo_title 'Install essential packages'
-  pacstrap /mnt $PACSTRAP_PACKAGES
+  pacstrap /mnt "${base_packages[@]}" $ADDITIONAL_PACKAGES
 
   echo_title 'Fstab'
   genfstab -U /mnt >> /mnt/etc/fstab
@@ -75,7 +77,7 @@ EOF
   echo_title 'Unmount partitions'
   umount -R /mnt
 
-  echo_title 'Done'
+  echo_title 'Done!'
 }
 
 function exec_chroot {
