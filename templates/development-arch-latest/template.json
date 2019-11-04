@@ -64,14 +64,14 @@
     {
       "environment_vars": [
         "MEMORY={{user `memory`}}",
-        "NETWORK_INTERFACE={{user `network_interface`}}",
-        "PACSTRAP_PACKAGES={{user `pacstrap_packages`}}",
+        "NETWORK_INTERFACE=enp0s3",
+        "ADDITIONAL_PACKAGES={{user `additional_packages`}}",
         "ROOT_PASSWORD={{user `root_password`}}",
         "VM_NAME={{user `vm_name`}}",
         "ZONE_CITY={{user `zone_city`}}",
         "ZONE_REGION={{user `zone_region`}}"
       ],
-      "script": "shell/bootstrap.sh",
+      "script": "../../common/provisioners/shell/arch_bootstrap_os.sh",
       "type": "shell"
     }
   ],
