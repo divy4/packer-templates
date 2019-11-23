@@ -21,7 +21,7 @@
       "iso_url": "{{user `iso_url`}}",
       "keep_registered": true,
       "memory": "{{user `memory`}}",
-      "output_directory": "{{user `output_base_directory`}}/{{user `vm_name`}}",
+      "output_directory": "{{user `vm_base_directory`}}/{{user `vm_name`}}",
       "post_shutdown_delay": "10s",
       "shutdown_command": "shutdown now",
       "shutdown_timeout": "60s",
