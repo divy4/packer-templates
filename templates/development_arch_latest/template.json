@@ -2,10 +2,10 @@
   "builders": [
     {
       "boot_command": [
-        "passwd<enter>",
-        "{{user `root_password`}}<enter>",
-        "{{user `root_password`}}<enter>",
-        "systemctl start sshd<enter>"
+        "passwd<enter><wait>",
+        "{{user `root_password`}}<enter><wait>",
+        "{{user `root_password`}}<enter><wait>",
+        "systemctl start sshd<enter><wait>"
       ],
       "boot_wait": "40s",
       "cpus": "{{user `cpus`}}",
