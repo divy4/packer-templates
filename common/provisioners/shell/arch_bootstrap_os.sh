@@ -171,8 +171,12 @@ function replace {
 }
 
 function echo_title {
-  echo "##### $* #####"
+  local args_string buffer_string
+  args_string="##### $* #####"
+  buffer_string="${args_string//?/#}"
+  echo "$buffer_string"
+  echo "$args_string"
+  echo "$buffer_string"
 }
 
 main "$@"
-
