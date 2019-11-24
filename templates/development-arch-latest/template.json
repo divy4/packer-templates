@@ -81,15 +81,17 @@
         "ZONE_CITY={{user `zone_city`}}",
         "ZONE_REGION={{user `zone_region`}}"
       ],
-      "pause_after": "30s",
+      "pause_after": "5s",
       "script": "../../common/provisioners/shell/arch_bootstrap_os.sh",
       "type": "shell"
     },
     {
-      "inline": [
-        "echo 'Done!'"
-      ],
-      "type": "shell"
+      "command": "vboxmanage storageattach \"{{user `vm_name`}}\" --storagectl \"SATA Controller\" --port 1 --medium emptydrive",
+      "type": "shell-local"
+    },
+    {
+      "command": "vboxmanage startvm \"{{user `vm_name`}}\"",
+      "type": "shell-local"
     }
   ],
   "sensitive-variables": [
