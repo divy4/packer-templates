@@ -96,6 +96,7 @@ EOF
 
 function exec_chroot {
   export -f chroot_command
+  export -f echo_title
   export -f emulate_human_input
   export -f replace
   export NETWORK_INTERFACE
@@ -108,9 +109,6 @@ function exec_chroot {
 
 function chroot_command {
   set -e
-  function echo_title {
-    echo "##### $* #####"
-  }
   
   echo_title 'Time zone'
   ln -sf "/usr/share/zoneinfo/$ZONE_REGION/$ZONE_CITY" /etc/localtime
