@@ -14,7 +14,7 @@ sed_human_input='s/\s*\([\+0-9a-zA-Z]*\).*/\1/'
 # linux - You know, probably want this one
 # linux-firmware - Firmware is pretty nice too
 # openssh - ssh server, needed to continue provisioning tools after initial run
-base_packages=(\
+packages=(\
   base \
   efibootmgr \
   grub \
@@ -82,7 +82,7 @@ EOF
   cat /etc/pacman.d/mirrorlist
 
   echo_title 'Install essential packages'
-  pacstrap /mnt "${base_packages[@]}" $ADDITIONAL_PACKAGES
+  pacstrap /mnt "${packages[@]}"
 
   echo_title 'Fstab'
   genfstab -U /mnt >> /mnt/etc/fstab
