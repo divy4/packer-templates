@@ -8,7 +8,6 @@ set -e
 # efibootmgr - EFI mode support
 # grub - Bootloader
 # haveged - Random number generator, needed to generate session keys for ssh to start properly (see https://bbs.archlinux.org/viewtopic.php?id=241346)
-# iputils - Networking tools
 # linux - You know, probably want this one
 # linux-firmware - Firmware is pretty nice too
 # openssh - ssh server, needed to continue provisioning tools after initial run
@@ -17,7 +16,6 @@ packages=(\
   efibootmgr \
   grub \
   haveged \
-  iputils \
   linux \
   linux-firmware \
   openssh \
