@@ -4,8 +4,6 @@
 
 set -e
 
-sed_human_input='s/\s*\([\+0-9a-zA-Z]*\).*/\1/'
-
 # base - Base packages
 # efibootmgr - EFI mode support
 # grub - Bootloader
@@ -31,7 +29,7 @@ function main {
   timedatectl status
 
   echo_title 'Partition the disks'
-  sed -e "$sed_human_input" << EOF | fdisk /dev/sda
+  emulate_human_input << EOF | fdisk /dev/sda
   g            # create GPT partition table
   n            # new partition (efi)
   1            # partition 1
@@ -100,10 +98,10 @@ EOF
 
 function exec_chroot {
   export -f chroot_command
+  export -f emulate_human_input
   export -f replace
   export NETWORK_INTERFACE
   export ROOT_PASSWORD
-  export sed_human_input
   export VM_NAME
   export ZONE_CITY
   export ZONE_REGION
@@ -136,16 +134,13 @@ EOF
   echo "Host name is: $VM_NAME"
 
   echo_title 'Root password'
-  sed -e "$sed_human_input" << EOF | passwd
+  emulate_human_input << EOF | passwd
   $ROOT_PASSWORD  # Enter password
   $ROOT_PASSWORD  # Confirm password
 EOF
 
   echo_title 'Boot loader'
-  sed -e 's/GRUB_TIMEOUT=5/GRUB_TIMEOUT=0\nGRUB_HIDDEN_TIMEOUT=0/' \
-    < /etc/default/grub \
-    > /tmp/grub
-  mv /tmp/grub /etc/default/grub
+  replace /etc/default/grub 'GRUB_TIMEOUT=5' 'GRUB_TIMEOUT=0\nGRUB_HIDDEN_TIMEOUT=0'
   grub-install --target=x86_64-efi --efi-directory=/efi --bootloader-id=GRUB --removable
   grub-mkconfig -o /boot/grub/grub.cfg
 
@@ -164,6 +159,12 @@ EOF
   replace /etc/ssh/sshd_config '#\s*PermitRootLogin.*' 'PermitRootLogin yes'
   systemctl enable sshd
   systemctl enable haveged
+}
+
+# utils
+
+function emulate_human_input {
+  sed --expression='s/\s*\([\+0-9a-zA-Z]*\).*/\1/'
 }
 
 function replace {
