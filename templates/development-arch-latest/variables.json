@@ -1,4 +1,5 @@
 {
+  "biosbootmenu": "disabled",
   "clipboard": "bidirectional",
   "cpus": "8",
   "disk_size": "102400",
@@ -10,8 +11,6 @@
   "iso_url": "http://mirrors.edge.kernel.org/archlinux/iso/2019.11.01/archlinux-2019.11.01-x86_64.iso",
   "memory": "8192",
   "mouse": "usbtablet",
-  "network_interface": "enp0s3",
-  "pacstrap_packages": "base efibootmgr grub iputils linux linux-firmware",
   "root_password": "password",
   "vm_description": "Generated with Packer",
   "vm_name": "dev-arch",

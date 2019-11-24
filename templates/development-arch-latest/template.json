@@ -2,10 +2,10 @@
   "builders": [
     {
       "boot_command": [
-        "passwd<enter>",
-        "{{user `root_password`}}<enter>",
-        "{{user `root_password`}}<enter>",
-        "systemctl start sshd<enter>"
+        "passwd<enter><wait>",
+        "{{user `root_password`}}<enter><wait>",
+        "{{user `root_password`}}<enter><wait>",
+        "systemctl start sshd<enter><wait>"
       ],
       "boot_wait": "40s",
       "cpus": "{{user `cpus`}}",
@@ -33,6 +33,16 @@
         [
           "modifyvm",
           "{{.Name}}",
+          "--biosbootmenu",
+          "{{user `biosbootmenu`}}",
+          "--boot1",
+          "disk",
+          "--boot2",
+          "none",
+          "--boot3",
+          "none",
+          "--boot4",
+          "none",
           "--clipboard",
           "{{user `clipboard`}}",
           "--draganddrop",
@@ -64,15 +74,23 @@
     {
       "environment_vars": [
         "MEMORY={{user `memory`}}",
-        "NETWORK_INTERFACE={{user `network_interface`}}",
-        "PACSTRAP_PACKAGES={{user `pacstrap_packages`}}",
+        "NETWORK_INTERFACE=enp0s3",
         "ROOT_PASSWORD={{user `root_password`}}",
         "VM_NAME={{user `vm_name`}}",
         "ZONE_CITY={{user `zone_city`}}",
         "ZONE_REGION={{user `zone_region`}}"
       ],
-      "script": "shell/bootstrap.sh",
+      "pause_after": "5s",
+      "script": "../../common/provisioners/shell/arch_bootstrap_os.sh",
       "type": "shell"
+    },
+    {
+      "command": "vboxmanage storageattach \"{{user `vm_name`}}\" --storagectl \"SATA Controller\" --port 1 --medium emptydrive",
+      "type": "shell-local"
+    },
+    {
+      "command": "vboxmanage startvm \"{{user `vm_name`}}\"",
+      "type": "shell-local"
     }
   ],
   "sensitive-variables": [

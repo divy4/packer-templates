@@ -3,24 +3,30 @@
 set -e
 
 function main {
+  local args
   if [[ "$#" -ne 1 ]]; then
     echo 'Usage: ./build.sh TEMPLATE_DIRECTORY_PATH'
     return 1
   fi
   cd "$1"
-  local args
   args=(-var "vm_base_directory=$(get_vm_base_directory)" -var-file=variables.json template.json)
   packer validate "${args[@]}"
   packer build -force "${args[@]}"
 }
 
 function get_vm_base_directory {
-  if [[ -d "$PACKER_VM_DIR" ]]; then
-    echo "$PACKER_VM_DIR"
+  local dir
+  dir="${PACKER_VM_DIR:-"$(get_vbox_vm_directory)"}"
+  if [[ -d "$dir" ]]; then
+    echo "$dir"
   else
-    echo_err "Invalid PACKER_VM_DIR: '$PACKER_VM_DIR' is not a directory"
+    echo_err "Invalid vm directory: '$dir' is not a directory"
     return 1
   fi
+}
+
+function get_vbox_vm_directory {
+  VBoxManage list systemproperties | grep '^Default machine folder:' | awk '{print $NF}'
 }
 
 function echo_err {
