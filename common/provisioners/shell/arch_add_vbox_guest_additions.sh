@@ -2,9 +2,15 @@
 
 set -e
 
+packages=(\
+  virtualbox-guest-modules-arch \
+  virtualbox-guest-utils \
+  xf86-video-vmware \
+)
+
 function main {
   echo_title 'Installing VirtualBox Guest Additions'
-  pacman --noconfirm --sync virtualbox-guest-modules-arch virtualbox-guest-utils xf86-video-vmware
+  pacman --noconfirm --sync "${packages[@]}"
   systemctl start vboxservice
   systemctl enable vboxservice
   echo_title 'Done'
