@@ -91,6 +91,15 @@
     {
       "command": "vboxmanage startvm \"{{user `vm_name`}}\"",
       "type": "shell-local"
+    },
+    {
+      "environment_vars": [
+        "IS_SUDO_USER=true",
+        "PASSWORD={{user `non_root_password`}}",
+        "USERNAME={{user `non_root_username`}}"
+      ],
+      "script": "../../common/provisioners/shell/arch_add_user.sh",
+      "type": "shell"
     }
   ],
   "sensitive-variables": [
