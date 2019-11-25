@@ -93,7 +93,7 @@
       "type": "shell-local"
     },
     {
-      "script": "../../common/provisioners/shell/arch_install_vbox_guest_additions.sh",
+      "script": "../../common/provisioners/shell/arch_add_vbox_guest_additions.sh",
       "type": "shell"
     },
     {
