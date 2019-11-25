@@ -106,7 +106,7 @@
       "type": "shell"
     },
     {
-      "script": "../../common/provisioners/shell/arch_add_fluxbox.sh",
+      "script": "../../common/provisioners/shell/arch_add_x.sh",
       "type": "shell"
     }
   ],
