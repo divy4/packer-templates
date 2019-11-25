@@ -4,13 +4,10 @@
 
 set -e
 
-sed_human_input='s/\s*\([\+0-9a-zA-Z]*\).*/\1/'
-
 # base - Base packages
 # efibootmgr - EFI mode support
 # grub - Bootloader
 # haveged - Random number generator, needed to generate session keys for ssh to start properly (see https://bbs.archlinux.org/viewtopic.php?id=241346)
-# iputils - Networking tools
 # linux - You know, probably want this one
 # linux-firmware - Firmware is pretty nice too
 # openssh - ssh server, needed to continue provisioning tools after initial run
@@ -19,7 +16,6 @@ packages=(\
   efibootmgr \
   grub \
   haveged \
-  iputils \
   linux \
   linux-firmware \
   openssh \
@@ -31,7 +27,7 @@ function main {
   timedatectl status
 
   echo_title 'Partition the disks'
-  sed -e "$sed_human_input" << EOF | fdisk /dev/sda
+  emulate_human_input << EOF | fdisk /dev/sda
   g            # create GPT partition table
   n            # new partition (efi)
   1            # partition 1
@@ -100,10 +96,11 @@ EOF
 
 function exec_chroot {
   export -f chroot_command
+  export -f echo_title
+  export -f emulate_human_input
   export -f replace
   export NETWORK_INTERFACE
   export ROOT_PASSWORD
-  export sed_human_input
   export VM_NAME
   export ZONE_CITY
   export ZONE_REGION
@@ -112,9 +109,6 @@ function exec_chroot {
 
 function chroot_command {
   set -e
-  function echo_title {
-    echo "##### $* #####"
-  }
   
   echo_title 'Time zone'
   ln -sf "/usr/share/zoneinfo/$ZONE_REGION/$ZONE_CITY" /etc/localtime
@@ -136,16 +130,13 @@ EOF
   echo "Host name is: $VM_NAME"
 
   echo_title 'Root password'
-  sed -e "$sed_human_input" << EOF | passwd
+  emulate_human_input << EOF | passwd
   $ROOT_PASSWORD  # Enter password
   $ROOT_PASSWORD  # Confirm password
 EOF
 
   echo_title 'Boot loader'
-  sed -e 's/GRUB_TIMEOUT=5/GRUB_TIMEOUT=0\nGRUB_HIDDEN_TIMEOUT=0/' \
-    < /etc/default/grub \
-    > /tmp/grub
-  mv /tmp/grub /etc/default/grub
+  replace /etc/default/grub 'GRUB_TIMEOUT=5' 'GRUB_TIMEOUT=0\nGRUB_HIDDEN_TIMEOUT=0'
   grub-install --target=x86_64-efi --efi-directory=/efi --bootloader-id=GRUB --removable
   grub-mkconfig -o /boot/grub/grub.cfg
 
@@ -166,13 +157,23 @@ EOF
   systemctl enable haveged
 }
 
+# utils
+
+function emulate_human_input {
+  sed --expression='s/\s*\([\+0-9a-zA-Z]*\).*/\1/'
+}
+
 function replace {
   sed --in-place --regexp-extended "s/$2/$3/g" "$1"
 }
 
 function echo_title {
-  echo "##### $* #####"
+  local args_string buffer_string
+  args_string="##### $* #####"
+  buffer_string="${args_string//?/#}"
+  echo "$buffer_string"
+  echo "$args_string"
+  echo "$buffer_string"
 }
 
 main "$@"
-
