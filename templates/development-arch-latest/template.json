@@ -104,6 +104,10 @@
       ],
       "script": "../../common/provisioners/shell/arch_add_user.sh",
       "type": "shell"
+    },
+    {
+      "script": "../../common/provisioners/shell/arch_add_fluxbox.sh",
+      "type": "shell"
     }
   ],
   "sensitive-variables": [
