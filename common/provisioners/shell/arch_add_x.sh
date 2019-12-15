@@ -3,8 +3,6 @@
 set -e
 
 packages=(\
-  fluxbox \
-  xcompmgr \
   xorg-apps \
   xorg-server \
   xorg-xinit \
