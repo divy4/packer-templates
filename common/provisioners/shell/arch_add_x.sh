@@ -2,6 +2,11 @@
 
 set -e
 
+# ttf-ubuntu-font-family - Fonts, needed for fluxbox to start successfully
+# xorg-apps - A bunch of X utilities
+# xorg-server - The X server, makes the world go round
+# xorg-xinit - xinit, starts X server
+# xterm - A terminal
 packages=(\
   ttf-ubuntu-font-family \
   xorg-apps \

@@ -2,6 +2,9 @@
 
 set -e
 
+# virtualbox-guest-modules-arch - Modules needed for guest additions when using the default linux kernel
+# virtualbox-guest-utils - Guest additions
+# xf86-video-vmware - The video driver
 packages=(\
   virtualbox-guest-modules-arch \
   virtualbox-guest-utils \
