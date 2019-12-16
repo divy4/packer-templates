@@ -10,6 +10,7 @@ packages=(\
 function main {
   echo_title 'Installing fluxbox'
   pacman --noconfirm --sync "${packages[@]}"
+  sed --in-place 's/^exec.*/exec startfluxbox/g' /etc/X11/xinit/xinitrc
   echo_title 'done'
 }
 
@@ -32,4 +33,4 @@ function echo_title {
   echo "$buffer_string"
 }
 
-main "$@" 
+main "$@"
