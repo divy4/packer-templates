@@ -2,9 +2,18 @@
 
 set -e
 
+# virtualbox-guest-modules-arch - Modules needed for guest additions when using the default linux kernel
+# virtualbox-guest-utils - Guest additions
+# xf86-video-vmware - The video driver
+packages=(\
+  virtualbox-guest-modules-arch \
+  virtualbox-guest-utils \
+  xf86-video-vmware \
+)
+
 function main {
   echo_title 'Installing VirtualBox Guest Additions'
-  pacman --noconfirm --sync virtualbox-guest-modules-arch virtualbox-guest-utils xf86-video-vmware
+  pacman --noconfirm --sync "${packages[@]}"
   systemctl start vboxservice
   systemctl enable vboxservice
   echo_title 'Done'
