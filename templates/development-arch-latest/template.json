@@ -93,7 +93,7 @@
       "type": "shell-local"
     },
     {
-      "script": "../../common/provisioners/shell/arch_install_vbox_guest_additions.sh",
+      "script": "../../common/provisioners/shell/arch_add_vbox_guest_additions.sh",
       "type": "shell"
     },
     {
@@ -103,6 +103,14 @@
         "USERNAME={{user `non_root_username`}}"
       ],
       "script": "../../common/provisioners/shell/arch_add_user.sh",
+      "type": "shell"
+    },
+    {
+      "script": "../../common/provisioners/shell/arch_add_x.sh",
+      "type": "shell"
+    },
+    {
+      "script": "../../common/provisioners/shell/arch_add_fluxbox.sh",
       "type": "shell"
     }
   ],
