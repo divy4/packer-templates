@@ -15,9 +15,20 @@ packages=(\
   xterm \
 )
 
+# vboxguest - General guest additions
+# vboxvideo - Video
+# vboxsf - Shared folders
+modules=(\
+  vboxguest \
+  vboxsf \
+  vboxvideo \
+)
+
 function main {
   echo_title 'Installing X'
   pacman --noconfirm --sync "${packages[@]}"
+  add_manualy_loaded_modules "${modules[@]}"
+  echo_title 'Configuring basic setup'
   tee /etc/X11/xinit/xinitrc << EOF
 #!/bin/sh
 
@@ -55,12 +66,17 @@ EOF
 
 # utils
 
+function add_manualy_loaded_modules {
+  echo_title "Manually loading modules: $@"
+  replace /etc/mkinitcpio.config '^MODULES=\((.*)\)' "MODULES=(\1 $@)"
+}
+
 function emulate_human_input {
   sed --expression='s/\s*\([\+0-9a-zA-Z]*\).*/\1/'
 }
 
 function replace {
-  sed --in-place --regexp-extended "s/$2/$3/g" "$1"
+  sed --in-place --regexp-extended --expression="s/$2/$3/g" "$1"
 }
 
 function echo_title {
