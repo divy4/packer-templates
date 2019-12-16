@@ -2,6 +2,8 @@
 
 set -e
 
+# fluxbox - The good stuff
+# xcompmgr - Needed for transparency. Not actually used here, but helpful for later.
 packages=(\
   fluxbox \
   xcompmgr \
