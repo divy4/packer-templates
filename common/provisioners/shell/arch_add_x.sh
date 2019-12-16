@@ -3,6 +3,7 @@
 set -e
 
 packages=(\
+  ttf-ubuntu-font-family \
   xorg-apps \
   xorg-server \
   xorg-xinit \
