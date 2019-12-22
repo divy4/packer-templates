@@ -17,6 +17,7 @@
   "vm_description": "Generated with Packer",
   "vm_name": "dev-arch",
   "vram": "128",
+  "x_support": "true",
   "zone_city": "Chicago",
   "zone_region": "America"
 }

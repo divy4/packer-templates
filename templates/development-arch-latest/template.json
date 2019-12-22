@@ -112,6 +112,13 @@
     {
       "script": "../../common/provisioners/shell/arch_add_fluxbox.sh",
       "type": "shell"
+    },
+    {
+      "environment_vars": [
+        "X_SUPPORT={{user `x_support`}}"
+      ],
+      "script": "../../common/provisioners/shell/arch_add_tools.sh",
+      "type": "shell"
     }
   ],
   "sensitive-variables": [
