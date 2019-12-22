@@ -58,8 +58,8 @@ function main {
 # utils
 
 function add_manualy_loaded_modules {
-  echo_title "Manually loading modules: $@"
-  replace /etc/mkinitcpio.conf '^MODULES=\((.*)\)' "MODULES=(\1 $@)"
+  echo_title "Manually loading modules: $*"
+  replace /etc/mkinitcpio.conf '^MODULES=\((.*)\)' "MODULES=(\1 $*)"
 }
 
 function emulate_human_input {
