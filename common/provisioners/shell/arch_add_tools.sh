@@ -57,12 +57,17 @@ function main {
 
 # utils
 
+function add_manualy_loaded_modules {
+  echo_title "Manually loading modules: $@"
+  replace /etc/mkinitcpio.conf '^MODULES=\((.*)\)' "MODULES=(\1 $@)"
+}
+
 function emulate_human_input {
   sed --expression='s/\s*\([\+0-9a-zA-Z]*\).*/\1/'
 }
 
 function replace {
-  sed --in-place --regexp-extended "s/$2/$3/g" "$1"
+  sed --in-place --regexp-extended --expression="s/$2/$3/g" "$1"
 }
 
 function x_support {

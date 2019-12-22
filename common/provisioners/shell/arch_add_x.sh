@@ -68,7 +68,7 @@ EOF
 
 function add_manualy_loaded_modules {
   echo_title "Manually loading modules: $@"
-  replace /etc/mkinitcpio.config '^MODULES=\((.*)\)' "MODULES=(\1 $@)"
+  replace /etc/mkinitcpio.conf '^MODULES=\((.*)\)' "MODULES=(\1 $@)"
 }
 
 function emulate_human_input {
@@ -77,6 +77,21 @@ function emulate_human_input {
 
 function replace {
   sed --in-place --regexp-extended --expression="s/$2/$3/g" "$1"
+}
+
+function x_support {
+  case "$X_SUPPORT" in
+  true)
+    return 0
+    ;;
+  false)
+    return 1
+    ;;
+  *)
+    echo "Invalid value for X_SUPPORT: $X_SUPPORT"
+    exit 1
+    ;;
+  esac
 }
 
 function echo_title {
