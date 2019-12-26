@@ -2,10 +2,12 @@
 
 set -e
 
+# feh - An image viewer, needed for setting the background
 # virtualbox-guest-modules-arch - Modules needed for guest additions when using the default linux kernel
 # virtualbox-guest-utils - Guest additions
 # xf86-video-vmware - The video driver
 packages=(\
+  feh \
   virtualbox-guest-modules-arch \
   virtualbox-guest-utils \
   xf86-video-vmware \
