@@ -43,7 +43,7 @@
           "none",
           "--boot4",
           "none",
-          "--clipboard",
+          "--clipboard-mode",
           "{{user `clipboard`}}",
           "--draganddrop",
           "{{user `draganddrop`}}",
