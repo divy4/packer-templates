@@ -13,10 +13,25 @@ function main {
   echo_title 'Installing fluxbox'
   pacman --noconfirm --sync "${packages[@]}"
   replace /etc/X11/xinit/xinitrc '^exec.*' 'exec startfluxbox'
+  add_config_files_modules "$NON_ROOT_USERNAME" fluxbox
   echo_title 'done'
 }
 
 # utils
+
+function add_config_files_modules {
+  local user
+  user="$1"
+  echo_title "Loading configs from $@"
+  if ! command -v git; then
+    sudo pacman --noconfirm --sync git
+  fi
+  git clone --branch master --depth 1 https://github.com/divy4/config-files.git
+  cd config-files
+  sudo -u "$user" ./install.sh "${@:2}"
+  cd ..
+  rm -rf config-files/
+}
 
 function add_manualy_loaded_modules {
   echo_title "Manually loading modules: $*"
