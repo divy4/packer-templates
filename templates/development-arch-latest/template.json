@@ -110,6 +110,9 @@
       "type": "shell"
     },
     {
+      "environment_vars": [
+        "NON_ROOT_USERNAME={{user `non_root_username`}}"
+      ],
       "script": "../../common/provisioners/shell/arch_add_fluxbox.sh",
       "type": "shell"
     },
