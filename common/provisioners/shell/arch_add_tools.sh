@@ -57,7 +57,7 @@ gui_tools=(\
 gui_root_configs=(\
 )
 
-gui_non_root_configs=(\ 
+gui_non_root_configs=(\
 )
 
 function main {
@@ -90,7 +90,7 @@ function add_configs {
   local user configs
   user="$1"
   configs=("${@:2}")
-  echo_title "Loading configs for ${configs[@]}"
+  echo_title "Loading configs for ${configs[*]}"
   if ! command -v git; then
     sudo pacman --noconfirm --sync git
   fi
