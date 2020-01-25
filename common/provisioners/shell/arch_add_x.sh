@@ -66,6 +66,20 @@ EOF
 
 # utils
 
+function add_config_files_modules {
+  local user
+  user="$1"
+  echo_title "Loading configs from $@"
+  if ! command -v git; then
+    sudo pacman --noconfirm --sync git
+  fi
+  git clone --branch master --depth 1 https://github.com/divy4/config-files.git
+  cd config-files
+  sudo -u "$user" ./install.sh "${@:2}"
+  cd ..
+  rm -rf config-files/
+}
+
 function add_manualy_loaded_modules {
   echo_title "Manually loading modules: $*"
   replace /etc/mkinitcpio.conf '^MODULES=\((.*)\)' "MODULES=(\1 $*)"
