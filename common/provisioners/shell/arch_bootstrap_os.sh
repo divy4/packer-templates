@@ -159,16 +159,17 @@ EOF
 
 # utils
 
-function add_config_files_modules {
-  local user
+function add_configs {
+  local user configs
   user="$1"
-  echo_title "Loading configs from $@"
+  configs=("${@:2}")
+  echo_title "Loading configs for ${configs[@]}"
   if ! command -v git; then
     sudo pacman --noconfirm --sync git
   fi
   git clone --branch master --depth 1 https://github.com/divy4/config-files.git
   cd config-files
-  sudo -u "$user" ./install.sh "${@:2}"
+  sudo -u "$user" ./install.sh "${configs[@]}"
   cd ..
   rm -rf config-files/
 }
