@@ -41,6 +41,7 @@ non_gui_root_configs=(\
 )
 
 non_gui_non_root_configs=(\
+  fluxbox \
 )
 
 # chromium - www
