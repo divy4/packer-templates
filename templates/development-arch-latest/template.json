@@ -73,6 +73,12 @@
           "global",
           "GUI/SuppressMessages",
           "all"
+        ],
+        [
+          "setextradata",
+          "{{.Name}}",
+          "GUI/ShowMiniToolBar",
+          "false"
         ]
       ],
       "vm_name": "{{user `vm_name`}}"
