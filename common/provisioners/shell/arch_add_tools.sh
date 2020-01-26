@@ -21,9 +21,27 @@ base_services=(\
   docker \
 )
 
+base_root_configs=(\
+  nano \
+  vim \
+)
+
+base_non_root_configs=(\
+  bash \
+  git \
+  ssh \
+)
+
 # vim - For when nano is too simple
 non_gui_tools=(\
   vim \
+)
+
+non_gui_root_configs=(\
+  fluxbox \
+)
+
+non_gui_non_root_configs=(\
 )
 
 # chromium - www
@@ -37,12 +55,22 @@ gui_tools=(\
   ttf-dejavu \
 )
 
+gui_root_configs=(\
+)
+
+gui_non_root_configs=(\
+)
+
 function main {
-  local packages services
+  local packages services root_configs non_root_configs
   if x_support; then
     packages=("${base_packages[@]}" "${gui_tools[@]}")
+    root_configs=("${base_root_configs[@]}" "${gui_root_configs[@]}")
+    non_root_configs=("${base_non_root_configs[@]}" "${gui_non_root_configs[@]}")
   else
     packages=("${base_packages[@]}" "${non_gui_tools[@]}")
+    root_configs=("${base_root_configs[@]}" "${non_gui_root_configs[@]}")
+    non_root_configs=("${base_non_root_configs[@]}" "${non_gui_non_root_configs[@]}")
   fi
   services=("${base_services[@]}")
   echo_title 'Installing tools'
@@ -52,10 +80,27 @@ function main {
     systemctl start "$service"
     systemctl enable "$service"
   done
+  add_configs root "${root_configs[@]}"
+  add_configs "$NON_ROOT_USERNAME" "${non_root_configs[@]}"
   echo_title 'Done'
 }
 
 # utils
+
+function add_configs {
+  local user configs
+  user="$1"
+  configs=("${@:2}")
+  echo_title "Loading configs for ${configs[*]}"
+  if ! command -v git; then
+    sudo pacman --noconfirm --sync git
+  fi
+  git clone --branch master --depth 1 https://github.com/divy4/config-files.git
+  cd config-files
+  sudo -u "$user" ./install.sh "${configs[@]}"
+  cd ..
+  rm -rf config-files/
+}
 
 function add_manualy_loaded_modules {
   echo_title "Manually loading modules: $*"

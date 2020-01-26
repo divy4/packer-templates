@@ -43,7 +43,7 @@
           "none",
           "--boot4",
           "none",
-          "--clipboard",
+          "--clipboard-mode",
           "{{user `clipboard`}}",
           "--draganddrop",
           "{{user `draganddrop`}}",
@@ -110,11 +110,15 @@
       "type": "shell"
     },
     {
+      "environment_vars": [
+        "NON_ROOT_USERNAME={{user `non_root_username`}}"
+      ],
       "script": "../../common/provisioners/shell/arch_add_fluxbox.sh",
       "type": "shell"
     },
     {
       "environment_vars": [
+        "NON_ROOT_USERNAME={{user `non_root_username`}}",
         "X_SUPPORT={{user `x_support`}}"
       ],
       "script": "../../common/provisioners/shell/arch_add_tools.sh",
