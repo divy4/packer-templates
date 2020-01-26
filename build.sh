@@ -5,7 +5,7 @@ set -e
 function main {
   local args
   if [[ "$#" -ne 1 ]]; then
-    echo 'Usage: ./build.sh TEMPLATE_DIRECTORY_PATH'
+    echo 'Usage: ./build.sh TEMPLATE_DIRECTORY'
     return 1
   fi
   cd "$1"
@@ -26,7 +26,9 @@ function get_vm_base_directory {
 }
 
 function get_vbox_vm_directory {
-  VBoxManage list systemproperties | grep '^Default machine folder:' | awk '{print $NF}'
+  VBoxManage list systemproperties \
+    | grep '^Default machine folder:' \
+    | sed 's/^Default machine folder:\s*//g'
 }
 
 function echo_err {

@@ -2,10 +2,12 @@
 
 set -e
 
+# feh - An image viewer, needed for setting the background
 # virtualbox-guest-modules-arch - Modules needed for guest additions when using the default linux kernel
 # virtualbox-guest-utils - Guest additions
 # xf86-video-vmware - The video driver
 packages=(\
+  feh \
   virtualbox-guest-modules-arch \
   virtualbox-guest-utils \
   xf86-video-vmware \
@@ -20,6 +22,21 @@ function main {
 }
 
 # utils
+
+function add_configs {
+  local user configs
+  user="$1"
+  configs=("${@:2}")
+  echo_title "Loading configs for ${configs[*]}"
+  if ! command -v git; then
+    sudo pacman --noconfirm --sync git
+  fi
+  git clone --branch master --depth 1 https://github.com/divy4/config-files.git
+  cd config-files
+  sudo -u "$user" ./install.sh "${configs[@]}"
+  cd ..
+  rm -rf config-files/
+}
 
 function add_manualy_loaded_modules {
   echo_title "Manually loading modules: $*"
