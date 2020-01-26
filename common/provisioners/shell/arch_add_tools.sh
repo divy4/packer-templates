@@ -38,10 +38,10 @@ non_gui_tools=(\
 )
 
 non_gui_root_configs=(\
+  fluxbox \
 )
 
 non_gui_non_root_configs=(\
-  fluxbox \
 )
 
 # chromium - www
