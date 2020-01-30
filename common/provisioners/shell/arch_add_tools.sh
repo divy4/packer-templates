@@ -5,6 +5,7 @@ set -e
 # base-devel - Base development tools
 # docker - All the containers
 # git - All the changes
+# htop - System monitor
 # man - rtfm
 # nano - For when vim is difficult
 # nmap - Network scanning tool
@@ -12,6 +13,7 @@ base_packages=(\
   base-devel \
   docker \
   git \
+  htop \
   man \
   nano \
   nmap \
@@ -82,6 +84,8 @@ function main {
   done
   add_configs root "${root_configs[@]}"
   add_configs "$NON_ROOT_USERNAME" "${non_root_configs[@]}"
+  echo_title 'Adding Final Touches'
+  mkdir "/home/$NON_ROOT_USERNAME/projects"
   echo_title 'Done'
 }
 
