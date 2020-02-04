@@ -138,6 +138,10 @@
       ],
       "script": "../../common/provisioners/shell/arch_add_tools.sh",
       "type": "shell"
+    },
+    {
+      "script": "../../common/provisioners/shell/arch_harden_vm.sh",
+      "type": "shell"
     }
   ],
   "sensitive-variables": [
