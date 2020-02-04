@@ -10,7 +10,11 @@ function Main {
   $StartingDir = Get-Location
   try {
     Set-Location $TemplateDirectory
-    $PackerArgs = '-var',"vm_base_directory=$(Get-VMBaseDirectory)",'-var-file=variables.json','template.json'
+    $PackerArgs = 
+      '-var',
+      "vm_base_directory=$(Get-VMBaseDirectory)",
+      '-var-file=variables.json',
+      'template.json'
     packer validate @PackerArgs
     packer build -force @PackerArgs
   } finally {
