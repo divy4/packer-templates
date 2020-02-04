@@ -91,7 +91,7 @@ EOF
   umount -R /mnt
 
   echo_title 'Done! Rebooting...'
-  sleep 1 && shutdown now &
+  nohup bash -c 'sleep 2 && shutdown now' &
 }
 
 function exec_chroot {
