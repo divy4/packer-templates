@@ -72,7 +72,8 @@ EOF
   echo_title 'Select the mirrors'
   sed ':a;N;$!ba;s/\nServer/Server/g' < /etc/pacman.d/mirrorlist \
     | grep '^##\sUnited\sStates' \
-    | sed 's/Server\s=/\nServer =/g' \
+    | sed 's/^##\sUnited\sStates//g' \
+    | shuf \
     > /tmp/mirrorlist
   mv /tmp/mirrorlist /etc/pacman.d/mirrorlist
   cat /etc/pacman.d/mirrorlist
