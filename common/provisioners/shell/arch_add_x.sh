@@ -3,6 +3,7 @@
 set -e
 
 # alsa-utils - Audio drivers and controls
+# lal - Clock
 # ttf-ubuntu-font-family - Fonts, needed for fluxbox to start successfully
 # xorg-apps - A bunch of X utilities
 # xorg-server - The X server, makes the world go round
@@ -10,6 +11,7 @@ set -e
 # xterm - A terminal
 packages=(\
   alsa-utils \
+  lal \
   ttf-ubuntu-font-family \
   xorg-apps \
   xorg-server \

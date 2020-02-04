@@ -10,6 +10,9 @@
       "boot_wait": "40s",
       "cpus": "{{user `cpus`}}",
       "disk_size": "{{user `disk_size`}}",
+      "export_opts": [
+        "--manifest"
+      ],
       "format": "{{user `format`}}",
       "guest_os_type": "ArchLinux_64",
       "hard_drive_discard": true,
@@ -19,13 +22,11 @@
       "iso_checksum_type": "{{user `iso_checksum_type`}}",
       "iso_interface": "sata",
       "iso_url": "{{user `iso_url`}}",
-      "keep_registered": true,
       "memory": "{{user `memory`}}",
       "output_directory": "{{user `vm_base_directory`}}/{{user `vm_name`}}",
       "post_shutdown_delay": "10s",
       "shutdown_command": "shutdown now",
       "shutdown_timeout": "60s",
-      "skip_export": true,
       "ssh_password": "{{user `root_password`}}",
       "ssh_username": "root",
       "type": "virtualbox-iso",
@@ -73,6 +74,12 @@
           "global",
           "GUI/SuppressMessages",
           "all"
+        ],
+        [
+          "setextradata",
+          "{{.Name}}",
+          "GUI/ShowMiniToolBar",
+          "false"
         ]
       ],
       "vm_name": "{{user `vm_name`}}"

@@ -9,7 +9,12 @@ function main {
     return 1
   fi
   cd "$1"
-  args=(-var "vm_base_directory=$(get_vm_base_directory)" -var-file=variables.json template.json)
+  args=(\
+    -var \
+    "vm_base_directory=$(get_vm_base_directory)" \
+    -var-file=variables.json \
+    template.json \
+  )
   packer validate "${args[@]}"
   packer build -force "${args[@]}"
 }
