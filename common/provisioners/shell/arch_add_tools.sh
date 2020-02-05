@@ -25,6 +25,7 @@ base_services=(\
 
 base_root_configs=(\
   nano \
+  scripts \
   vim \
 )
 
