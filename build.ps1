@@ -27,10 +27,6 @@ function Get-VMBaseDirectory {
   if ($dir -eq $null) {
     $dir = Get-VBoxVMDirectory
   }
-  if (-Not (Test-Path $dir)) {
-    Write-Error "Invalid vm directory: '$dir' is not a directory"
-    return $false
-  }
   return $dir
 }
 
