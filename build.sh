@@ -20,14 +20,7 @@ function main {
 }
 
 function get_vm_base_directory {
-  local dir
-  dir="${PACKER_VM_DIR:-"$(get_vbox_vm_directory)"}"
-  if [[ -d "$dir" ]]; then
-    echo "$dir"
-  else
-    echo_err "Invalid vm directory: '$dir' is not a directory"
-    return 1
-  fi
+  echo "${PACKER_VM_DIR:-"$(get_vbox_vm_directory)"}"
 }
 
 function get_vbox_vm_directory {
