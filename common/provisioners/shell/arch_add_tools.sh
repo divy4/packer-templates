@@ -14,6 +14,7 @@ base_packages=(\
   docker \
   git \
   htop \
+  jq \
   man \
   nano \
   nmap \
