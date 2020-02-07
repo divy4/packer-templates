@@ -14,6 +14,7 @@ base_packages=(\
   docker \
   git \
   htop \
+  jq \
   man \
   nano \
   nmap \
@@ -62,6 +63,7 @@ gui_root_configs=(\
 
 gui_non_root_configs=(\
   chromium \
+  code \
   fluxbox \
 )
 
