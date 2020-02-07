@@ -61,6 +61,7 @@ gui_root_configs=(\
 )
 
 gui_non_root_configs=(\
+  chromium \
   fluxbox \
 )
 
