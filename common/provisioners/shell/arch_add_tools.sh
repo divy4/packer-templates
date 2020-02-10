@@ -90,6 +90,7 @@ function main {
   add_configs "$NON_ROOT_USERNAME" "${non_root_configs[@]}"
   echo_title 'Adding Final Touches'
   sudo -u "$NON_ROOT_USERNAME" mkdir "/home/$NON_ROOT_USERNAME/projects"
+  sudo -u "$NON_ROOT_USERNAME" mkdir "/home/$NON_ROOT_USERNAME/downloads"
   echo_title 'Done'
 }
 
