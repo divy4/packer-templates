@@ -11,13 +11,16 @@ set -e
 # nmap - Network scanning tool
 base_packages=(\
   base-devel \
+  bind-tools \
   docker \
   git \
   htop \
   jq \
+  kubectl \
   man \
   nano \
   nmap \
+  yq \
 )
 
 base_services=(\
@@ -55,6 +58,7 @@ gui_tools=(\
   chromium \
   code \
   gvim \
+  imagemagick \
   ttf-dejavu \
 )
 
