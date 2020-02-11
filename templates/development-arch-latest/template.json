@@ -36,6 +36,8 @@
           "{{.Name}}",
           "--accelerate2dvideo",
           "{{user `2d_acceleration`}}",
+          "--accelerate3d",
+          "{{user `3d_acceleration`}}",
           "--audio",
           "dsound",
           "--audiocontroller",
