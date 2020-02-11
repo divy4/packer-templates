@@ -37,4 +37,4 @@ function Get-VBoxVMDirectory {
     ) -replace '^Default machine folder:\s*', ''
 }
 
-Main $TemplateDirectory
+Measure-Command {Main $TemplateDirectory}
