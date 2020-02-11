@@ -9,7 +9,8 @@ function main {
   echo_title 'Enabling Firewall'
   pacman --noconfirm --sync ufw
   ufw default deny
-  ufw enable
+  echo 'y' | ufw enable
+  systemctl enable ufw
   echo_title 'Done'
 }
 
