@@ -33,4 +33,4 @@ function echo_err {
   >&2 echo "$@"
 }
 
-main "$@"
+time main "$@"
