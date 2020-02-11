@@ -19,7 +19,7 @@
   "non_root_username": "dan",
   "post_shutdown_delay": "10s",
   "root_password": "password",
-  "shutdown_timeout": "60s",
+  "shutdown_timeout": "30s",
   "vm_description": "Generated with Packer",
   "vm_name": "dev-arch",
   "vram": "128",
