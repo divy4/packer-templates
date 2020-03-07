@@ -59,6 +59,7 @@ gui_tools=(\
   code \
   gvim \
   imagemagick \
+  nemo \
   ttf-dejavu \
 )
 
