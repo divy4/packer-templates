@@ -1,0 +1,16 @@
+---
+- name: Install packages
+  package:
+    name:
+    - alsa-utils
+    - fluxbox
+    - lal
+    - ttf-ubuntu-font-family
+    - xcompmgr
+    - xorg-apps
+    - xorg-server
+    - xorg-xinit
+    - xterm
+- copy:
+    src: xinitrc
+    dest: /etc/X11/xinit/xinitrc
