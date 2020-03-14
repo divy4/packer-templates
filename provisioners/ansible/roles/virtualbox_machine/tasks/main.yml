@@ -1,0 +1,12 @@
+---
+- name: Install packages
+  package:
+    name:
+    - virtualbox-guest-modules-arch
+    - virtualbox-guest-utils
+    - xf86-video-vmware
+- name: Enable vboxservice
+  service:
+    enabled: 'yes'
+    name: vboxservice
+    state: started
