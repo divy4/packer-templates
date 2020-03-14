@@ -1,0 +1,5 @@
+---
+- name: dev_box
+  hosts: all
+  roles:
+  - dev_box

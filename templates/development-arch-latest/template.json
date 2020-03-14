@@ -114,39 +114,17 @@
       "type": "shell-local"
     },
     {
-      "script": "../../provisioners/shell/arch_add_vbox_guest_additions.sh",
-      "type": "shell"
+      "destination": "/root",
+      "source": "../../provisioners/ansible",
+      "type": "file"
     },
     {
       "environment_vars": [
-        "IS_SUDO_USER=true",
-        "PASSWORD={{user `non_root_password`}}",
-        "USERNAME={{user `non_root_username`}}"
+        "PLAYBOOK=dev_box.yml",
+        "SSH_PASSWORD={{user `root_password`}}",
+        "SSH_USER=root"
       ],
-      "script": "../../provisioners/shell/arch_add_user.sh",
-      "type": "shell"
-    },
-    {
-      "script": "../../provisioners/shell/arch_add_x.sh",
-      "type": "shell"
-    },
-    {
-      "environment_vars": [
-        "NON_ROOT_USERNAME={{user `non_root_username`}}"
-      ],
-      "script": "../../provisioners/shell/arch_add_fluxbox.sh",
-      "type": "shell"
-    },
-    {
-      "environment_vars": [
-        "NON_ROOT_USERNAME={{user `non_root_username`}}",
-        "X_SUPPORT={{user `x_support`}}"
-      ],
-      "script": "../../provisioners/shell/arch_add_tools.sh",
-      "type": "shell"
-    },
-    {
-      "script": "../../provisioners/shell/arch_harden_vm.sh",
+      "script": "../../provisioners/shell/install_and_run_ansible.sh",
       "type": "shell"
     }
   ],
