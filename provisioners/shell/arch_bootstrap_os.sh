@@ -74,7 +74,9 @@ EOF
     | grep '^##\sUnited\sStates' \
     | sed 's/^##\sUnited\sStates//g' \
     > /tmp/mirrorlist
-  mv /tmp/mirrorlist /etc/pacman.d/mirrorlist
+  chmod a+x /usr/bin/rankmirrors
+  rankmirrors --max-time 1 /tmp/mirrorlist > /etc/pacman.d/mirrorlist
+  rm /tmp/mirrorlist
   cat /etc/pacman.d/mirrorlist
 
   echo_title 'Install essential packages'
