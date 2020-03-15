@@ -1,0 +1,6 @@
+---
+development:
+  users:
+  - groups: sudo
+    name: dan
+    password: password

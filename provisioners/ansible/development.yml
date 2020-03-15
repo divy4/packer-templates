@@ -1,0 +1,6 @@
+---
+- become: 'yes'
+  hosts: development
+  name: development
+  roles:
+  - development

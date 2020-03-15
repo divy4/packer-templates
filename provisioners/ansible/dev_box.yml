@@ -1,6 +1,0 @@
----
-- become: 'yes'
-  hosts: all
-  name: dev_box
-  roles:
-  - dev_box

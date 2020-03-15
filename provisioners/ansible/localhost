@@ -1,4 +1,6 @@
 ---
 all:
-  hosts:
-    localhost
+  children:
+    development:
+      hosts:
+        localhost

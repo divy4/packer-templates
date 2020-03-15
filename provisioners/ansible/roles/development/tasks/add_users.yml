@@ -1,0 +1,25 @@
+---
+- name: Install packages
+  package:
+    name:
+    - sudo
+- group:
+    name: sudo
+  name: Create sudo group
+- group:
+    name: '{{ item.name }}'
+  loop: '{{ development.users }}'
+  name: Create user groups
+- loop: '{{ development.users }}'
+  name: Create users
+  user:
+    append: 'yes'
+    group: '{{ item.name }}'
+    groups: '{{ item.groups }}'
+    name: '{{ item.name }}'
+    password: '{{ item.password | password_hash(''sha512'') }}'
+    update_password: on_create
+- lineinfile:
+    line: '%sudo ALL=(ALL) ALL'
+    path: /etc/sudoers
+  name: Grant sudo group sudo access

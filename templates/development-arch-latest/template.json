@@ -131,7 +131,7 @@
         "ftp_proxy={{user `proxy`}}",
         "http_proxy={{user `proxy`}}",
         "https_proxy={{user `proxy`}}",
-        "PLAYBOOK=dev_box.yml",
+        "PLAYBOOK=development.yml",
         "SSH_PASSWORD={{user `root_password`}}",
         "SSH_USER=root"
       ],
