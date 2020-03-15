@@ -37,8 +37,11 @@
     config_module: '{{ item }}'
 - include_tasks: add_config_module.yml
   loop:
+  - bash
   - chromium
   - code
+  - git
+  - ssh
   vars:
     become_user: '{{ development.user.name }}'
     config_module: '{{ item }}'
