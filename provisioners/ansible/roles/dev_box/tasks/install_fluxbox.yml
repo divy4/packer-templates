@@ -14,3 +14,6 @@
 - copy:
     src: xinitrc
     dest: /etc/X11/xinit/xinitrc
+- include_tasks: add_config_module.yml
+  vars:
+    config_module: fluxbox

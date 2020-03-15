@@ -7,6 +7,8 @@
   git:
     depth: 1
     dest: /home/dan/config-files
-    force: 'yes'
     repo: 'https://github.com/divy4/config-files.git'
   name: Clone config-files repo
+- become_user: dan
+  name: Load config module
+  shell: '/home/dan/config-files/install.sh "{{ config_module }}"'
