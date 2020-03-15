@@ -94,6 +94,9 @@
   "provisioners": [
     {
       "environment_vars": [
+        "ftp_proxy={{user `proxy`}}",
+        "http_proxy={{user `proxy`}}",
+        "https_proxy={{user `proxy`}}",
         "MEMORY={{user `memory`}}",
         "NETWORK_INTERFACE=enp0s3",
         "ROOT_PASSWORD={{user `root_password`}}",
@@ -120,6 +123,9 @@
     },
     {
       "environment_vars": [
+        "ftp_proxy={{user `proxy`}}",
+        "http_proxy={{user `proxy`}}",
+        "https_proxy={{user `proxy`}}",
         "PLAYBOOK=dev_box.yml",
         "SSH_PASSWORD={{user `root_password`}}",
         "SSH_USER=root"
