@@ -12,7 +12,15 @@ function main {
   pacman --noconfirm --sync ansible sshpass
   cd ~/ansible
   export ANSIBLE_HOST_KEY_CHECKING=False
-  echo "$SSH_PASSWORD" | ansible-playbook --ask-pass --inventory localhost --user "$SSH_USER" "$PLAYBOOK"
+  echo "$SSH_PASSWORD" | \
+    ansible-playbook \
+      --ask-pass \
+      --extra-vars "ftp_proxy=$ftp_proxy" \
+      --extra-vars "http_proxy=$http_proxy" \
+      --extra-vars "https_proxy=$https_proxy" \
+      --inventory localhost \
+      --user "$SSH_USER" \
+      "$PLAYBOOK"
 }
 
 main "$@"
