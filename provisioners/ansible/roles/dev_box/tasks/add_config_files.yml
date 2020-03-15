@@ -1,0 +1,12 @@
+---
+- name: Install packages
+  package:
+    name:
+    - git
+- become_user: dan
+  git:
+    depth: 1
+    dest: /home/dan/config-files
+    force: 'yes'
+    repo: 'https://github.com/divy4/config-files.git'
+  name: Clone config-files repo
