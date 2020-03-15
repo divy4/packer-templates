@@ -1,6 +1,8 @@
 ---
 - include_role:
     name: virtualbox_machine
+- include_role:
+    name: common
 - include_tasks: add_user.yml
 - include_tasks: install_fluxbox.yml
 - include_tasks: install_tools.yml

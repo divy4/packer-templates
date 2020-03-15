@@ -1,0 +1,11 @@
+---
+- lineinfile:
+    line: PermitRootLogin no
+    path: /etc/ssh/sshd_config
+    regexp: '^(# )?PermitRootLogin '
+  name: Disable root access
+- name: Restart and enable sshd
+  service:
+    enabled: 'yes'
+    name: sshd
+    state: restarted

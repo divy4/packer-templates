@@ -1,0 +1,17 @@
+---
+- name: Install packages
+  package:
+    name:
+    - ufw
+- name: Deny incoming traffic by default
+  ufw:
+    default: deny
+- name: Limit ssh traffic
+  ufw:
+    direction: in
+    proto: tcp
+    rule: limit
+    to_port: ssh
+- name: Start and enable firewall
+  ufw:
+    state: enabled
