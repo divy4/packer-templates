@@ -93,6 +93,11 @@
   ],
   "provisioners": [
     {
+      "destination": "/usr/bin/rankmirrors",
+      "source": "../../provisioners/file/rankmirrors",
+      "type": "file"
+    },
+    {
       "environment_vars": [
         "ftp_proxy={{user `proxy`}}",
         "http_proxy={{user `proxy`}}",
