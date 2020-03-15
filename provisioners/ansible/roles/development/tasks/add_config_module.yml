@@ -1,14 +1,17 @@
+
 ---
 - name: Install packages
   package:
     name:
     - git
-- become_user: dan
+- become_user: '{{ development.user.name }}'
   git:
     depth: 1
-    dest: /home/dan/config-files
+    dest: '/home/{{ development.user.name }}/config-files'
     repo: 'https://github.com/divy4/config-files.git'
   name: Clone config-files repo
-- become_user: dan
+- become_user: '{{ become_user }}'
   name: Load config module
-  shell: '/home/dan/config-files/install.sh "{{ config_module }}"'
+  shell: >-
+    "/home/{{ development.user.name }}/config-files/install.sh" "{{
+    config_module }}"

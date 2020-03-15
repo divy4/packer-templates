@@ -1,6 +1,6 @@
 ---
 development:
-  users:
-  - groups: sudo
+  user:
+    groups: sudo
     name: dan
     password: password

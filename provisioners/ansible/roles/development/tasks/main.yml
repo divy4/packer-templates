@@ -1,5 +1,5 @@
 ---
 - include_role:
     name: virtualbox_machine
-- include_tasks: add_users.yml
+- include_tasks: add_user.yml
 - include_tasks: install_fluxbox.yml

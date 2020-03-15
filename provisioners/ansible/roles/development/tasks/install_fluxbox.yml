@@ -16,4 +16,5 @@
     dest: /etc/X11/xinit/xinitrc
 - include_tasks: add_config_module.yml
   vars:
+    become_user: "{{ development.user.name }}"
     config_module: fluxbox
