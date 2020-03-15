@@ -21,6 +21,8 @@ function main {
       --inventory localhost \
       --user "$SSH_USER" \
       "$PLAYBOOK"
+  cd
+  rm -rf ~/ansible
 }
 
 main "$@"
