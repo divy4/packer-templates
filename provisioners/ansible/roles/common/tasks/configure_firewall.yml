@@ -1,17 +1,17 @@
 ---
-- name: Install packages
+- name: 'configure_firewall : Install packages'
   package:
     name:
     - ufw
-- name: Deny incoming traffic by default
+- name: 'configure_firewall : Deny incoming traffic by default'
   ufw:
     default: deny
-- name: Limit ssh traffic
+- name: 'configure_firewall : Limit ssh traffic'
   ufw:
     direction: in
     proto: tcp
     rule: limit
     to_port: ssh
-- name: Start and enable firewall
+- name: 'configure_firewall : Start and enable firewall'
   ufw:
     state: enabled

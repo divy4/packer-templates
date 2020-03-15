@@ -3,8 +3,8 @@
     line: PermitRootLogin no
     path: /etc/ssh/sshd_config
     regexp: '^(# )?PermitRootLogin '
-  name: Disable root access
-- name: Restart and enable sshd
+  name: 'configure_sshd : Disable root access'
+- name: 'configure_sshd : Restart and enable sshd'
   service:
     enabled: 'yes'
     name: sshd

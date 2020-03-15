@@ -1,5 +1,5 @@
 ---
-- name: Install packages
+- name: 'install_tools : Install packages'
   package:
     name:
     - base-devel # Base development tools
@@ -22,7 +22,7 @@
     - yq # YAML command line tool
 - loop:
   - docker
-  name: Enable services
+  name: 'install_tools : Enable services'
   service:
     enabled: 'yes'
     name: '{{ item }}'
@@ -51,4 +51,4 @@
   loop:
   - '/home/{{ development.user.name }}/downloads'
   - '/home/{{ development.user.name }}/projects'
-  name: Create directories
+  name: 'install_tools : Create directories'

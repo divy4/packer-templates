@@ -1,5 +1,5 @@
 ---
-- name: Install packages
+- name: 'install_fluxbox : Install packages'
   package:
     name:
     - alsa-utils # Audio drivers and controls
@@ -14,6 +14,7 @@
 - copy:
     src: xinitrc
     dest: /etc/X11/xinit/xinitrc
+  name: 'install_fluxbox : Copy xinitrc'
 - include_tasks: add_config_module.yml
   vars:
     become_user: "{{ development.user.name }}"

@@ -1,11 +1,11 @@
 ---
-- name: Install packages
+- name: 'main : Install packages'
   package:
     name:
     - virtualbox-guest-modules-arch
     - virtualbox-guest-utils
     - xf86-video-vmware
-- name: Enable vboxservice
+- name: 'main : Enable vboxservice'
   service:
     enabled: 'yes'
     name: vboxservice

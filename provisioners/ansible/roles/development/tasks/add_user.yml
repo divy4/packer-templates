@@ -1,15 +1,15 @@
 ---
-- name: Install packages
+- name: 'add_user : Install packages'
   package:
     name:
     - sudo
 - group:
     name: sudo
-  name: Create sudo group
+  name: 'add_user : Create sudo group'
 - group:
     name: '{{ development.user.name }}'
-  name: Create user groups
-- name: Create user
+  name: 'add_user : Create user groups'
+- name: 'add_user : Create user'
   user:
     append: 'yes'
     group: '{{ development.user.name }}'
@@ -20,4 +20,4 @@
 - lineinfile:
     line: '%sudo ALL=(ALL) ALL'
     path: /etc/sudoers
-  name: Grant sudo group sudo access
+  name: 'add_user : Grant sudo group sudo access'

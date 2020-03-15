@@ -2,4 +2,4 @@
 - file:
     path: '/home/{{ development.user.name }}/config-files'
     state: absent
-  name: Remove config-files clone
+  name: 'cleanup : Remove config-files clone'
