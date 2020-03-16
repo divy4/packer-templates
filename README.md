@@ -4,15 +4,10 @@ A collection of Packer templates
 
 ## Repo File Structure
 
-- common/
-  - builders/
-    - `BUILDER-NAME-1`/ - A directory of common files for a builder
-      - ...
+- provisioners/
+  - `PROVISIONER-NAME-1`/ - A directory of common files for a provisioner
     - ...
-  - provisioners/
-    - `PROVISIONER-NAME-1`/ - A directory of common files for a provisioner
-      - ...
-    - ...
+  - ...
 - output/ - The default output directory (ignored by git)
 - templates/
   - `TEMPLATE-NAME-1` - The name of the template to build
