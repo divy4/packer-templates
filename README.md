@@ -5,31 +5,37 @@ A collection of Packer templates
 ## Repo File Structure
 
 - provisioners/
-  - `PROVISIONER-NAME-1`/ - A directory of common files for a provisioner
+  - `PROVISIONER_NAME_1`/ - A directory of common files for a provisioner
     - ...
   - ...
-- output/ - The default output directory (ignored by git)
-- templates/
-  - `TEMPLATE-NAME-1` - The name of the template to build
-    - `PROVISIONER`/ - A directory of template-specific files used by a specific provisioner
-      - ...
-    - template.json - The template
-    - variables.json - Template-specific variables
+- `output/` - The default output directory (ignored by git)
+- `templates/`
+  - `TEMPLATE_NAME_1/` - A template of a generic machine architecture
+    - `template.json` - The template
+    - `VARIANT_NAME_1.json` - Variables for a specific variant of the template
+    - ...
   - ...
 
-### Template Directory Naming
+### Directory Naming
 
 All templates should be named by the following pattern:
 
 ```format
-TECHNOLOGY-OS-OSVERSION
+PLATFORM_OS_PROVISIONER
 ```
 
-- TECHNOLOGY = The technology this template supports, e.g. `rabbitmq`, `docker`, etc...
-- OS = The template operating system, e.g. `windows`, `centos`, `ubuntu`, `arch`, etc...
-- OSVERSION = The version of the operating system, e.g. `2019`, `8`, `18.04`, `latest`, etc...
+And all variants should be named by the following pattern:
 
-All template names should be lowercase and only have 2 hyphens in it. i.e. remove all non-alphanumeric characters and convert all uppercase letters to lowercase.
+```format
+ROLE.json
+```
+
+- PLATFORM = The platform used to host the machine, e.g. `virtualbox`, `vmware`, etc...
+- OS = The template operating system (including version if needed), e.g. `windows`, `centos7`, `centos8`, `arch`, etc...
+- PROVISIONER = The main provisioner used in the template, e.g. `ansible`, `chef`, `shell`, etc...
+- ROLE = The role of the variant, e.g. `development`, `kubernetes_master`, etc...
+
+All template names should be lowercase and only have 2 underscores in it. i.e. remove all non-alphanumeric characters and convert all uppercase letters to lowercase. Variants follow the same rules, except that they can have any number of underscores in their name.
 
 ### Builder and Provisioner Directory Naming
 
