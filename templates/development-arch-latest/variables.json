@@ -16,8 +16,6 @@
   "iso_url": "http://mirrors.edge.kernel.org/archlinux/iso/2020.03.01/archlinux-2020.03.01-x86_64.iso",
   "memory": "8192",
   "mouse": "usbtablet",
-  "non_root_password": "password",
-  "non_root_username": "dan",
   "post_shutdown_delay": "10s",
   "proxy": "http://192.168.1.42:3128",
   "root_password": "password",
@@ -25,7 +23,6 @@
   "vm_description": "Generated with Packer",
   "vm_name": "dev-arch",
   "vram": "128",
-  "x_support": "true",
   "zone_city": "Chicago",
   "zone_region": "America"
 }

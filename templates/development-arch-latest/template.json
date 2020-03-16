@@ -138,8 +138,5 @@
       "script": "../../provisioners/shell/install_and_run_ansible.sh",
       "type": "shell"
     }
-  ],
-  "sensitive-variables": [
-    "root_password"
   ]
 }
