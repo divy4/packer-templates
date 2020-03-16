@@ -93,7 +93,15 @@
   ],
   "provisioners": [
     {
+      "destination": "/usr/bin/rankmirrors",
+      "source": "../../provisioners/file/rankmirrors",
+      "type": "file"
+    },
+    {
       "environment_vars": [
+        "ftp_proxy={{user `proxy`}}",
+        "http_proxy={{user `proxy`}}",
+        "https_proxy={{user `proxy`}}",
         "MEMORY={{user `memory`}}",
         "NETWORK_INTERFACE=enp0s3",
         "ROOT_PASSWORD={{user `root_password`}}",
@@ -102,7 +110,7 @@
         "ZONE_REGION={{user `zone_region`}}"
       ],
       "pause_after": "5s",
-      "script": "../../common/provisioners/shell/arch_bootstrap_os.sh",
+      "script": "../../provisioners/shell/arch_bootstrap_os.sh",
       "type": "shell"
     },
     {
@@ -114,43 +122,21 @@
       "type": "shell-local"
     },
     {
-      "script": "../../common/provisioners/shell/arch_add_vbox_guest_additions.sh",
-      "type": "shell"
+      "destination": "/root",
+      "source": "../../provisioners/ansible",
+      "type": "file"
     },
     {
       "environment_vars": [
-        "IS_SUDO_USER=true",
-        "PASSWORD={{user `non_root_password`}}",
-        "USERNAME={{user `non_root_username`}}"
+        "ftp_proxy={{user `proxy`}}",
+        "http_proxy={{user `proxy`}}",
+        "https_proxy={{user `proxy`}}",
+        "PLAYBOOK=development.yml",
+        "SSH_PASSWORD={{user `root_password`}}",
+        "SSH_USER=root"
       ],
-      "script": "../../common/provisioners/shell/arch_add_user.sh",
-      "type": "shell"
-    },
-    {
-      "script": "../../common/provisioners/shell/arch_add_x.sh",
-      "type": "shell"
-    },
-    {
-      "environment_vars": [
-        "NON_ROOT_USERNAME={{user `non_root_username`}}"
-      ],
-      "script": "../../common/provisioners/shell/arch_add_fluxbox.sh",
-      "type": "shell"
-    },
-    {
-      "environment_vars": [
-        "NON_ROOT_USERNAME={{user `non_root_username`}}",
-        "X_SUPPORT={{user `x_support`}}"
-      ],
-      "script": "../../common/provisioners/shell/arch_add_tools.sh",
-      "type": "shell"
-    },
-    {
-      "script": "../../common/provisioners/shell/arch_harden_vm.sh",
+      "script": "../../provisioners/shell/install_and_run_ansible.sh",
       "type": "shell"
     }
-  ],
-  "sensitive-variables": [
-    "root_password"
   ]
 }
