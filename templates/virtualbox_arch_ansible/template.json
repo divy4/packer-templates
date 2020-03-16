@@ -27,8 +27,8 @@
       "post_shutdown_delay": "{{user `post_shutdown_delay`}}",
       "shutdown_command": "shutdown now",
       "shutdown_timeout": "{{user `shutdown_timeout`}}",
-      "ssh_password": "{{user `root_password`}}",
-      "ssh_username": "root",
+      "ssh_password": "{{user `ssh_password`}}",
+      "ssh_username": "{{user `ssh_username`}}",
       "type": "virtualbox-iso",
       "vboxmanage": [
         [
@@ -132,8 +132,8 @@
         "http_proxy={{user `proxy`}}",
         "https_proxy={{user `proxy`}}",
         "PLAYBOOK=development.yml",
-        "SSH_PASSWORD={{user `root_password`}}",
-        "SSH_USER=root"
+        "SSH_PASSWORD={{user `ssh_password`}}",
+        "SSH_USERNAME={{user `ssh_username`}}"
       ],
       "script": "../../provisioners/shell/install_and_run_ansible.sh",
       "type": "shell"
