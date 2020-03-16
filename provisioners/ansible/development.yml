@@ -1,0 +1,10 @@
+---
+- become: 'yes'
+  environment:
+    ftp_proxy: '{{ ftp_proxy }}'
+    http_proxy: '{{ http_proxy }}'
+    https_proxy: '{{ https_proxy }}'
+  hosts: development
+  name: development
+  roles:
+  - development

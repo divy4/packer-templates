@@ -1,0 +1,54 @@
+---
+- name: 'install_tools : Install packages'
+  package:
+    name:
+    - base-devel # Base development tools
+    - bind-tools # Network debugging tools
+    - bmon # Network monitor
+    - chromium # Internet browser
+    - code # GUI text editor
+    - docker # All the containers
+    - git # All the changes
+    - gvim # Vim with mouse support in terminal
+    - htop # System monitor
+    - imagemagick # Image command line tool/screenshots
+    - jq # JSON command line tool
+    - kubectl # Kubernetes cluster controller
+    - man # Manuals
+    - nano # Basic text editor
+    - nemo # File browser
+    - nmap # Port scanning tool
+    - ttf-dejavu # More fonts
+    - yq # YAML command line tool
+- loop:
+  - docker
+  name: 'install_tools : Enable services'
+  service:
+    enabled: 'yes'
+    name: '{{ item }}'
+    state: started
+- include_tasks: add_config_module.yml
+  loop:
+  - nano
+  - scripts
+  - vim
+  vars:
+    become_user: root
+    config_module: '{{ item }}'
+- include_tasks: add_config_module.yml
+  loop:
+  - bash
+  - chromium
+  - code
+  - git
+  - ssh
+  vars:
+    become_user: '{{ development.user.name }}'
+    config_module: '{{ item }}'
+- file:
+    path: '{{ item }}'
+    state: directory
+  loop:
+  - '/home/{{ development.user.name }}/downloads'
+  - '/home/{{ development.user.name }}/projects'
+  name: 'install_tools : Create directories'

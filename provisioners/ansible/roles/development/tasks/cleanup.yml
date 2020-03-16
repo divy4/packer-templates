@@ -1,0 +1,5 @@
+---
+- file:
+    path: '/home/{{ development.user.name }}/config-files'
+    state: absent
+  name: 'cleanup : Remove config-files clone'

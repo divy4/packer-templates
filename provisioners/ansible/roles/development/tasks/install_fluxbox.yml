@@ -1,0 +1,21 @@
+---
+- name: 'install_fluxbox : Install packages'
+  package:
+    name:
+    - alsa-utils # Audio drivers and controls
+    - fluxbox # Window manager
+    - lal # Clock
+    - ttf-ubuntu-font-family # Fonts, needed for fluxbox to start successfully
+    - xcompmgr # Transparency
+    - xorg-apps # A bunch of X utilities
+    - xorg-server # The X server, makes the world go round
+    - xorg-xinit # xinit, starts X server
+    - xterm # A terminal
+- copy:
+    src: xinitrc
+    dest: /etc/X11/xinit/xinitrc
+  name: 'install_fluxbox : Copy xinitrc'
+- include_tasks: add_config_module.yml
+  vars:
+    become_user: "{{ development.user.name }}"
+    config_module: fluxbox
