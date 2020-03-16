@@ -20,6 +20,8 @@
   "proxy": "http://192.168.1.42:3128",
   "root_password": "password",
   "shutdown_timeout": "30s",
+  "ssh_password": "password",
+  "ssh_username": "root",
   "vm_description": "Generated with Packer",
   "vm_name": "dev-arch",
   "vram": "128",

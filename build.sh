@@ -3,16 +3,20 @@
 set -e
 
 function main {
-  local args
-  if [[ "$#" -ne 1 ]]; then
-    echo 'Usage: ./build.sh TEMPLATE_DIRECTORY'
+  local args var_file
+  if [[ "$#" -ne 1 ]] \
+      || [[ ! -f "$1" ]] \
+      || [[ "$1" != *.json ]] \
+      || [[ "$(basename "$1")" == "template.json" ]]; then
+    echo 'Usage: ./build.sh TEMPLATE_VARIANT_JSON'
     return 1
   fi
-  cd "$1"
+  var_file="$(realpath "$1")"
+  cd "$(dirname "$1")"
   args=(\
     -var \
     "vm_base_directory=$(get_vm_base_directory)" \
-    -var-file=variables.json \
+    "-var-file=$var_file" \
     template.json \
   )
   packer validate "${args[@]}"
