@@ -15,3 +15,8 @@
 - name: 'configure_firewall : Start and enable firewall'
   ufw:
     state: enabled
+- name: 'configure_firewall : Start and enable firewall for real (ufw bug)'
+  service:
+    enabled: 'yes'
+    name: ufw
+    state: started
