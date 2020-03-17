@@ -131,7 +131,7 @@
         "ftp_proxy={{user `proxy`}}",
         "http_proxy={{user `proxy`}}",
         "https_proxy={{user `proxy`}}",
-        "PLAYBOOK=development.yml",
+        "PLAYBOOK={{user `ansible_playbook`}}",
         "SSH_PASSWORD={{user `ssh_password`}}",
         "SSH_USERNAME={{user `ssh_username`}}"
       ],
