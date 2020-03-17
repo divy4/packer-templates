@@ -1,8 +1,13 @@
 ---
 - lineinfile:
+    line: PasswordAuthentication no
+    path: /etc/ssh/sshd_config
+    regexp: 'PasswordAuthentication (yes|no)'
+  name: 'configure_sshd : Disable root access'
+- lineinfile:
     line: PermitRootLogin no
     path: /etc/ssh/sshd_config
-    regexp: '^(# )?PermitRootLogin '
+    regexp: 'PermitRootLogin (yes|no)'
   name: 'configure_sshd : Disable root access'
 - name: 'configure_sshd : Restart and enable sshd'
   service:
