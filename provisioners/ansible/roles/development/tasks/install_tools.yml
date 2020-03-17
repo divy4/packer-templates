@@ -11,7 +11,6 @@
     - git # All the changes
     - gvim # Vim with mouse support in terminal
     - htop # System monitor
-    - imagemagick # Image command line tool/screenshots
     - jq # JSON command line tool
     - kubectl # Kubernetes cluster controller
     - man # Manuals
