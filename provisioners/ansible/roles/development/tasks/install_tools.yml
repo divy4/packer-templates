@@ -44,7 +44,8 @@
   vars:
     become_user: '{{ development.user.name }}'
     config_module: '{{ item }}'
-- file:
+- become_user: '{{ development.user.name }}'
+  file:
     path: '{{ item }}'
     state: directory
   loop:
