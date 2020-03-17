@@ -3,7 +3,7 @@ set -e
 
 function main {
   local var
-  for var in PLAYBOOK SSH_PASSWORD SSH_USER; do
+  for var in PLAYBOOK SSH_PASSWORD SSH_USERNAME; do
     if [[ -z "${!var}" ]]; then
       echo "Error: $var is not set"
       return 1
@@ -19,7 +19,7 @@ function main {
       --extra-vars "http_proxy=$http_proxy" \
       --extra-vars "https_proxy=$https_proxy" \
       --inventory localhost \
-      --user "$SSH_USER" \
+      --user "$SSH_USERNAME" \
       "$PLAYBOOK"
   cd
   rm -rf ~/ansible
