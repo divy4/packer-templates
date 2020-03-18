@@ -98,6 +98,7 @@ EOF
 
 function exec_chroot {
   export -f chroot_command
+  export -f configure_time_zone
   export -f echo_title
   export -f emulate_human_input
   export -f replace
@@ -112,10 +113,7 @@ function exec_chroot {
 function chroot_command {
   set -e
   
-  echo_title 'Time zone'
-  ln -sf "/usr/share/zoneinfo/$ZONE_REGION/$ZONE_CITY" /etc/localtime
-  hwclock --systohc
-  echo "Zone set to $ZONE_REGION/$ZONE_CITY"
+  configure_time_zone
 
   echo_title 'Localization'
   echo 'en_US.UTF-8 UTF-8' > /etc/locale.gen
@@ -157,6 +155,34 @@ EOF
   replace /etc/ssh/sshd_config '#\s*PermitRootLogin.*' 'PermitRootLogin yes'
   systemctl enable sshd
   systemctl enable haveged
+}
+
+function configure_time_zone {
+  echo_title 'Time Zone'
+  cat << EOF > /etc/systemd/system/time-zone-sync.service
+[Unit]
+Description=Time Zone Sync
+Wants=network-online.target
+After=network-online.target
+StartLimitIntervalSec=0
+
+[Service]
+Type=oneshot
+ExecStart=bash -c 'timedatectl set-timezone "$(curl --fail https://ipapi.co/timezone)"'
+RemainAfterExit=yes
+Restart=on-failure
+RestartSec=60
+
+[Install]
+WantedBy=multi-user.target
+EOF
+  systemctl daemon-reload
+  systemctl start time-zone-sync.service
+  systemctl enable time-zone-sync.service
+
+  hwclock --systohc # sync hardware clock
+
+  timedatectl
 }
 
 # utils
