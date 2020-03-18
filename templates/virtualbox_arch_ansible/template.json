@@ -105,9 +105,7 @@
         "MEMORY={{user `memory`}}",
         "NETWORK_INTERFACE=enp0s3",
         "ROOT_PASSWORD={{user `root_password`}}",
-        "VM_NAME={{user `vm_name`}}",
-        "ZONE_CITY={{user `zone_city`}}",
-        "ZONE_REGION={{user `zone_region`}}"
+        "VM_NAME={{user `vm_name`}}"
       ],
       "pause_after": "5s",
       "script": "../../provisioners/shell/arch_bootstrap_os.sh",
