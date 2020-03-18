@@ -25,7 +25,5 @@
   "ssh_username": "root",
   "vm_description": "Generated with Packer",
   "vm_name": "dev-arch",
-  "vram": "128",
-  "zone_city": "Chicago",
-  "zone_region": "America"
+  "vram": "128"
 }
