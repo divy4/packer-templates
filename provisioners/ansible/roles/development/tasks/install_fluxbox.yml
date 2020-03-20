@@ -15,8 +15,10 @@
     - xorg-xmessage # X server message display, needed for when things go bad
     - xterm # A terminal
 - copy:
-    src: xinitrc
     dest: /etc/X11/xinit/xinitrc
+    mode: 644
+    owner: root
+    src: xinitrc
   name: 'install_fluxbox : Copy xinitrc'
 - include_tasks: add_config_module.yml
   vars:
