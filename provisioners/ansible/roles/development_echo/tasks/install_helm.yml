@@ -1,0 +1,49 @@
+---
+- get_url:
+    checksum: '{{ development_echo.install_helm.helm2.checksum }}'
+    dest: /tmp/temp.tar.gz
+    group: root
+    mode: 0644
+    owner: root
+    url: 'https://get.helm.sh/helm-v{{ development_echo.install_helm.helm2.version }}-linux-amd64.tar.gz'
+  name: 'install_helm : download helm 2'
+- name: 'install_helm : decompress helm 2'
+  unarchive:
+    dest: /usr/local/bin/
+    exclude:
+    - linux-amd64/README.md
+    - linux-amd64/LICENSE
+    extra_opts:
+    - '--strip-components=1'
+    - '--transform=flags=r;s|helm|helm2|'
+    group: root
+    mode: 755
+    owner: root
+    remote_src: 'no'
+    src: /tmp/temp.tar.gz
+- get_url:
+    checksum: '{{ development_echo.install_helm.helm3.checksum }}'
+    dest: /tmp/temp.tar.gz
+    group: root
+    mode: 0644
+    owner: root
+    url: 'https://get.helm.sh/helm-v{{ development_echo.install_helm.helm3.version }}-linux-amd64.tar.gz'
+  name: 'install_helm : download helm 3'
+- name: 'install_helm : decompress helm 3'
+  unarchive:
+    dest: /usr/local/bin/
+    exclude:
+    - linux-amd64/README.md
+    - linux-amd64/LICENSE
+    extra_opts:
+    - '--strip-components=1'
+    - '--transform=flags=r;s|helm|helm3|'
+    group: root
+    mode: 755
+    owner: root
+    remote_src: 'no'
+    src: /tmp/temp.tar.gz
+- file:
+    path: /tmp/temp.tar.gz
+    state: absent
+  name: 'install_helm : cleanup'

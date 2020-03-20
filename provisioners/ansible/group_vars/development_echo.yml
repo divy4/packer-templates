@@ -5,6 +5,13 @@ development:
     name: divy
     password: password
 development_echo:
+  install_helm:
+    helm2:
+      checksum: 'sha256:9678eb726d6870e8eded204190357a0f494ed9d1803781b4bb80dde6427b086e'
+      version: 2.16.3
+    helm3:
+      checksum: 'sha256:e6be589df85076108c33e12e60cfb85dcd82c5d756a6f6ebc8de0ee505c9fd4c'
+      version: 3.1.2
   install_sops:
     checksum: 'sha256:610FCA9687D1326EF2E1A66699A740F5DBD5AC8130190275959DA737EC52F096'
     version: 3.5.0
