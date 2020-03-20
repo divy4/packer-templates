@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+set -e
+
+AUTH_GROUP='ANYCONNECT-AGENT-VPN'
+PID_FILE='/var/run/openconnect.pid'
+SERVER_CERTIFICATE='pin-sha256:v//AK7zXrODNO9JTvbCBSNo82Z20dBmfd5L4zsJegEo='
+SERVER='vpn.echo.com'
+
+function main {
+  sudo openconnect "$SERVER" \
+    --authgroup="$AUTH_GROUP" \
+    --background \
+    --pid-file "$PID_FILE" \
+    --servercert="$SERVER_CERTIFICATE"
+}
+
+main "$@"
