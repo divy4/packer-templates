@@ -1,0 +1,6 @@
+---
+development:
+  user:
+    groups: sudo
+    name: divy
+    password: password

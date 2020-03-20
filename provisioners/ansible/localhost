@@ -2,5 +2,6 @@
 all:
   children:
     development:
-      hosts:
-        localhost
+      hosts: localhost
+    development_echo:
+      hosts: localhost

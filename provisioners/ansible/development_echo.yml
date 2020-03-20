@@ -4,8 +4,8 @@
     ftp_proxy: '{{ ftp_proxy | default() }}'
     http_proxy: '{{ http_proxy | default() }}'
     https_proxy: '{{ https_proxy | default() }}'
-  hosts: development
-  name: development
+  hosts: development_echo
+  name: development_echo
   roles:
   - virtualbox_machine
   - common
