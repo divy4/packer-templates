@@ -4,3 +4,7 @@ development:
     groups: sudo
     name: divy
     password: password
+development_echo:
+  install_sops:
+    checksum: 'sha256:610FCA9687D1326EF2E1A66699A740F5DBD5AC8130190275959DA737EC52F096'
+    version: 3.5.0

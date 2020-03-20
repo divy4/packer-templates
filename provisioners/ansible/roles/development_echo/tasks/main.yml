@@ -1,3 +1,4 @@
 ---
 - include_tasks: install_remmina.yml
+- include_tasks: install_sops.yml
 - include_tasks: install_vpn.yml
