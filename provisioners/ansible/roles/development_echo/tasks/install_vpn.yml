@@ -5,13 +5,13 @@
     - openconnect
 - copy:
     dest: /usr/local/bin/
-    mode: 755
+    mode: '755'
     owner: root
     src: startvpn
   name: 'install_vpn : Copy startvpn script'
 - copy:
     dest: /usr/local/bin/
-    mode: 755
+    mode: '755'
     owner: root
     src: stopvpn
   name: 'install_vpn : Copy stopvpn script'

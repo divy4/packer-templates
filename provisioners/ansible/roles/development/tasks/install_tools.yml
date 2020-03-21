@@ -46,7 +46,7 @@
     config_module: '{{ item }}'
 - become_user: '{{ development.user.name }}'
   file:
-    mode: 755
+    mode: '755'
     owner: '{{ development.user.name }}'
     path: '{{ item }}'
     state: directory

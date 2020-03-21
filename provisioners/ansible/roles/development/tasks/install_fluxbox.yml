@@ -16,7 +16,7 @@
     - xterm # A terminal
 - copy:
     dest: /etc/X11/xinit/xinitrc
-    mode: 644
+    mode: '644'
     owner: root
     src: xinitrc
   name: 'install_fluxbox : Copy xinitrc'
