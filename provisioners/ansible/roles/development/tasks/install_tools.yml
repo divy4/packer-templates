@@ -17,8 +17,11 @@
     - nano # Basic text editor
     - nemo # File browser
     - nmap # Port scanning tool
+    - tmux # Teminal multiplexer
     - ttf-dejavu # More fonts
+    - unzip # Unzip zip files
     - yq # YAML command line tool
+    - zip # Zip zip files
 - loop:
   - docker
   name: 'install_tools : Enable services'
@@ -46,6 +49,8 @@
     config_module: '{{ item }}'
 - become_user: '{{ development.user.name }}'
   file:
+    mode: '755'
+    owner: '{{ development.user.name }}'
     path: '{{ item }}'
     state: directory
   loop:

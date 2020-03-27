@@ -1,0 +1,12 @@
+---
+- get_url:
+    checksum: '{{ development_echo.install_sops.checksum }}'
+    dest: /usr/local/bin/sops
+    group: root
+    mode: '755'
+    owner: root
+    url: >-
+      https://github.com/mozilla/sops/releases/download/v{{
+      development_echo.install_sops.version }}/sops-v{{
+      development_echo.install_sops.version }}.linux
+  name: 'install_sops : Download executable'

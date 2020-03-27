@@ -1,0 +1,6 @@
+---
+- include_tasks: install_remmina.yml
+- include_tasks: install_sops.yml
+- include_tasks: install_helm.yml
+- include_tasks: install_slack.yml
+- include_tasks: install_vpn.yml
