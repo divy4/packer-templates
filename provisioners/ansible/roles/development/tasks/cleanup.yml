@@ -1,8 +1,0 @@
----
-- file:
-    path: '/home/{{ item }}/config-files'
-    state: absent
-  loop:
-  - root
-  - '{{ development.user.name }}'
-  name: 'cleanup : Remove config-files clone'
