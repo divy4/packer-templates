@@ -2,4 +2,3 @@
 - include_tasks: add_user.yml
 - include_tasks: install_fluxbox.yml
 - include_tasks: install_tools.yml
-- include_tasks: cleanup.yml
