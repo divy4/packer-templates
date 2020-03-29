@@ -2,3 +2,7 @@
 - include_tasks: add_user.yml
 - include_tasks: install_fluxbox.yml
 - include_tasks: install_tools.yml
+- include_tasks: add_config_module.yml
+  vars:
+    become_user: "{{ development.user.name }}"
+    config_module: fluxbox

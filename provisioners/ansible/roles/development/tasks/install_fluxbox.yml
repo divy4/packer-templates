@@ -20,7 +20,3 @@
     owner: root
     src: xinitrc
   name: 'install_fluxbox : Copy xinitrc'
-- include_tasks: add_config_module.yml
-  vars:
-    become_user: "{{ development.user.name }}"
-    config_module: fluxbox
