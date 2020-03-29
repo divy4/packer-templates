@@ -4,3 +4,7 @@
 - include_tasks: install_helm.yml
 - include_tasks: install_slack.yml
 - include_tasks: install_vpn.yml
+- include_tasks: add_config_module.yml
+  vars:
+    become_user: "{{ development_echo.user.name }}"
+    config_module: fluxbox
