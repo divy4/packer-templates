@@ -1,5 +1,9 @@
 ---
 development:
+  install_tools:
+    yq:
+      checksum: 7C77A1D71A42DED8335A2A2629E0C77C5D7FB331
+      version: 3.2.1
   user:
     groups: sudo
     name: dan
