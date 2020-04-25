@@ -20,8 +20,17 @@
     - tmux # Teminal multiplexer
     - ttf-dejavu # More fonts
     - unzip # Unzip zip files
-    - yq # YAML command line tool
     - zip # Zip zip files
+- get_url:
+    checksum: '{{ development.install_tools.yq.checksum }}'
+    dest: /usr/local/bin/yq
+    group: root
+    mode: '755'
+    owner: root
+    url: >-
+      https://github.com/mikefarah/yq/releases/download/{{
+      development.install_tools.yq.version }}/yq_linux_amd64
+  name: 'install_tools : Install yq'
 - loop:
   - docker
   name: 'install_tools : Enable services'
