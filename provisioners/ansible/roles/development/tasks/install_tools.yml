@@ -17,6 +17,7 @@
     - nano # Basic text editor
     - nemo # File browser
     - nmap # Port scanning tool
+    - shellcheck # Shell linter
     - tmux # Teminal multiplexer
     - ttf-dejavu # More fonts
     - unzip # Unzip zip files
