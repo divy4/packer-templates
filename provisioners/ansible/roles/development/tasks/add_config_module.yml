@@ -4,7 +4,7 @@
   package:
     name:
     - git
-- become_user: '{{ development_echo.user.name }}'
+- become_user: '{{ development.user.name }}'
   git:
     depth: 1
     dest: '/tmp/config-files'
