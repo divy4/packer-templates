@@ -19,8 +19,9 @@ function main {
       --extra-vars "http_proxy=$http_proxy" \
       --extra-vars "https_proxy=$https_proxy" \
       --inventory localhost \
+      --limit "$PLAYBOOK" \
       --user "$SSH_USERNAME" \
-      "$PLAYBOOK"
+      "$PLAYBOOK.yml"
   cd
   rm -rf ~/ansible
 }
