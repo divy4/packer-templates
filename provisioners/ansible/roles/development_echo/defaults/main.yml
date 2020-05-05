@@ -1,13 +1,4 @@
 ---
-development:
-  install_tools:
-    yq:
-      checksum: 'sha256:11A830FFB72AAD0EAA7640EF69637068F36469BE4F68A93DA822FBE454E998F8'
-      version: 3.2.1
-  user:
-    groups: sudo
-    name: divy
-    password: password
 development_echo:
   install_helm:
     helm2:
@@ -24,4 +15,4 @@ development_echo:
     checksum: 'sha256:610FCA9687D1326EF2E1A66699A740F5DBD5AC8130190275959DA737EC52F096'
     version: 3.5.0
   user:
-    name: '{{ development.user.name }}'
+    name: dan
