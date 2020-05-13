@@ -8,6 +8,7 @@
     - chromium # Internet browser
     - code # GUI text editor
     - docker # All the containers
+    - dos2unix # Convert LF <==> CRLF
     - git # All the changes
     - gvim # Vim with mouse support in terminal
     - htop # System monitor
