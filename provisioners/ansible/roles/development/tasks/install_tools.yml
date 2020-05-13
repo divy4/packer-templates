@@ -9,6 +9,7 @@
     - code # GUI text editor
     - docker # All the containers
     - dos2unix # Convert LF <==> CRLF
+    - expect # Make scripts pretend they're human
     - git # All the changes
     - gvim # Vim with mouse support in terminal
     - htop # System monitor
