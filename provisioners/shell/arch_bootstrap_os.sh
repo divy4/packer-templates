@@ -31,6 +31,7 @@ function main {
   select_pacman_mirrors
   install_packages
   generate_fstab
+  configure_dns
   exec_chroot
   exit_install_and_shutdown
 }
@@ -111,6 +112,11 @@ function generate_fstab {
   echo_title 'Generate fstab'
   genfstab -U /mnt >> /mnt/etc/fstab
   cat /mnt/etc/fstab
+}
+
+function configure_dns {
+  echo_title 'Enabling systemd-resolved DNS'
+  ln --force --symbolic /run/systemd/resolve/stub-resolv.conf /mnt/etc/resolv.conf
 }
 
 function exec_chroot {
