@@ -14,7 +14,6 @@
     - gvim # Vim with mouse support in terminal
     - htop # System monitor
     - jq # JSON command line tool
-    - kubectl # Kubernetes cluster controller
     - man # Manuals
     - nano # Basic text editor
     - nemo # File browser
