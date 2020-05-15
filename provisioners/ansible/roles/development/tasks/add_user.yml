@@ -4,11 +4,9 @@
     name:
     - sudo
 - group:
-    name: sudo
-  name: 'add_user : Create sudo group'
-- group:
-    name: '{{ development.user.name }}'
-  name: 'add_user : Create user groups'
+    name: '{{ item }}'
+  loop: '{{ development.user.groups + [ development.user.name ] }}'
+  name: 'add_user : Create groups'
 - name: 'add_user : Create user'
   user:
     append: 'yes'
