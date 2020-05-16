@@ -33,13 +33,6 @@
       https://github.com/mikefarah/yq/releases/download/{{
       development.install_tools.yq.version }}/yq_linux_amd64
   name: 'install_tools : Install yq'
-- loop:
-  - docker
-  name: 'install_tools : Enable services'
-  service:
-    enabled: 'yes'
-    name: '{{ item }}'
-    state: started
 - include_tasks: add_config_module.yml
   loop:
   - nano

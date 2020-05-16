@@ -2,6 +2,7 @@
 - include_tasks: add_user.yml
 - include_tasks: install_fluxbox.yml
 - include_tasks: install_tools.yml
+- include_tasks: install_docker.yml
 - include_tasks: install_minikube.yml
 - include_tasks: add_config_module.yml
   vars:
