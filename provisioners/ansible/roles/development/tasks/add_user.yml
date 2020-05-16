@@ -1,21 +1,27 @@
 ---
-- name: 'add_user : Install packages'
+- name: 'add_user ({{name}}) : Install sudo'
   package:
     name:
     - sudo
+  when: is_sudo_user == "yes"
+- group:
+    name: sudo
+  name: 'add_user ({{name}}) : Create sudo group'
+  when: is_sudo_user == "yes"
 - group:
     name: '{{ item }}'
-  loop: '{{ development.user.groups + [ development.user.name ] }}'
-  name: 'add_user : Create groups'
-- name: 'add_user : Create user'
+  loop: '{{ user_groups + [ name ] | unique }}'
+  name: 'add_user ({{name}}) : Create groups'
+- name: 'add_user ({{name}}) : Create user'
   user:
     append: 'yes'
-    group: '{{ development.user.name }}'
-    groups: '{{ development.user.groups }}'
-    name: '{{ development.user.name }}'
-    password: '{{ development.user.password | password_hash(''sha512'') }}'
+    group: '{{ name }}'
+    groups: '{{ user_groups }}'
+    name: '{{ name }}'
+    password: '{{ password | password_hash(''sha512'') }}'
     update_password: on_create
 - lineinfile:
     line: '%sudo ALL=(ALL) ALL'
     path: /etc/sudoers
-  name: 'add_user : Grant sudo group sudo access'
+  name: 'add_user ({{name}}) : Grant sudo group sudo access'
+  when: is_sudo_user == "yes"

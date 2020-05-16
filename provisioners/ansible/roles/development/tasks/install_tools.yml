@@ -23,6 +23,11 @@
     - ttf-dejavu # More fonts
     - unzip # Unzip zip files
     - zip # Zip zip files
+- name: 'install_tools : Enable docker service'
+  service:
+    enabled: 'yes'
+    name: docker
+    state: started
 - get_url:
     checksum: '{{ development.install_tools.yq.checksum }}'
     dest: /usr/local/bin/yq
