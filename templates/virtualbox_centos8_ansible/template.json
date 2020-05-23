@@ -2,10 +2,7 @@
   "builders": [
     {
       "boot_command": [
-        "passwd<enter><wait>",
-        "{{user `root_password`}}<enter><wait>",
-        "{{user `root_password`}}<enter><wait>",
-        "systemctl start sshd<enter><wait>"
+        "<tab> text ks=http://{{ .HTTPIP }}:{{ .HTTPPort }}/kickstart/centos8/ks.cfg<enter><wait>"
       ],
       "boot_wait": "{{user `first_boot_wait`}}",
       "cpus": "{{user `cpus`}}",
@@ -13,11 +10,16 @@
       "export_opts": [
         "--manifest"
       ],
+      "floppy_files": [
+        "../../provisioners/kickstart/centos8/ks.cfg"
+      ],
+      "floppy_label": "OEMDRV",
       "format": "{{user `format`}}",
       "guest_os_type": "RedHat_64",
       "hard_drive_discard": true,
       "hard_drive_interface": "sata",
       "hard_drive_nonrotational": true,
+      "http_directory": "../../provisioners/",
       "iso_checksum": "{{user `iso_checksum`}}",
       "iso_checksum_type": "{{user `iso_checksum_type`}}",
       "iso_interface": "sata",
@@ -28,6 +30,7 @@
       "shutdown_command": "shutdown now",
       "shutdown_timeout": "{{user `shutdown_timeout`}}",
       "ssh_password": "{{user `ssh_password`}}",
+      "ssh_timeout": "{{user `ssh_timeout`}}",
       "ssh_username": "{{user `ssh_username`}}",
       "type": "virtualbox-iso",
       "vboxmanage": [
@@ -51,7 +54,7 @@
           "--boot1",
           "disk",
           "--boot2",
-          "none",
+          "dvd",
           "--boot3",
           "none",
           "--boot4",
