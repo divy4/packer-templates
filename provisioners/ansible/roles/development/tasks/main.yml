@@ -1,7 +1,13 @@
 ---
 - include_tasks: add_user.yml
+  vars:
+    is_sudo_user: 'yes'
+    name: '{{ development.user.name }}'
+    password: '{{ development.user.password }}'
+    user_groups: '{{ development.user.groups }}'
 - include_tasks: install_fluxbox.yml
 - include_tasks: install_tools.yml
+- include_tasks: install_minikube.yml
 - include_tasks: add_config_module.yml
   vars:
     become_user: "{{ development.user.name }}"

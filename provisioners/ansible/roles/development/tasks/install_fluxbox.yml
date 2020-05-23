@@ -8,6 +8,7 @@
     - imagemagick # Image command line tool/screenshots
     - lal # Clock
     - ttf-ubuntu-font-family # Fonts, needed for fluxbox to start successfully
+    - xclip # clipboard
     - xcompmgr # Transparency
     - xorg-apps # A bunch of X utilities
     - xorg-server # The X server, makes the world go round
