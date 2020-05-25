@@ -2,6 +2,13 @@
 set -e
 
 function main {
+  check_vars
+  install_ansible
+  run_ansible
+  rm -rf ~/ansible
+}
+
+function check_vars {
   local var
   for var in PLAYBOOK SSH_PASSWORD SSH_USERNAME; do
     if [[ -z "${!var}" ]]; then
@@ -9,7 +16,29 @@ function main {
       return 1
     fi
   done
-  pacman --noconfirm --sync ansible sshpass
+}
+
+function get_os {
+  source /etc/os-release
+  echo "$ID"
+}
+
+function install_ansible {
+  case "$(get_os)" in
+  arch)
+    pacman --noconfirm --sync ansible sshpass
+    ;;
+  centos)
+    yum install --assumeyes epel-release
+    yum install --assumeyes ansible
+    ;;
+  *)
+    echo "Error: Unrecognized OS"
+    ;;
+  esac
+}
+
+function run_ansible {
   cd ~/ansible
   export ANSIBLE_HOST_KEY_CHECKING=False
   echo "$SSH_PASSWORD" | \
@@ -21,8 +50,6 @@ function main {
       --inventory localhost \
       --user "$SSH_USERNAME" \
       "$PLAYBOOK.yml"
-  cd
-  rm -rf ~/ansible
 }
 
 main "$@"
