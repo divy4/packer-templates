@@ -12,6 +12,7 @@
   "firmware": "bios",
   "first_boot_wait": "5s",
   "format": "ovf",
+  "guest_additions_path": "/tmp/VBoxGuestAdditions.iso",
   "iso_checksum": "49f028035c52a2feb89d817e0451eeb4c597b77a",
   "iso_checksum_type": "sha1",
   "iso_url": "http://mirror.grid.uchicago.edu/pub/linux/centos/8.1.1911/isos/x86_64/CentOS-8.1.1911-x86_64-dvd1.iso",
