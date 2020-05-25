@@ -7,6 +7,5 @@
   hosts: development
   name: development
   roles:
-  - virtualbox_machine
   - common
   - development
