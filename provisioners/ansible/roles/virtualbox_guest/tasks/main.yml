@@ -1,11 +1,5 @@
 ---
-- name: 'main : Install packages'
-  package:
-    name:
-    - virtualbox-guest-utils
-    - xf86-video-vmware
-- name: 'main : Enable vboxservice'
-  service:
-    enabled: 'yes'
-    name: vboxservice
-    state: started
+- debug:
+    msg: '{{ ansible_distribution }}'
+- include_tasks: arch.yml
+  when: ansible_distribution == 'Arch Linux'

@@ -10,11 +10,8 @@
       "export_opts": [
         "--manifest"
       ],
-      "floppy_files": [
-        "../../provisioners/kickstart/centos8/ks.cfg"
-      ],
-      "floppy_label": "OEMDRV",
       "format": "{{user `format`}}",
+      "guest_additions_path": "{{user `guest_additions_path`}}",
       "guest_os_type": "RedHat_64",
       "hard_drive_discard": true,
       "hard_drive_interface": "sata",
@@ -95,6 +92,16 @@
     }
   ],
   "provisioners": [
+    {
+      "environment_vars": [
+        "ftp_proxy={{user `proxy`}}",
+        "GUEST_ADDITIONS_PATH={{user `guest_additions_path`}}",
+        "http_proxy={{user `proxy`}}",
+        "https_proxy={{user `proxy`}}"
+      ],
+      "script": "../../provisioners/shell/install_virtualbox_guest_additions.sh",
+      "type": "shell"
+    },
     {
       "destination": "/root",
       "source": "../../provisioners/ansible",

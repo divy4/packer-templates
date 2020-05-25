@@ -29,7 +29,6 @@ function install_ansible {
     pacman --noconfirm --sync ansible sshpass
     ;;
   centos)
-    yum install --assumeyes epel-release
     yum install --assumeyes ansible
     ;;
   *)
