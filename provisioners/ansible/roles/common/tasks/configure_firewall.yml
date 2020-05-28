@@ -1,22 +1,23 @@
 ---
-- name: 'configure_firewall : Install packages'
+- name: 'configure_firewall : ufw : Install packages'
   package:
     name:
     - ufw
-- name: 'configure_firewall : Deny incoming traffic by default'
+- name: 'configure_firewall : ufw : Deny incoming traffic by default'
   ufw:
     default: deny
-- name: 'configure_firewall : Limit ssh traffic'
+- name: 'configure_firewall : ufw : Limit ssh traffic'
   ufw:
     direction: in
     proto: tcp
     rule: limit
     to_port: ssh
-- name: 'configure_firewall : Start and enable firewall'
+- name: 'configure_firewall : ufw : Start and enable firewall'
   ufw:
     state: enabled
-- name: 'configure_firewall : Start and enable firewall for real (ufw bug)'
+- name: 'configure_firewall : ufw : Start and enable firewall for real (ufw bug)'
   service:
     enabled: 'yes'
     name: ufw
     state: started
+  when: ansible_distribution == 'Archlinux'
