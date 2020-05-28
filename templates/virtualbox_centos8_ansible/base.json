@@ -1,7 +1,7 @@
 {
   "2d_acceleration": "off",
   "3d_acceleration": "off",
-  "ansible_playbook": "virtualbox_guest",
+  "ansible_playbook": "common",
   "audio_input": "off",
   "audio_output": "on",
   "bios_boot_menu": "disabled",
