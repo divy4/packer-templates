@@ -1,7 +1,7 @@
 {
   "2d_acceleration": "off",
   "3d_acceleration": "on",
-  "ansible_playbook": "development",
+  "ansible_playbook": "common",
   "audio_input": "off",
   "audio_output": "on",
   "bios_boot_menu": "disabled",
@@ -24,6 +24,6 @@
   "ssh_password": "password",
   "ssh_username": "root",
   "vm_description": "Generated with Packer",
-  "vm_name": "dev-arch",
+  "vm_name": "base-arch",
   "vram": "128"
 }
