@@ -20,4 +20,3 @@
     enabled: 'yes'
     name: ufw
     state: started
-  when: ansible_distribution == 'Archlinux'
