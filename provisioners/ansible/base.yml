@@ -1,13 +1,10 @@
 ---
-- import_playbook: virtualbox_guest.yml
 - become: 'yes'
   environment:
     ftp_proxy: '{{ ftp_proxy | default() }}'
     http_proxy: '{{ http_proxy | default() }}'
     https_proxy: '{{ https_proxy | default() }}'
-  hosts: development_echo
-  name: development_echo
+  hosts: base
+  name: base
   roles:
   - common
-  - development
-  - development_echo

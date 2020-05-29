@@ -1,6 +1,10 @@
 ---
 all:
   children:
+    base:
+      hosts: localhost
+    common:
+      hosts: localhost
     development:
       hosts: localhost
     development_echo:
