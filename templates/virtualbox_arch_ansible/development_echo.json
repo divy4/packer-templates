@@ -24,6 +24,6 @@
   "ssh_password": "password",
   "ssh_username": "root",
   "vm_description": "Generated with Packer",
-  "vm_name": "divy-arch",
+  "vm_name": "echo-arch",
   "vram": "128"
 }
