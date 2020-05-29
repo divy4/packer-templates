@@ -1,5 +1,4 @@
 ---
-- import_playbook: virtualbox_guest.yml
 - become: 'yes'
   environment:
     ftp_proxy: '{{ ftp_proxy | default() }}'

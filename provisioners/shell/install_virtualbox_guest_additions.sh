@@ -4,15 +4,21 @@ set -euo pipefail
 function main {
   echo "Installing guest additions..."
   case "$(get_os)" in
+  arch)
+    install_arch;;
   centos)
-    install_centos
-    ;;
+    install_centos;;
   *)
     echo "Error: Unrecognized OS '$(get_os)'"
     return 1
     ;;
   esac
   echo "Done!"
+}
+
+function install_arch {
+  pacman --noconfirm --sync virtualbox-guest-utils xf86-video-vmware
+  systemctl enable --now vboxservice
 }
 
 function install_centos {

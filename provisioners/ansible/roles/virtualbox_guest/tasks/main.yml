@@ -1,5 +1,0 @@
----
-- debug:
-    msg: '{{ ansible_distribution }}'
-- include_tasks: arch.yml
-  when: ansible_distribution == 'Arch Linux'
