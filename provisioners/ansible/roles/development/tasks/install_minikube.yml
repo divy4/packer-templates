@@ -8,14 +8,3 @@
   name: 'install_minikube : Set vm-driver'
   shell:
     cmd: minikube config set vm-driver docker
-- become_user: '{{ development.user.name }}'
-  ignore_errors: true
-  name: 'install_minikube : Check if cluster is running'
-  register: result
-  shell:
-    cmd: 'minikube status | grep "host: Running"'
-- become_user: '{{ development.user.name }}'
-  name: 'install_minikube : Start cluster'
-  shell:
-    cmd: minikube start
-  when: result is failed
