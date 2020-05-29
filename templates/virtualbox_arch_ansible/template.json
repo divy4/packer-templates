@@ -120,6 +120,16 @@
       "type": "shell-local"
     },
     {
+      "environment_vars": [
+        "ftp_proxy={{user `proxy`}}",
+        "GUEST_ADDITIONS_PATH={{user `guest_additions_path`}}",
+        "http_proxy={{user `proxy`}}",
+        "https_proxy={{user `proxy`}}"
+      ],
+      "script": "../../provisioners/shell/install_virtualbox_guest_additions.sh",
+      "type": "shell"
+    },
+    {
       "destination": "/root",
       "source": "../../provisioners/ansible",
       "type": "file"
