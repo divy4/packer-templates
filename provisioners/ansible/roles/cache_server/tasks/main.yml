@@ -1,0 +1,5 @@
+---
+- name: 'cache_server : Install squid package'
+  package:
+    name:
+    - squid
