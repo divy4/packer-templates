@@ -26,6 +26,6 @@
   "ssh_timeout": "10m",
   "ssh_username": "root",
   "vm_description": "Generated with Packer",
-  "vm_name": "cache-centos8",
+  "vm_name": "cache",
   "vram": "128"
 }
