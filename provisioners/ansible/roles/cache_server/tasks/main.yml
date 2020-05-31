@@ -1,0 +1,15 @@
+---
+- name: 'cache_server : Install squid package'
+  package:
+    name:
+    - squid
+- copy:
+    dest: /etc/squid/squid.conf
+    mode: '644'
+    owner: root
+    src: squid.conf
+  name: 'cache_server : Copy squid config'
+- name: 'cache_server : Enable squid service'
+  service:
+    enabled: 'yes'
+    name: squid

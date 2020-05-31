@@ -3,7 +3,7 @@ all:
   children:
     base:
       hosts: localhost
-    common:
+    cache_server:
       hosts: localhost
     development:
       hosts: localhost
