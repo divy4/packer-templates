@@ -24,6 +24,6 @@
   "ssh_password": "password",
   "ssh_username": "root",
   "vm_description": "Generated with Packer",
-  "vm_name": "dev-arch",
+  "vm_name": "dev",
   "vram": "128"
 }
