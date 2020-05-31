@@ -93,6 +93,10 @@
   ],
   "provisioners": [
     {
+      "inline": "hostnamectl set-hostname {{user `vm_name`}}",
+      "type": "shell"
+    },
+    {
       "environment_vars": [
         "ftp_proxy={{user `proxy`}}",
         "GUEST_ADDITIONS_PATH={{user `guest_additions_path`}}",
