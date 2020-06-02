@@ -1,12 +1,8 @@
 ---
 development:
+  dev_users:
+  - dan
   install_tools:
     yq:
       checksum: 'sha256:11A830FFB72AAD0EAA7640EF69637068F36469BE4F68A93DA822FBE454E998F8'
       version: 3.2.1
-  user:
-    groups:
-      - docker
-      - sudo
-    name: dan
-    password: password
