@@ -38,31 +38,31 @@
       https://github.com/mikefarah/yq/releases/download/{{
       development.install_tools.yq.version }}/yq_linux_amd64
   name: 'install_tools : Install yq'
-- include_tasks: add_config_module.yml
-  loop:
-  - nano
-  - scripts
-  - vim
+- include_tasks: add_config_modules.yml
   vars:
-    become_user: root
-    config_module: '{{ item }}'
-- include_tasks: add_config_module.yml
-  loop:
-  - bash
-  - chromium
-  - code
-  - git
-  - ssh
+    modules:
+    - nano
+    - scripts
+    - vim
+    users:
+    - root
+- include_tasks: add_config_modules.yml
   vars:
-    become_user: '{{ development.user.name }}'
-    config_module: '{{ item }}'
-- become_user: '{{ development.user.name }}'
+    modules:
+    - bash
+    - chromium
+    - code
+    - git
+    - ssh
+    users: '{{ development.dev_users }}'
+- become_user: '{{ item[0] }}'
   file:
     mode: '755'
-    owner: '{{ development.user.name }}'
-    path: '{{ item }}'
+    owner: '{{ item[0] }}'
+    path: '{{ item[1] }}'
     state: directory
-  loop:
-  - '/home/{{ development.user.name }}/downloads'
-  - '/home/{{ development.user.name }}/projects'
   name: 'install_tools : Create directories'
+  with_nested:
+  - '{{ development.dev_users }}'
+  - - '~/downloads'
+    - '~/projects'

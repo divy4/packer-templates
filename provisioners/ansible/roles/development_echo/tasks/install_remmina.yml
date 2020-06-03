@@ -4,7 +4,3 @@
     name:
     - freerdp
     - remmina
-- include_tasks: add_config_module.yml
-  vars:
-    become_user: "{{ development_echo.user.name }}"
-    config_module: fluxbox
