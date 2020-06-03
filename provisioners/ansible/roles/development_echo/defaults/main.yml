@@ -10,9 +10,9 @@ development_echo:
       checksum: 'sha256:e6be589df85076108c33e12e60cfb85dcd82c5d756a6f6ebc8de0ee505c9fd4c'
       version: 3.1.2
   install_slack:
-    commit_hash: ce7344892d787da469035641b3fc18f337cd908a
-    subversion: 3
-    version: 4.3.2
+    commit_hash: cdbaf97c014ac33443f735611f881469632d974e
+    subversion: 1
+    version: 4.4.3
   install_sops:
     checksum: 'sha256:610FCA9687D1326EF2E1A66699A740F5DBD5AC8130190275959DA737EC52F096'
     version: 3.5.0
