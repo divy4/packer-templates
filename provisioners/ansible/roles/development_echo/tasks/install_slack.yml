@@ -1,12 +1,12 @@
 ---
-- become_user: '{{ development_echo.user.name }}'
+- become_user: '{{ development_echo.dev_users[0] }}'
   git:
     depth: 1
     dest: /tmp/slack-desktop
     repo: 'https://aur.archlinux.org/slack-desktop.git'
     version: '{{ development_echo.install_slack.commit_hash }}'
   name: 'install_slack : clone package'
-- become_user: '{{ development_echo.user.name }}'
+- become_user: '{{ development_echo.dev_users[0] }}'
   name: 'install_slack : build'
   shell:
     chdir: /tmp/slack-desktop
