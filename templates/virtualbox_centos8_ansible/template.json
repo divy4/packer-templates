@@ -62,6 +62,8 @@
           "{{user `drag_and_drop`}}",
           "--firmware",
           "{{user `firmware`}}",
+          "--graphicscontroller",
+          "vboxsvga",
           "--mouse",
           "{{user `mouse`}}",
           "--natpf1",
