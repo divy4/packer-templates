@@ -1,6 +1,6 @@
 {
   "2d_acceleration": "off",
-  "3d_acceleration": "on",
+  "3d_acceleration": "off",
   "ansible_playbook": "base",
   "audio_input": "off",
   "audio_output": "on",
