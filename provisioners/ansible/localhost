@@ -9,3 +9,5 @@ all:
       hosts: localhost
     development_echo:
       hosts: localhost
+    k8s:
+      hosts: localhost
