@@ -2,15 +2,18 @@
 - lineinfile:
     line: PasswordAuthentication no
     path: /etc/ssh/sshd_config
-    regexp: 'PasswordAuthentication (yes|no)'
-  name: 'configure_sshd : Disable root access'
+    regexp: PasswordAuthentication (yes|no)
+  name: 'configure_sshd : Disable password authentication'
+  register: password_auth
 - lineinfile:
     line: PermitRootLogin no
     path: /etc/ssh/sshd_config
-    regexp: 'PermitRootLogin (yes|no)'
+    regexp: PermitRootLogin (yes|no)
   name: 'configure_sshd : Disable root access'
+  register: permit_root
 - name: 'configure_sshd : Restart and enable sshd'
   service:
     enabled: 'yes'
     name: sshd
     state: restarted
+  when: password_auth is changed or permit_root is changed
