@@ -1,0 +1,11 @@
+---
+- become: 'yes'
+  environment:
+    ftp_proxy: '{{ ftp_proxy | default() }}'
+    http_proxy: '{{ http_proxy | default() }}'
+    https_proxy: '{{ https_proxy | default() }}'
+  hosts: k8s
+  name: k8s
+  roles:
+  - common
+  - k8s
