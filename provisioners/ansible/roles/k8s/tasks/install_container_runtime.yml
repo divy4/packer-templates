@@ -1,0 +1,10 @@
+---
+- name: 'install_container_runtime : Install packages'
+  package:
+    name:
+    - podman
+- lineinfile:
+    line: registries = ['docker.io']
+    path: /etc/containers/registries.conf
+    regexp: ^registries = .*docker.io
+  name: 'install_container_runtime : Disable redhat registries'
