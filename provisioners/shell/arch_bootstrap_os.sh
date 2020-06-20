@@ -11,6 +11,8 @@ set -e
 # linux - You know, probably want this one
 # linux-firmware - Firmware is pretty nice too
 # openssh - ssh server, needed to continue provisioning tools after initial run
+# pulseaudio - Audio middleware that sits between applications and ALSA
+# pulseaudio-alsa - ALSA plugin for pulseaudio
 packages=(\
   base \
   efibootmgr \
@@ -19,6 +21,8 @@ packages=(\
   linux \
   linux-firmware \
   openssh \
+  pulseaudio \
+  pulseaudio-alsa \
 )
 
 # Bootdrive-level operations
