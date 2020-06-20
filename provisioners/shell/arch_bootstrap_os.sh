@@ -186,9 +186,8 @@ EOF
   systemctl daemon-reload
   systemctl start time-zone-sync.service
   systemctl enable time-zone-sync.service
-
+  systemctl enable systemd-timesyncd
   hwclock --systohc # sync hardware clock
-
   timedatectl
 }
 
