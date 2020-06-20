@@ -3,6 +3,7 @@
 - include_tasks: install_sops.yml
 - include_tasks: install_helm.yml
 - include_tasks: install_slack.yml
+- include_tasks: install_teams.yml
 - include_tasks: install_vpn.yml
 - include_tasks: add_config_modules.yml
   vars:

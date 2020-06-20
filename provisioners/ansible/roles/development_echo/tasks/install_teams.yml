@@ -1,0 +1,16 @@
+---
+- become_user: '{{ development_echo.dev_users[0] }}'
+  git:
+    depth: 1
+    dest: /tmp/teams
+    repo: 'https://aur.archlinux.org/teams.git'
+    version: '{{ development_echo.install_teams.commit_hash }}'
+  name: 'install_teams : clone package'
+- become_user: '{{ development_echo.dev_users[0] }}'
+  name: 'install_teams : build'
+  shell:
+    chdir: /tmp/teams
+    cmd: makepkg
+- name: 'install_teams : install'
+  pacman:
+    name: '/tmp/teams/teams-{{ development_echo.install_teams.version }}-{{ development_echo.install_teams.subversion }}-x86_64.pkg.tar.xz'
