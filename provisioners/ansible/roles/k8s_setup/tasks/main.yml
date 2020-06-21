@@ -1,3 +1,4 @@
 ---
 - include_tasks: install_container_runtime.yml
 - include_tasks: configure_firewall.yml
+- include_tasks: install_packages.yml
