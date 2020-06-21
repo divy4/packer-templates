@@ -1,5 +1,6 @@
 ---
-- failed_when: (subnet.rc != 0) or (subnet.stderr != '')
+- changed_when: false
+  failed_when: (subnet.rc != 0) or (subnet.stderr != '')
   name: 'configure_firewall : Find server subnet'
   register: subnet
   shell:
