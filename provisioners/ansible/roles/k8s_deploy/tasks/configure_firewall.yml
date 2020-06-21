@@ -1,0 +1,9 @@
+---
+- name: 'configure_firewall : Find server subnet'
+  register: subnet
+  shell:
+    cmd: 'ip addr show {{ k8s_deploy.network_adapters.lan }} | awk ''{if ($1 == "inet") print $2}'''
+    executable: bash
+  failed_when: (subnet.rc != 0) or (subnet.stderr != '')
+- debug:
+    msg: '{{ subnet }}'

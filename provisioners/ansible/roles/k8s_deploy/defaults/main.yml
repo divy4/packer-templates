@@ -1,0 +1,4 @@
+---
+k8s_deploy:
+  network_adapters:
+    lan: INVALID
