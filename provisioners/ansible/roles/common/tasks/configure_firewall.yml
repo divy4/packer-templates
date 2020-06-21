@@ -11,7 +11,7 @@
     direction: in
     proto: tcp
     rule: limit
-    to_port: ssh
+    to_port: '22'
 - name: 'configure_firewall : ufw : Start and enable firewall'
   ufw:
     state: enabled
