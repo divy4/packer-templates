@@ -6,4 +6,8 @@ all:
         cache_server:
           hosts: cache.dev.danivyit.com
         k8s:
-          hosts: k8s.dev.danivyit.com
+          children:
+            masters:
+              hosts: k8s.dev.danivyit.com
+            workers:
+              hosts: k8s.dev.danivyit.com

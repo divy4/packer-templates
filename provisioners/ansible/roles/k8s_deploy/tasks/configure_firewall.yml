@@ -1,9 +1,24 @@
 ---
-- name: 'configure_firewall : Find server subnet'
+- failed_when: (subnet.rc != 0) or (subnet.stderr != '')
+  name: 'configure_firewall : Find server subnet'
   register: subnet
   shell:
-    cmd: 'ip addr show {{ k8s_deploy.network_adapters.lan }} | awk ''{if ($1 == "inet") print $2}'''
+    cmd: >-
+      ip addr show {{ k8s_deploy.network_adapters.lan }} | awk '{if ($1 ==
+      "inet") print $2}'
     executable: bash
-  failed_when: (subnet.rc != 0) or (subnet.stderr != '')
-- debug:
-    msg: '{{ subnet }}'
+- name: 'configure_firewall : Grant subnet access to API server'
+  ufw:
+    direction: in
+    from_ip: '{{ subnet.stdout }}'
+    proto: tcp
+    rule: allow
+    to_port: '6443'
+  when: groups.masters is defined
+- name: 'configure_firewall : Grant subnet access to Kubelet API'
+  ufw:
+    direction: in
+    from_ip: '{{ subnet.stdout }}'
+    proto: tcp
+    rule: allow
+    to_port: '10250'
