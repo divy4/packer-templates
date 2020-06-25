@@ -3,6 +3,7 @@
   package:
     name:
     - podman
+    - podman-docker
 - lineinfile:
     line: registries = ['docker.io']
     path: /etc/containers/registries.conf
