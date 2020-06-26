@@ -1,4 +1,6 @@
 ---
 k8s_deploy:
+  control_plane_endpoint: INVALID
   network_adapters:
     lan: INVALID
+  pod_network_cidr: 10.244.0.0/16

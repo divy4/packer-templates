@@ -1,0 +1,11 @@
+---
+- changed_when: false
+  name: 'setup_control_plane : Pull kubeadm images'
+  shell:
+    cmd: kubeadm config images pull
+- name: 'setup_control_plane : Initialize first master'
+  shell:
+    cmd: >-
+      kubeadm init --control-plane-endpoint="{{
+      k8s_deploy.control_plane_endpoint }}" --pod-network-cidr="{{
+      k8s_deploy.pod_network_cidr }}"

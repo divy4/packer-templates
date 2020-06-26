@@ -1,4 +1,5 @@
 ---
 k8s_deploy:
+  control_plane_endpoint: k8s.dev.danivyit.com
   network_adapters:
     lan: enp0s3
