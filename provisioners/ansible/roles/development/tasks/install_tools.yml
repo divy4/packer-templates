@@ -7,7 +7,6 @@
     - bmon # Network monitor
     - chromium # Internet browser
     - code # GUI text editor
-    - docker # All the containers
     - dos2unix # Convert LF <==> CRLF
     - expect # Make scripts pretend they're human
     - git # All the changes
@@ -23,11 +22,6 @@
     - ttf-dejavu # More fonts
     - unzip # Unzip zip files
     - zip # Zip zip files
-- name: 'install_tools : Enable docker service'
-  service:
-    enabled: 'yes'
-    name: docker
-    state: started
 - get_url:
     checksum: '{{ development.install_tools.yq.checksum }}'
     dest: /usr/local/bin/yq
