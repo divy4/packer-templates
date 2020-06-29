@@ -5,8 +5,8 @@
   register: subnet
   shell:
     cmd: >-
-      ip addr show {{ k8s_deploy.network_adapters.lan }} | awk '{if ($1 ==
-      "inet") print $2}'
+      ip addr show {{ k8s_deploy_group.lan_adapter }} | awk '{if ($1 == "inet") print
+      $2}'
     executable: bash
 - name: 'configure_firewall : Grant subnet access to API server'
   ufw:
