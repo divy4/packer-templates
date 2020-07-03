@@ -17,13 +17,15 @@
   selinux:
     policy: targeted
     state: permissive
-- name: 'install_packages : Install kube* packages'
+- name: 'install_packages : Install kube* packages and other tools'
   yum:
     disable_excludes: kubernetes
     name:
-    - kubeadm
-    - kubectl
-    - kubelet
+    - jq
+    - 'kubeadm-{{ k8s_setup.kube_version }}'
+    - 'kubectl-{{ k8s_setup.kube_version }}'
+    - 'kubelet-{{ k8s_setup.kube_version }}'
+    - tc
     state: present
 - become_user: root
   copy:
