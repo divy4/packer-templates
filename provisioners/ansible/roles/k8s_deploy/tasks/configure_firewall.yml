@@ -5,8 +5,8 @@
   register: subnet
   shell:
     cmd: >-
-      ip addr show {{ k8s_deploy_group.lan_adapter }} | awk '{if ($1 == "inet") print
-      $2}'
+      ip addr show {{ k8s_deploy_group.lan_adapter }} | awk '{if ($1 == "inet")
+      print $2}'
     executable: bash
 - name: 'configure_firewall : Grant subnet access to API server'
   ufw:
@@ -15,7 +15,7 @@
     proto: tcp
     rule: allow
     to_port: '6443'
-  when: groups.masters is defined
+  when: '"masters" in group_names'
 - name: 'configure_firewall : Grant subnet access to Kubelet API'
   ufw:
     direction: in

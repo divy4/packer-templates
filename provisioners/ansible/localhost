@@ -12,4 +12,11 @@ all:
         development_echo:
           hosts: localhost
         k8s:
-          hosts: localhost
+          children:
+            masters:
+              children:
+                primary_master:
+                  hosts: localhost
+              hosts: localhost
+            workers:
+              hosts: localhost
