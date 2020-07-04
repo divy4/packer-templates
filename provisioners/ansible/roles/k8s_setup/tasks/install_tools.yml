@@ -3,5 +3,7 @@
   package:
     name:
     - jq
+    - nmap
     - tc
+    - telnet
     state: present

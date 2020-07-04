@@ -9,3 +9,10 @@
       kubeadm init --control-plane-endpoint="{{
       k8s_deploy_group.control_plane_endpoint }}" --pod-network-cidr="{{
       k8s_deploy_role.pod_network_cidr }}"
+- name: 'configure_control_plane : Link /root/.kube/config to admin config'
+  file:
+    src: /etc/kubernetes/admin.conf
+    dest: /root/.kube/config
+    owner: root
+    group: root
+    state: link
