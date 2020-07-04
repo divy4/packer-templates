@@ -25,13 +25,6 @@
     - 'kubectl-{{ k8s_setup.kube_version }}'
     - 'kubelet-{{ k8s_setup.kube_version }}'
     state: present
-- become_user: root
-  copy:
-    dest: /var/lib/kubelet/
-    mode: '644'
-    owner: root
-    src: config.yaml
-  name: 'install_kube_packages : Copy kubelet config'
 - name: 'install_kube_packages : Enable and start kubelet service'
   service:
     enabled: 'yes'
