@@ -30,3 +30,16 @@
     enabled: 'yes'
     name: kubelet
     state: started
+- file:
+    path: /root/.kube/
+    state: directory
+  name: 'install_kube_packages : Create /root/.kube/ directory'
+- file:
+    dest: /root/.kube/config
+    follow: 'no'
+    force: 'yes'
+    group: root
+    owner: root
+    src: /etc/kubernetes/admin.conf
+    state: link
+  name: 'install_kube_packages : Link /root/.kube/config to admin config'
