@@ -11,12 +11,12 @@
   register: yum_install
   shell:
     cmd: yum install --assumeyes --nobest docker-ce
-- name: 'install_container_runtime : Copy daemon.json'
-  copy:
+- copy:
     dest: /etc/docker/
     mode: '644'
     owner: root
     src: daemon.json
+  name: 'install_container_runtime : Copy daemon.json'
 - name: 'install_container_runtime : Start and enable docker service'
   service:
     enabled: 'yes'
