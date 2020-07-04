@@ -110,7 +110,7 @@
         "VM_NAME={{user `vm_name`}}"
       ],
       "pause_after": "5s",
-      "script": "../../provisioners/shell/arch_bootstrap_os.sh",
+      "script": "../../provisioners/shell/bootstrap_arch.sh",
       "type": "shell"
     },
     {
