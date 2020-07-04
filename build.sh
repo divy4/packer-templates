@@ -3,7 +3,11 @@
 set -e
 
 function main {
-  local args var_file
+  validate_setup "$@"
+  build_template "$@"
+}
+
+function validate_setup {
   if [[ "$#" -ne 1 ]] \
       || [[ ! -f "$1" ]] \
       || [[ "$1" != *.json ]] \
@@ -11,6 +15,16 @@ function main {
     echo 'Usage: ./build.sh TEMPLATE_VARIANT_JSON'
     return 1
   fi
+  if [[ ! -f 'provisioners/ansible/.git' ]]; then
+    echo 'Error: provisioners/ansible/.git not found!'
+    echo 'Please execute the following to install the ansible repo:'
+    echo '"git submodule update --init --recursive"'
+    return 2
+  fi
+}
+
+function build_template {
+  local args var_file
   var_file="$(realpath "$1")"
   cd "$(dirname "$1")"
   args=(\
