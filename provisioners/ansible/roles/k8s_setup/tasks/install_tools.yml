@@ -1,0 +1,9 @@
+---
+- name: 'install_tools : Install packages'
+  package:
+    name:
+    - jq
+    - nmap
+    - tc
+    - telnet
+    state: present

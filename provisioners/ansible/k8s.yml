@@ -1,0 +1,3 @@
+---
+- import_playbook: k8s_setup.yml
+- import_playbook: k8s_deploy.yml

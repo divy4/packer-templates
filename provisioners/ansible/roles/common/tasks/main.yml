@@ -1,5 +1,6 @@
 ---
 - include_tasks: configure_firewall.yml
+- include_tasks: set_hostname.yml
 - include_tasks: configure_sshd.yml
 - include_tasks: add_users.yml
 - include_tasks: configure_root_user.yml

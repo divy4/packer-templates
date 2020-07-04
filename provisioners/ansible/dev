@@ -1,0 +1,16 @@
+---
+all:
+  children:
+    dev:
+      children:
+        cache_server:
+          hosts: cache.dev.danivyit.com
+        k8s:
+          children:
+            masters:
+              children:
+                primary_master:
+                  hosts: k8s.dev.danivyit.com
+              hosts: k8s.dev.danivyit.com
+            workers:
+              hosts: k8s.dev.danivyit.com

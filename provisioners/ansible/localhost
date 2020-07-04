@@ -1,11 +1,22 @@
 ---
 all:
   children:
-    base:
-      hosts: localhost
-    cache_server:
-      hosts: localhost
-    development:
-      hosts: localhost
-    development_echo:
-      hosts: localhost
+    localhost:
+      children:
+        base:
+          hosts: localhost
+        cache_server:
+          hosts: localhost
+        development:
+          hosts: localhost
+        development_echo:
+          hosts: localhost
+        k8s:
+          children:
+            masters:
+              children:
+                primary_master:
+                  hosts: localhost
+              hosts: localhost
+            workers:
+              hosts: localhost
