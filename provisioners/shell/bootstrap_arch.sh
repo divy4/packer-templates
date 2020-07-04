@@ -32,6 +32,7 @@ function main {
   partition_disks
   format_partitions
   mount_filesystems
+  create_swapfile
   select_pacman_mirrors
   install_packages
   generate_fstab
@@ -60,15 +61,8 @@ function partition_disks {
   2            # partition 2
                # start after previous (default)
   +128M        # 128MB size
-  n            # new partition (swap)
-  3            # partition 3
-               # start after previous (default)
-  +${MEMORY}M  # Same size as memory
-  t            # change parition type
-  3            # select partition 3
-  19           # type=swap
   n            # new partition (root)
-  4            # partition 4
+  3            # partition 3
                # start after previous (default)
                # fill remaining space (default)
   w            # write to disk and exit
@@ -80,19 +74,25 @@ function format_partitions {
   echo_title 'Format partitions'
   mkfs.fat -F32 /dev/sda1
   mkfs.ext4 /dev/sda2
-  mkswap /dev/sda3
-  swapon /dev/sda3
-  mkfs.ext4 /dev/sda4
+  mkfs.ext4 /dev/sda3
 }
 
 function mount_filesystems {
   echo_title 'Mount the file systems'
-  mount /dev/sda4 /mnt
+  mount /dev/sda3 /mnt
   mkdir /mnt/efi
   mount /dev/sda1 /mnt/efi
   mkdir /mnt/boot
   mount /dev/sda2 /mnt/boot
   findmnt | grep sda
+}
+
+function create_swapfile {
+  echo_title 'Create swapfile'
+  dd if=/dev/zero of=/mnt/swapfile bs=1M count="$MEMORY" status=progress
+  chmod 600 /mnt/swapfile
+  mkswap /mnt/swapfile
+  swapon /mnt/swapfile
 }
 
 function select_pacman_mirrors {
@@ -144,7 +144,8 @@ function exec_chroot {
 }
 
 function exit_install_and_shutdown {
-  echo_title 'Unmount partitions'
+  echo_title 'Disable swap and unmount partitions'
+  swapoff --all
   umount -R /mnt
 
   echo_title 'Done! Rebooting...'
