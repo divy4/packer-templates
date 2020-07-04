@@ -1,0 +1,3 @@
+[submodule "provisioners/ansible"]
+	path = provisioners/ansible
+	url = git@github.com:divy4/ansible.git
