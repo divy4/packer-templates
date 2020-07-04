@@ -95,7 +95,12 @@
   ],
   "provisioners": [
     {
-      "inline": "hostnamectl set-hostname {{user `vm_name`}}",
+      "environment_vars": [
+        "HOSTNAME={{user `vm_name`}}",
+        "SWAP={{user `swap`}}",
+        "SWAP_SIZE={{user `memory`}}"
+      ],
+      "script": "../../provisioners/shell/configure_centos.sh",
       "type": "shell"
     },
     {
