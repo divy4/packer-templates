@@ -1,9 +1,9 @@
 {
   "2d_acceleration": "off",
   "3d_acceleration": "off",
-  "ansible_playbook": "base",
+  "ansible_playbook": "k8s_setup",
   "audio_input": "off",
-  "audio_output": "on",
+  "audio_output": "off",
   "bios_boot_menu": "disabled",
   "clipboard": "bidirectional",
   "cpus": "8",
@@ -25,8 +25,8 @@
   "ssh_password": "password",
   "ssh_timeout": "10m",
   "ssh_username": "root",
-  "swap": "on",
+  "swap": "off",
   "vm_description": "Generated with Packer",
-  "vm_name": "base-centos8",
+  "vm_name": "k8s",
   "vram": "128"
 }
