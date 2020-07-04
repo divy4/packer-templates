@@ -1,0 +1,7 @@
+---
+- name: 'install_tools : Install packages'
+  package:
+    name:
+    - jq
+    - tc
+    state: present

@@ -1,5 +1,5 @@
 ---
-- name: 'install_packages : Add yum repo'
+- name: 'install_kube_packages : Add yum repo'
   yum_repository:
     baseurl: 'https://packages.cloud.google.com/yum/repos/kubernetes-el7-$basearch'
     description: kubernetes
@@ -13,19 +13,17 @@
     - 'https://packages.cloud.google.com/yum/doc/rpm-package-key.gpg'
     name: kubernetes
     repo_gpgcheck: 'yes'
-- name: 'install_packages : Set selinux to permissive'
+- name: 'install_kube_packages : Set selinux to permissive'
   selinux:
     policy: targeted
     state: permissive
-- name: 'install_packages : Install kube* packages and other tools'
+- name: 'install_kube_packages : Install packages'
   yum:
     disable_excludes: kubernetes
     name:
-    - jq
     - 'kubeadm-{{ k8s_setup.kube_version }}'
     - 'kubectl-{{ k8s_setup.kube_version }}'
     - 'kubelet-{{ k8s_setup.kube_version }}'
-    - tc
     state: present
 - become_user: root
   copy:
@@ -33,8 +31,8 @@
     mode: '644'
     owner: root
     src: config.yaml
-  name: 'install_packages : Copy kubelet config'
-- name: 'install_packages : Enable and start kubelet service'
+  name: 'install_kube_packages : Copy kubelet config'
+- name: 'install_kube_packages : Enable and start kubelet service'
   service:
     enabled: 'yes'
     name: kubelet
