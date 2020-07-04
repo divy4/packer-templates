@@ -3,7 +3,7 @@ set -e
 
 function main {
   set_hostname
-  configure_swap
+  setup_swap
 }
 
 function set_hostname {
