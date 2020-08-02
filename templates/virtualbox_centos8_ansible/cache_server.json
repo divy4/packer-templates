@@ -3,11 +3,11 @@
   "3d_acceleration": "off",
   "ansible_playbook": "cache_server_setup",
   "audio_input": "off",
-  "audio_output": "on",
+  "audio_output": "off",
   "bios_boot_menu": "disabled",
   "clipboard": "bidirectional",
-  "cpus": "8",
-  "disk_size_mb": "20480",
+  "cpus": "2",
+  "disk_size_mb": "40960",
   "drag_and_drop": "bidirectional",
   "firmware": "bios",
   "first_boot_wait": "5s",
@@ -17,7 +17,7 @@
   "iso_checksum_type": "sha1",
   "iso_url": "http://mirror.steadfastnet.com/centos/8.2.2004/isos/x86_64/CentOS-8.2.2004-x86_64-boot.iso",
   "mac_address": "000000000010",
-  "memory": "8192",
+  "memory": "4096",
   "mouse": "usbtablet",
   "post_shutdown_delay": "60s",
   "proxy": "http://cache.bld.danivyit.com:3128",
@@ -29,5 +29,5 @@
   "swap": "on",
   "vm_description": "Generated with Packer",
   "vm_name": "cache",
-  "vram": "128"
+  "vram": "24"
 }
