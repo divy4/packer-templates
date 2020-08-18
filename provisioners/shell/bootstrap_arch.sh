@@ -97,10 +97,7 @@ function create_swapfile {
 
 function select_pacman_mirrors {
   echo_title 'Select pacman mirrors'
-  sed ':a;N;$!ba;s/\nServer/Server/g' < /etc/pacman.d/mirrorlist \
-    | grep '^##\sUnited\sStates' \
-    | sed 's/^##\sUnited\sStates//g' \
-    > /tmp/mirrorlist
+  cp /etc/pacman.d/mirrorlist /tmp/mirrorlist
   chmod a+x /usr/bin/rankmirrors
   rankmirrors --max-time 1 /tmp/mirrorlist > /etc/pacman.d/mirrorlist
   rm /tmp/mirrorlist
