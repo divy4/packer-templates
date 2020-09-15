@@ -3,7 +3,7 @@
   "3d_acceleration": "off",
   "ansible_playbook": "base_setup",
   "audio_input": "off",
-  "audio_output": "on",
+  "audio_output": "off",
   "bios_boot_menu": "disabled",
   "clipboard": "bidirectional",
   "cpus": "8",
