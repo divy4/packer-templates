@@ -23,7 +23,7 @@
       "iso_interface": "sata",
       "iso_url": "{{user `iso_url`}}",
       "memory": "{{user `memory`}}",
-      "output_directory": "{{user `vm_base_directory`}}/{{user `vm_name`}}",
+      "output_directory": "{{user `vm_base_directory`}}/{{user `name`}}",
       "post_shutdown_delay": "{{user `post_shutdown_delay`}}",
       "shutdown_command": "shutdown now",
       "shutdown_timeout": "{{user `shutdown_timeout`}}",
@@ -92,7 +92,7 @@
           "false"
         ]
       ],
-      "vm_name": "{{user `vm_name`}}"
+      "vm_name": "{{user `name`}}"
     }
   ],
   "provisioners": [
@@ -106,21 +106,21 @@
         "ftp_proxy={{user `proxy`}}",
         "http_proxy={{user `proxy`}}",
         "https_proxy={{user `proxy`}}",
+        "HOSTNAME={{user `name`}}",
         "MEMORY={{user `memory`}}",
         "NETWORK_INTERFACE=enp0s3",
-        "ROOT_PASSWORD={{user `root_password`}}",
-        "VM_NAME={{user `vm_name`}}"
+        "ROOT_PASSWORD={{user `root_password`}}"
       ],
       "pause_after": "5s",
       "script": "../../provisioners/shell/bootstrap_arch.sh",
       "type": "shell"
     },
     {
-      "command": "vboxmanage storageattach \"{{user `vm_name`}}\" --storagectl \"SATA Controller\" --port 1 --medium emptydrive",
+      "command": "vboxmanage storageattach \"{{user `name`}}\" --storagectl \"SATA Controller\" --port 1 --medium emptydrive",
       "type": "shell-local"
     },
     {
-      "command": "vboxmanage startvm \"{{user `vm_name`}}\"",
+      "command": "vboxmanage startvm \"{{user `name`}}\"",
       "type": "shell-local"
     },
     {

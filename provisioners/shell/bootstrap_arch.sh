@@ -133,9 +133,9 @@ function exec_chroot {
   export -f set_localization
   export -f set_root_password
   export -f set_time_zone
+  export HOSTNAME
   export NETWORK_INTERFACE
   export ROOT_PASSWORD
-  export VM_NAME
   arch-chroot /mnt /bin/bash -c "chroot_command"
   echo_title 'Exiting chroot'
 }
@@ -198,13 +198,13 @@ function set_localization {
 
 function set_hostname {
   echo_title 'Hostname'
-  echo "$VM_NAME" > /etc/hostname
+  echo "$HOSTNAME" > /etc/hostname
   cat << EOF > /etc/hosts
 127.0.0.1 localhost
 ::1       localhost
-127.0.1.1 $VM_NAME $VM_NAME
+127.0.1.1 $HOSTNAME $HOSTNAME
 EOF
-  echo "Host name is: $VM_NAME"
+  echo "Host name is: $HOSTNAME"
 }
 
 function set_root_password {

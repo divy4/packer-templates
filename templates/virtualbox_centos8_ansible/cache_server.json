@@ -27,7 +27,5 @@
   "ssh_timeout": "10m",
   "ssh_username": "root",
   "swap": "on",
-  "vm_description": "Generated with Packer",
-  "vm_name": "cache",
   "vram": "24"
 }
