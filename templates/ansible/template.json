@@ -1,0 +1,27 @@
+{
+  "builders": [
+    {
+      "export_opts": [
+        "--manifest"
+      ],
+      "guest_additions_mode": "disable",
+      "output_directory": "{{user `local_virtualbox_vm_directory`}}/{{user `name`}}",
+      "shutdown_command": "shutdown now",
+      "source_path": "{{user `local_virtualbox_vm_directory`}}/{{user `parent_template`}}/{{user `parent_template`}}.ovf",
+      "ssh_password": "{{user `ssh_password`}}",
+      "ssh_username": "{{user `ssh_username`}}",
+      "type": "virtualbox-ovf",
+      "vm_name": "{{user `name`}}"
+    }
+  ],
+  "provisioners": [
+    {
+      "environment_vars": [
+        "SWAP_SIZE={{user `memory`}}",
+        "SWAP={{user `swap`}}"
+      ],
+      "script": "{{template_dir}}/../../../provisioners/shell/configure_swap.sh",
+      "type": "shell"
+    }
+  ]
+}
