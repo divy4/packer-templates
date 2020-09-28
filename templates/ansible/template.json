@@ -27,6 +27,18 @@
           "{{user `memory`}}",
           "--vram",
           "{{user `vram`}}"
+        ],
+        [
+          "setextradata",
+          "global",
+          "GUI/SuppressMessages",
+          "all"
+        ],
+        [
+          "setextradata",
+          "{{.Name}}",
+          "GUI/ShowMiniToolBar",
+          "false"
         ]
       ],
       "vm_name": "{{user `name`}}"
