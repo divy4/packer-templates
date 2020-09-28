@@ -5,7 +5,7 @@
   "audio_output": "off",
   "bios_boot_menu": "disabled",
   "clipboard": "bidirectional",
-  "cpus": "8",
+  "cpus": "4",
   "disk_size_mb": "102400",
   "drag_and_drop": "bidirectional",
   "firmware": "bios",
@@ -16,7 +16,7 @@
   "iso_checksum_type": "sha1",
   "iso_url": "http://mirror.steadfastnet.com/centos/8.2.2004/isos/x86_64/CentOS-8.2.2004-x86_64-boot.iso",
   "mac_address": "auto",
-  "memory": "8192",
+  "memory": "4096",
   "mouse": "usbtablet",
   "post_shutdown_delay": "60s",
   "proxy": "http://cache.bld.danivyit.com:3128",
@@ -26,5 +26,5 @@
   "ssh_timeout": "10m",
   "ssh_username": "root",
   "swap": "on",
-  "vram": "128"
+  "vram": "24"
 }
