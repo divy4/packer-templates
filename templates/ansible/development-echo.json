@@ -1,0 +1,14 @@
+{
+  "ansible_playbook": "development_echo_setup",
+  "audio_input": "off",
+  "audio_output": "on",
+  "cpus": "8",
+  "mac_address": "auto",
+  "memory": "8192",
+  "parent_template": "arch-base",
+  "proxy": "http://cache.bld.danivyit.com:3128",
+  "ssh_password": "password",
+  "ssh_username": "root",
+  "swap": "on",
+  "vram": "128"
+}

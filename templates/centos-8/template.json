@@ -2,10 +2,7 @@
   "builders": [
     {
       "boot_command": [
-        "passwd<enter><wait>",
-        "{{user `root_password`}}<enter><wait>",
-        "{{user `root_password`}}<enter><wait>",
-        "systemctl start sshd<enter><wait>"
+        "<tab> text ks=http://{{ .HTTPIP }}:{{ .HTTPPort }}/ks.cfg<enter><wait>"
       ],
       "boot_wait": "{{user `first_boot_wait`}}",
       "cpus": "{{user `cpus`}}",
@@ -14,20 +11,23 @@
         "--manifest"
       ],
       "format": "{{user `format`}}",
-      "guest_os_type": "ArchLinux_64",
+      "guest_additions_path": "{{user `guest_additions_path`}}",
+      "guest_os_type": "RedHat_64",
       "hard_drive_discard": true,
       "hard_drive_interface": "sata",
       "hard_drive_nonrotational": true,
+      "http_directory": "../../provisioners/kickstart/centos8",
       "iso_checksum": "{{user `iso_checksum`}}",
       "iso_checksum_type": "{{user `iso_checksum_type`}}",
       "iso_interface": "sata",
       "iso_url": "{{user `iso_url`}}",
       "memory": "{{user `memory`}}",
-      "output_directory": "{{user `vm_base_directory`}}/{{user `vm_name`}}",
+      "output_directory": "{{user `vm_base_directory`}}/{{user `name`}}",
       "post_shutdown_delay": "{{user `post_shutdown_delay`}}",
       "shutdown_command": "shutdown now",
       "shutdown_timeout": "{{user `shutdown_timeout`}}",
       "ssh_password": "{{user `ssh_password`}}",
+      "ssh_timeout": "{{user `ssh_timeout`}}",
       "ssh_username": "{{user `ssh_username`}}",
       "type": "virtualbox-iso",
       "vboxmanage": [
@@ -51,7 +51,7 @@
           "--boot1",
           "disk",
           "--boot2",
-          "none",
+          "dvd",
           "--boot3",
           "none",
           "--boot4",
@@ -92,36 +92,24 @@
           "false"
         ]
       ],
-      "vm_name": "{{user `vm_name`}}"
+      "vm_name": "{{user `name`}}"
     }
   ],
   "provisioners": [
     {
-      "destination": "/usr/bin/rankmirrors",
-      "source": "../../provisioners/file/rankmirrors",
-      "type": "file"
-    },
-    {
       "environment_vars": [
-        "ftp_proxy={{user `proxy`}}",
-        "http_proxy={{user `proxy`}}",
-        "https_proxy={{user `proxy`}}",
-        "MEMORY={{user `memory`}}",
-        "NETWORK_INTERFACE=enp0s3",
-        "ROOT_PASSWORD={{user `root_password`}}",
-        "VM_NAME={{user `vm_name`}}"
+        "HOSTNAME={{user `name`}}"
       ],
-      "pause_after": "5s",
-      "script": "../../provisioners/shell/bootstrap_arch.sh",
+      "script": "../../provisioners/shell/set_hostname.sh",
       "type": "shell"
     },
     {
-      "command": "vboxmanage storageattach \"{{user `vm_name`}}\" --storagectl \"SATA Controller\" --port 1 --medium emptydrive",
-      "type": "shell-local"
-    },
-    {
-      "command": "vboxmanage startvm \"{{user `vm_name`}}\"",
-      "type": "shell-local"
+      "environment_vars": [
+        "SWAP={{user `swap`}}",
+        "SWAP_SIZE={{user `memory`}}"
+      ],
+      "script": "../../provisioners/shell/configure_swap.sh",
+      "type": "shell"
     },
     {
       "environment_vars": [
@@ -131,23 +119,6 @@
         "https_proxy={{user `proxy`}}"
       ],
       "script": "../../provisioners/shell/install_virtualbox_guest_additions.sh",
-      "type": "shell"
-    },
-    {
-      "destination": "/root",
-      "source": "../../provisioners/ansible",
-      "type": "file"
-    },
-    {
-      "environment_vars": [
-        "ftp_proxy={{user `proxy`}}",
-        "http_proxy={{user `proxy`}}",
-        "https_proxy={{user `proxy`}}",
-        "PLAYBOOK={{user `ansible_playbook`}}",
-        "SSH_PASSWORD={{user `ssh_password`}}",
-        "SSH_USERNAME={{user `ssh_username`}}"
-      ],
-      "script": "../../provisioners/shell/install_and_run_ansible.sh",
       "type": "shell"
     }
   ]

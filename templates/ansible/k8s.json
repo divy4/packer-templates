@@ -1,0 +1,14 @@
+{
+  "ansible_playbook": "k8s_setup",
+  "audio_input": "off",
+  "audio_output": "off",
+  "cpus": "8",
+  "mac_address": "auto",
+  "memory": "8192",
+  "parent_template": "centos-8-base",
+  "proxy": "http://cache.bld.danivyit.com:3128",
+  "ssh_password": "password",
+  "ssh_username": "root",
+  "swap": "off",
+  "vram": "24"
+}

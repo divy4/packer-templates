@@ -1,0 +1,81 @@
+{
+  "builders": [
+    {
+      "export_opts": [
+        "--manifest"
+      ],
+      "guest_additions_mode": "disable",
+      "output_directory": "{{user `vm_base_directory`}}/{{user `name`}}",
+      "shutdown_command": "shutdown now",
+      "source_path": "{{user `vm_base_directory`}}/{{user `parent_template`}}/{{user `parent_template`}}.ovf",
+      "ssh_password": "{{user `ssh_password`}}",
+      "ssh_username": "{{user `ssh_username`}}",
+      "type": "virtualbox-ovf",
+      "vboxmanage": [
+        [
+          "modifyvm",
+          "{{.Name}}",
+          "--audioin",
+          "{{user `audio_input`}}",
+          "--audioout",
+          "{{user `audio_output`}}",
+          "--cpus",
+          "{{user `cpus`}}",
+          "--macaddress1",
+          "{{user `mac_address`}}",
+          "--memory",
+          "{{user `memory`}}",
+          "--vram",
+          "{{user `vram`}}"
+        ],
+        [
+          "setextradata",
+          "global",
+          "GUI/SuppressMessages",
+          "all"
+        ],
+        [
+          "setextradata",
+          "{{.Name}}",
+          "GUI/ShowMiniToolBar",
+          "false"
+        ]
+      ],
+      "vm_name": "{{user `name`}}"
+    }
+  ],
+  "provisioners": [
+    {
+      "environment_vars": [
+        "HOSTNAME={{user `name`}}"
+      ],
+      "script": "../../provisioners/shell/set_hostname.sh",
+      "type": "shell"
+    },
+    {
+      "environment_vars": [
+        "SWAP={{user `swap`}}",
+        "SWAP_SIZE={{user `memory`}}"
+      ],
+      "script": "../../provisioners/shell/configure_swap.sh",
+      "type": "shell"
+    },
+    {
+      "destination": "/root",
+      "source": "../../provisioners/ansible",
+      "type": "file"
+    },
+    {
+      "environment_vars": [
+        "ftp_proxy={{user `proxy`}}",
+        "http_proxy={{user `proxy`}}",
+        "https_proxy={{user `proxy`}}",
+        "PLAYBOOK={{user `ansible_playbook`}}",
+        "SSH_PASSWORD={{user `ssh_password`}}",
+        "SSH_USERNAME={{user `ssh_username`}}"
+      ],
+      "script": "../../provisioners/shell/install_and_run_ansible.sh",
+      "type": "shell"
+    }
+  ]
+}

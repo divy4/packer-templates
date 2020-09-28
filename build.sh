@@ -24,17 +24,28 @@ function validate_setup {
 }
 
 function build_template {
-  local args var_file
+  local args var_file name
   var_file="$(realpath "$1")"
+  name="$(get_name "$var_file")"
   cd "$(dirname "$1")"
   args=(\
+    "-var-file=$var_file" \
     -var \
     "vm_base_directory=$(get_vm_base_directory)" \
-    "-var-file=$var_file" \
+    -var \
+    "name=$name"
     template.json \
   )
   packer validate "${args[@]}"
   packer build -force "${args[@]}"
+}
+
+function get_name {
+  local var_file template role
+  var_file="$1"
+  template="$(basename "$(dirname "$var_file")")"
+  role="$(basename "$var_file" | sed 's/\.json$//g')"
+  echo "$template-$role"
 }
 
 function get_vm_base_directory {

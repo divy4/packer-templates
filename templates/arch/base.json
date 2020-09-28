@@ -1,12 +1,11 @@
 {
   "2d_acceleration": "off",
   "3d_acceleration": "off",
-  "ansible_playbook": "development_echo_setup",
   "audio_input": "off",
-  "audio_output": "on",
+  "audio_output": "off",
   "bios_boot_menu": "disabled",
   "clipboard": "bidirectional",
-  "cpus": "8",
+  "cpus": "4",
   "disk_size_mb": "102400",
   "drag_and_drop": "bidirectional",
   "firmware": "efi64",
@@ -16,7 +15,7 @@
   "iso_checksum_type": "sha1",
   "iso_url": "http://www.gtlib.gatech.edu/pub/archlinux/iso/2020.08.01/archlinux-2020.08.01-x86_64.iso",
   "mac_address": "auto",
-  "memory": "8192",
+  "memory": "4096",
   "mouse": "usbtablet",
   "post_shutdown_delay": "10s",
   "proxy": "http://cache.bld.danivyit.com:3128",
@@ -24,7 +23,5 @@
   "shutdown_timeout": "30s",
   "ssh_password": "password",
   "ssh_username": "root",
-  "vm_description": "Generated with Packer",
-  "vm_name": "divy-arch",
-  "vram": "128"
+  "vram": "24"
 }
