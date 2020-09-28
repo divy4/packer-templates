@@ -45,7 +45,7 @@ function get_name {
   var_file="$1"
   template="$(basename "$(dirname "$var_file")")"
   role="$(basename "$var_file" | sed 's/\.json$//g')"
-  echo "${template}_$role"
+  echo "$template-$role"
 }
 
 function get_vm_base_directory {

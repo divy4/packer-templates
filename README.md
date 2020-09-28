@@ -22,9 +22,9 @@ Provisioner templates are templates that build on top of other OS or provisioner
   - ...
 - `output/` - The default output directory (ignored by git)
 - `templates/`
-  - `TEMPLATE_NAME_1/` - A template of a generic machine architecture
+  - `TEMPLATE-NAME-1/` - A template of a generic machine architecture
     - `template.json` - The template
-    - `ROLE_NAME_1.json` - Variables for a specific role
+    - `ROLE-NAME-1.json` - Variables for a specific role
     - ...
   - ...
 
@@ -33,11 +33,11 @@ Provisioner templates are templates that build on top of other OS or provisioner
 All templates should be named by 1 of the following 2 patterns:
 
 ```format
-OS[_VERSION]
+OS[-VERSION]
 ```
 
 ```format
-PROVISIONER[_VARIANT]
+PROVISIONER[-VARIANT]
 ```
 
 The first of these patterns is for OS templates whereas the second is for provisioner templates.
@@ -52,12 +52,12 @@ ROLE.json
 - VERSION = The version of the OS being installed, e.g. `2016` or `7`. This is not required for OS's that don't have a version (i.e. Arch Linux).
 - PROVISIONER = The main provisioner used in the template, e.g. `ansible`, `chef`, or `shell`.
 - VARIANT = An optional (but optimally sparse) component of a template name when the basic template can't accommodate a specific role. E.g. additional hardware.
-- ROLE = The role of the specific instance of the template, e.g. `development`, `kubernetes_master`, etc...
+- ROLE = The role of the specific instance of the template, e.g. `development`, `kubernetes-master`, etc...
   - For OS templates that contain 1 role, the name should be `base`.
   - For OS templates that contain a role for each OS version, the name should be the version of the OS, e.g. `7` and `8` for a `centos` template.
 
-All template names should be lowercase. i.e. remove all non-alphanumeric characters and convert all uppercase letters to lowercase. Underscores should be used to join multiple words instead of hyphens.
+All template names should be lowercase. i.e. remove all non-alphanumeric characters and convert all uppercase letters to lowercase. Hyphens should be used to join multiple words instead of underscores because underscore is not a valid hostname character.
 
 ### Builder and Provisioner Directory Naming
 
-The builder and provisioner directories should be named after the `type` value in the corresponding `template.json`, removing all non-alphanumeric, non-hyphen characters and converting to lowercase.
+The builder and provisioner directories should be named after the `type` value in the corresponding `template.json`, removing all non-alphanumeric, non-underscore characters and converting to lowercase.
