@@ -47,13 +47,17 @@
   "provisioners": [
     {
       "environment_vars": [
-        "ftp_proxy={{user `proxy`}}",
-        "http_proxy={{user `proxy`}}",
-        "https_proxy={{user `proxy`}}",
-        "SWAP_SIZE={{user `memory`}}",
-        "SWAP={{user `swap`}}"
+        "HOSTNAME={{user `name`}}"
       ],
-      "script": "{{template_dir}}/../../provisioners/shell/configure_swap.sh",
+      "script": "../../provisioners/shell/set_hostname.sh",
+      "type": "shell"
+    },
+    {
+      "environment_vars": [
+        "SWAP={{user `swap`}}",
+        "SWAP_SIZE={{user `memory`}}"
+      ],
+      "script": "../../provisioners/shell/configure_swap.sh",
       "type": "shell"
     },
     {
