@@ -12,7 +12,7 @@ OS templates are templates that install a specific OS and perform a few basic se
 
 ### Provisioner Templates
 
-Provisioner templates are templates that build on top of other OS or provisioner templates via a meta builder (e.g. `virtualbox-ova`). These templates are often very simple, only requiring 1 or 2 provisioners along with some simple hardware modifications (e.g. cpu count and memory size), and can easily have multiple roles within it.
+Provisioner templates are templates that build on top of other OS or provisioner templates via a meta builder (e.g. `virtualbox-ova`). These templates are often very simple, only requiring 1 or 2 provisioners (other than common actions needed for most templates) along with some simple hardware modifications (e.g. cpu count and memory size), and can easily have multiple roles within it.
 
 ## Repo File Structure
 
