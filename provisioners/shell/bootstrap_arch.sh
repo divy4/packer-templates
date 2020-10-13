@@ -13,6 +13,7 @@ set -e
 # openssh - ssh server, needed to continue provisioning tools after initial run
 # pulseaudio - Audio middleware that sits between applications and ALSA
 # pulseaudio-alsa - ALSA plugin for pulseaudio
+# sudo - Privilage escalation
 packages=(\
   base \
   efibootmgr \
@@ -23,6 +24,7 @@ packages=(\
   openssh \
   pulseaudio \
   pulseaudio-alsa \
+  sudo \
 )
 
 # Bootdrive-level operations

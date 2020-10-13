@@ -1,14 +1,14 @@
 {
-  "ansible_playbook": "development_setup",
+  "ansible_playbook": "common_setup",
   "audio_input": "off",
-  "audio_output": "on",
+  "audio_output": "off",
   "cpus": "8",
   "mac_address": "auto",
   "memory": "8192",
-  "parent_template": "ansible-common-arch",
+  "parent_template": "arch-base",
   "proxy": "http://cache.bld.danivyit.com:3128",
   "ssh_password": "password",
-  "ssh_username": "dan",
+  "ssh_username": "root",
   "swap": "on",
   "vram": "128"
 }

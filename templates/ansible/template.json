@@ -6,7 +6,7 @@
       ],
       "guest_additions_mode": "disable",
       "output_directory": "{{user `vm_base_directory`}}/{{user `name`}}",
-      "shutdown_command": "shutdown now",
+      "shutdown_command": "echo '{{user `ssh_password`}}' | sudo -S shutdown -P now",
       "source_path": "{{user `vm_base_directory`}}/{{user `parent_template`}}/{{user `parent_template`}}.ovf",
       "ssh_password": "{{user `ssh_password`}}",
       "ssh_username": "{{user `ssh_username`}}",
@@ -49,6 +49,7 @@
       "environment_vars": [
         "HOSTNAME={{user `name`}}"
       ],
+      "execute_command": "echo '{{user `ssh_password`}}' | sudo -S sh -c '{{ .Vars }} {{ .Path }}'",
       "script": "../../provisioners/shell/set_hostname.sh",
       "type": "shell"
     },
@@ -57,11 +58,12 @@
         "SWAP={{user `swap`}}",
         "SWAP_SIZE={{user `memory`}}"
       ],
+      "execute_command": "echo '{{user `ssh_password`}}' | sudo -S sh -c '{{ .Vars }} {{ .Path }}'",
       "script": "../../provisioners/shell/configure_swap.sh",
       "type": "shell"
     },
     {
-      "destination": "/root",
+      "destination": "/tmp",
       "source": "../../provisioners/ansible",
       "type": "file"
     },
@@ -74,6 +76,7 @@
         "SSH_PASSWORD={{user `ssh_password`}}",
         "SSH_USERNAME={{user `ssh_username`}}"
       ],
+      "execute_command": "echo '{{user `ssh_password`}}' | sudo -S sh -c '{{ .Vars }} {{ .Path }}'",
       "script": "../../provisioners/shell/install_and_run_ansible.sh",
       "type": "shell"
     }
