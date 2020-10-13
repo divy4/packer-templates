@@ -5,10 +5,10 @@
   "cpus": "8",
   "mac_address": "auto",
   "memory": "8192",
-  "parent_template": "centos-8-base",
+  "parent_template": "ansible-common-centos8",
   "proxy": "http://cache.bld.danivyit.com:3128",
   "ssh_password": "password",
-  "ssh_username": "root",
+  "ssh_username": "dan",
   "swap": "off",
   "vram": "24"
 }

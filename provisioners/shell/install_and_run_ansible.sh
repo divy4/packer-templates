@@ -5,7 +5,7 @@ function main {
   check_vars
   install_ansible
   run_ansible
-  rm -rf ~/ansible
+  rm -rf /tmp/ansible
 }
 
 function check_vars {
@@ -38,17 +38,17 @@ function install_ansible {
 }
 
 function run_ansible {
-  cd ~/ansible
+  cd /tmp/ansible
   export ANSIBLE_HOST_KEY_CHECKING=False
-  echo "$SSH_PASSWORD" | \
-    ansible-playbook \
-      --ask-pass \
-      --extra-vars "ftp_proxy=$ftp_proxy" \
-      --extra-vars "http_proxy=$http_proxy" \
-      --extra-vars "https_proxy=$https_proxy" \
-      --inventory localhost \
-      --user "$SSH_USERNAME" \
-      "$PLAYBOOK.yml"
+  ansible-playbook \
+    --extra-vars "ansible_become_password=$SSH_PASSWORD" \
+    --extra-vars "ansible_password=$SSH_PASSWORD" \
+    --extra-vars "ftp_proxy=$ftp_proxy" \
+    --extra-vars "http_proxy=$http_proxy" \
+    --extra-vars "https_proxy=$https_proxy" \
+    --inventory localhost \
+    --user "$SSH_USERNAME" \
+    "$PLAYBOOK.yml"
 }
 
 main "$@"
