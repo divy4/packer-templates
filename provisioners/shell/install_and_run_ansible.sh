@@ -24,17 +24,19 @@ function get_os {
 }
 
 function install_ansible {
-  case "$(get_os)" in
-  arch)
-    pacman --noconfirm --sync ansible sshpass
-    ;;
-  centos)
-    yum install --assumeyes ansible
-    ;;
-  *)
-    echo "Error: Unrecognized OS"
-    ;;
-  esac
+  if ! command -v ansible > /dev/null; then
+    case "$(get_os)" in
+    arch)
+      pacman --noconfirm --sync ansible sshpass
+      ;;
+    centos)
+      yum install --assumeyes ansible
+      ;;
+    *)
+      echo "Error: Unrecognized OS"
+      ;;
+    esac
+  fi
 }
 
 function run_ansible {
