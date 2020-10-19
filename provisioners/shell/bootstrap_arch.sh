@@ -124,6 +124,7 @@ function configure_dns {
 
 function exec_chroot {
   echo_title 'Entering chroot'
+  export -f add_master_signing_keys
   export -f chroot_command
   export -f configure_boot_loader
   export -f echo_title
@@ -155,6 +156,7 @@ function exit_install_and_shutdown {
 
 function chroot_command {
   set -e
+  add_master_signing_keys
   set_time_zone
   set_localization
   set_hostname
@@ -162,6 +164,12 @@ function chroot_command {
   configure_boot_loader
   enable_networking
   enable_ssh
+}
+
+function add_master_signing_keys {
+  echo_title 'Add Master Signing Keys'
+  pacman-key --populate archlinux
+  # TODO: Add cron job to update keys
 }
 
 function set_time_zone {
