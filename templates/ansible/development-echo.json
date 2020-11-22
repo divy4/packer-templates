@@ -3,7 +3,7 @@
   "audio_input": "off",
   "audio_output": "on",
   "cpus": "8",
-  "mac_address": "auto",
+  "mac_address": "000000000040",
   "memory": "8192",
   "parent_template": "ansible-development",
   "proxy": "http://cache.bld.danivyit.com:3128",
