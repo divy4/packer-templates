@@ -169,7 +169,26 @@ function chroot_command {
 function add_master_signing_keys {
   echo_title 'Add Master Signing Keys'
   pacman-key --populate archlinux
-  # TODO: Add cron job to update keys
+  cat << EOF > /etc/systemd/system/pacman-signing-key-update.service
+[Unit]
+Description=Pacman signing key update
+Wants=network-online.target
+After=network-online.target
+StartLimitIntervalSec=0
+
+[Service]
+Type=oneshot
+ExecStart=/usr/bin/pacman-key --populate archlinux
+RemainAfterExit=yes
+Restart=on-failure
+RestartSec=60
+
+[Install]
+WantedBy=multi-user.target
+EOF
+  systemctl daemon-reload
+  systemctl start pacman-signing-key-update.service
+  systemctl enable pacman-signing-key-update.service
 }
 
 function set_time_zone {
