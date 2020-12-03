@@ -5,6 +5,10 @@
         "--manifest"
       ],
       "guest_additions_mode": "disable",
+      "import_flags": [
+        "--basefolder",
+        "{{user `vm_base_directory`}}"
+      ],
       "output_directory": "{{user `vm_base_directory`}}/{{user `name`}}",
       "shutdown_command": "echo '{{user `ssh_password`}}' | sudo -S shutdown -P now",
       "source_path": "{{user `vm_base_directory`}}/{{user `parent_template`}}/{{user `parent_template`}}.ovf",

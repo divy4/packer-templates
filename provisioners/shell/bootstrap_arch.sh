@@ -113,7 +113,10 @@ function install_packages {
 
 function generate_fstab {
   echo_title 'Generate fstab'
-  genfstab -U /mnt >> /mnt/etc/fstab
+  # Generate fstab and make sure continuous trim is enabled on ext4 systems
+  genfstab -U /mnt \
+    | awk '{if ($3 == "ext4" && $4 !~ /discard/) {$4=$4",discard"; print} else {print} }' \
+    >> /mnt/etc/fstab
   cat /mnt/etc/fstab
 }
 
@@ -169,7 +172,26 @@ function chroot_command {
 function add_master_signing_keys {
   echo_title 'Add Master Signing Keys'
   pacman-key --populate archlinux
-  # TODO: Add cron job to update keys
+  cat << EOF > /etc/systemd/system/pacman-signing-key-update.service
+[Unit]
+Description=Pacman signing key update
+Wants=network-online.target
+After=network-online.target
+StartLimitIntervalSec=0
+
+[Service]
+Type=oneshot
+ExecStart=/usr/bin/pacman-key --populate archlinux
+RemainAfterExit=yes
+Restart=on-failure
+RestartSec=60
+
+[Install]
+WantedBy=multi-user.target
+EOF
+  systemctl daemon-reload
+  systemctl start pacman-signing-key-update.service
+  systemctl enable pacman-signing-key-update.service
 }
 
 function set_time_zone {
