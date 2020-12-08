@@ -40,7 +40,8 @@ function main {
   generate_fstab
   configure_dns
   exec_chroot
-  exit_install_and_shutdown
+  prepare_for_reboot
+  echo_title 'Done!'
 }
 
 function enable_ntp {
@@ -146,13 +147,10 @@ function exec_chroot {
   echo_title 'Exiting chroot'
 }
 
-function exit_install_and_shutdown {
+function prepare_for_reboot {
   echo_title 'Disable swap and unmount partitions'
   swapoff --all
   umount -R /mnt
-
-  echo_title 'Done! Rebooting...'
-  nohup bash -c 'sleep 2 && shutdown now' &
 }
 
 # Chroot-level operations

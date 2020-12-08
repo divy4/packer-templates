@@ -110,8 +110,13 @@
         "NETWORK_INTERFACE=enp0s3",
         "ROOT_PASSWORD={{user `root_password`}}"
       ],
-      "pause_after": "5s",
       "script": "../../provisioners/shell/bootstrap_arch.sh",
+      "type": "shell"
+    },
+    {
+      "expect_disconnect": "true",
+      "inline": "shutdown now",
+      "pause_after": "5s",
       "type": "shell"
     },
     {
@@ -134,4 +139,3 @@
     }
   ]
 }
-
