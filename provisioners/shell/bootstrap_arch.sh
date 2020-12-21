@@ -114,10 +114,7 @@ function install_packages {
 
 function generate_fstab {
   echo_title 'Generate fstab'
-  # Generate fstab and make sure continuous trim is enabled on ext4 systems
-  genfstab -U /mnt \
-    | awk '{if ($3 == "ext4" && $4 !~ /discard/) {$4=$4",discard"; print} else {print} }' \
-    >> /mnt/etc/fstab
+  genfstab -U /mnt >> /mnt/etc/fstab
   cat /mnt/etc/fstab
 }
 
