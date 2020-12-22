@@ -73,10 +73,10 @@
           "on",
           "--rtcuseutc",
           "on",
-          "--usbxhci",
-          "on",
           "--vram",
-          "{{user `vram`}}"
+          "{{user `vram`}}",
+          "--vrde",
+          "off"
         ],
         [
           "setextradata",
