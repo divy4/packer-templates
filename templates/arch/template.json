@@ -57,6 +57,8 @@
           "none",
           "--clipboard-mode",
           "{{user `clipboard`}}",
+          "--cpuexecutioncap",
+          "100",
           "--draganddrop",
           "{{user `drag_and_drop`}}",
           "--firmware",
@@ -73,10 +75,10 @@
           "on",
           "--rtcuseutc",
           "on",
-          "--usbxhci",
-          "on",
           "--vram",
-          "{{user `vram`}}"
+          "{{user `vram`}}",
+          "--vrde",
+          "off"
         ],
         [
           "setextradata",
