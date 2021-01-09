@@ -57,6 +57,8 @@
           "none",
           "--clipboard-mode",
           "{{user `clipboard`}}",
+          "--cpuexecutioncap",
+          "100",
           "--draganddrop",
           "{{user `drag_and_drop`}}",
           "--firmware",
