@@ -229,7 +229,7 @@ function set_hostname {
   cat << EOF > /etc/hosts
 127.0.0.1 localhost
 ::1       localhost
-127.0.1.1 $HOSTNAME $HOSTNAME
+127.0.1.1 ${HOSTNAME//.*/} $HOSTNAME
 EOF
   echo "Host name is: $HOSTNAME"
 }
