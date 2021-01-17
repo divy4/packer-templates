@@ -30,7 +30,9 @@
           "--memory",
           "{{user `memory`}}",
           "--vram",
-          "{{user `vram`}}"
+          "{{user `vram`}}",
+          "--vrde",
+          "off"
         ],
         [
           "setextradata",
