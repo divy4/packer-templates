@@ -50,7 +50,7 @@ function run_ansible {
     --extra-vars "https_proxy=$https_proxy" \
     --inventory localhost \
     --user "$SSH_USERNAME" \
-    "$PLAYBOOK.yml"
+    "$PLAYBOOK.yml" packer_trigger_setup.yml
 }
 
 main "$@"
