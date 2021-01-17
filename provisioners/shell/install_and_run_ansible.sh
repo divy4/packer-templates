@@ -27,7 +27,7 @@ function install_ansible {
   if ! command -v ansible > /dev/null; then
     case "$(get_os)" in
     arch)
-      pacman --noconfirm --sync ansible sshpass
+      pacman --noconfirm --sync ansible rsync sshpass
       ;;
     centos)
       yum install --assumeyes ansible
