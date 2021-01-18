@@ -27,7 +27,7 @@ function install_ansible {
   if ! command -v ansible > /dev/null; then
     case "$(get_os)" in
     arch)
-      pacman --noconfirm --sync ansible sshpass
+      pacman --noconfirm --sync ansible rsync sshpass
       ;;
     centos)
       yum install --assumeyes ansible
@@ -50,7 +50,7 @@ function run_ansible {
     --extra-vars "https_proxy=$https_proxy" \
     --inventory localhost \
     --user "$SSH_USERNAME" \
-    "$PLAYBOOK.yml"
+    "$PLAYBOOK.yml" packer_trigger_setup.yml
 }
 
 main "$@"
