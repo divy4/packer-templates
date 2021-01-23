@@ -39,13 +39,12 @@ function run_ansible {
   fi
   #shellcheck disable=SC2154
   ansible-playbook \
+    --connection=local \
     --extra-vars "ansible_become_password=$SSH_PASSWORD" \
-    --extra-vars "ansible_password=$SSH_PASSWORD" \
     --extra-vars "ftp_proxy=$ftp_proxy" \
     --extra-vars "http_proxy=$http_proxy" \
     --extra-vars "https_proxy=$https_proxy" \
     --inventory localhost \
-    --user "$SSH_USERNAME" \
     "${playbooks[@]}"
 }
 
