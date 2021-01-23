@@ -2,7 +2,7 @@
 
 # Following https://wiki.archlinux.org/index.php/Installation_guide
 
-set -e
+set -euo pipefail
 
 # base - Base packages
 # efibootmgr - EFI mode support
