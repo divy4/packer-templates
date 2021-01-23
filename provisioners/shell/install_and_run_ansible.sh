@@ -1,24 +1,14 @@
 #!/usr/bin/env bash
-set -e
+set -euo pipefail
 
 function main {
-  check_vars
   install_ansible
   run_ansible
   rm -rf /tmp/ansible
 }
 
-function check_vars {
-  local var
-  for var in PLAYBOOK SSH_PASSWORD SSH_USERNAME; do
-    if [[ -z "${!var}" ]]; then
-      echo "Error: $var is not set"
-      return 1
-    fi
-  done
-}
-
 function get_os {
+  #shellcheck disable=SC1091
   source /etc/os-release
   echo "$ID"
 }
@@ -40,8 +30,14 @@ function install_ansible {
 }
 
 function run_ansible {
+  local playbooks
   cd /tmp/ansible
   export ANSIBLE_HOST_KEY_CHECKING=False
+  playbooks=("$PLAYBOOK.yml")
+  if ! [[ -f /usr/local/sbin/packer-trigger ]]; then
+    playbooks+=(packer_trigger_setup.yml)
+  fi
+  #shellcheck disable=SC2154
   ansible-playbook \
     --extra-vars "ansible_become_password=$SSH_PASSWORD" \
     --extra-vars "ansible_password=$SSH_PASSWORD" \
@@ -50,7 +46,7 @@ function run_ansible {
     --extra-vars "https_proxy=$https_proxy" \
     --inventory localhost \
     --user "$SSH_USERNAME" \
-    "$PLAYBOOK.yml" packer_trigger_setup.yml
+    "${playbooks[@]}"
 }
 
 main "$@"
