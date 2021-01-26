@@ -37,6 +37,7 @@ function run_ansible {
   if ! [[ -f /usr/local/sbin/packer-trigger ]]; then
     playbooks+=(packer_trigger_setup.yml)
   fi
+  ansible-galaxy install kewlfft.aur
   #shellcheck disable=SC2154
   ansible-playbook \
     --connection=local \
