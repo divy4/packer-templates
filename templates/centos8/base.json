@@ -19,7 +19,7 @@
   "memory": "4096",
   "mouse": "usbtablet",
   "post_shutdown_delay": "60s",
-  "proxy": "http://cache.bld.danivyit.com:3128",
+  "proxy": "http://cache.bld.danivy.com:3128",
   "root_password": "password",
   "shutdown_timeout": "60s",
   "ssh_password": "password",
