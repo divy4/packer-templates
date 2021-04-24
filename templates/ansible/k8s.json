@@ -6,7 +6,7 @@
   "mac_address": "000000000020",
   "memory": "8192",
   "parent_template": "ansible-common-centos8",
-  "proxy": "http://cache.bld.danivyit.com:3128",
+  "proxy": "http://cache.bld.danivy.com:3128",
   "ssh_password": "password",
   "ssh_username": "dan",
   "swap": "off",

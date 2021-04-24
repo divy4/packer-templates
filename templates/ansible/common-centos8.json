@@ -6,7 +6,7 @@
   "mac_address": "auto",
   "memory": "4096",
   "parent_template": "centos8-base",
-  "proxy": "http://cache.bld.danivyit.com:3128",
+  "proxy": "http://cache.bld.danivy.com:3128",
   "ssh_password": "password",
   "ssh_username": "root",
   "swap": "on",
