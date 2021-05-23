@@ -1,3 +1,0 @@
-[submodule "provisioners/ansible"]
-	path = provisioners/ansible
-	url = ../ansible.git
