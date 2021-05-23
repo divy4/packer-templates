@@ -4,6 +4,11 @@
     dest: /tmp/config-files
     src: config-files/
 
+- name: 'add_config_modules ({{ modules }}) : Set permissions on install script'
+  file:
+    mode: '755'
+    path: /tmp/config-files/install.sh
+
 - name: 'add_config_modules ({{ modules }}) : Load config module'
   become_user: '{{ item[0] }}'
   shell: '"/tmp/config-files/install.sh" "{{ item[1] }}"'
