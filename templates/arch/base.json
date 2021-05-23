@@ -1,8 +1,7 @@
 {
   "2d_acceleration": "off",
   "3d_acceleration": "off",
-  "audio_input": "off",
-  "audio_output": "off",
+  "audio": "none",
   "bios_boot_menu": "disabled",
   "clipboard": "bidirectional",
   "cpus": "4",

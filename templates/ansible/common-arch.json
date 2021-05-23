@@ -1,7 +1,6 @@
 {
   "ansible_playbook": "common_setup",
-  "audio_input": "off",
-  "audio_output": "off",
+  "audio": "none",
   "cpus": "8",
   "mac_address": "auto",
   "memory": "8192",

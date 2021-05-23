@@ -1,7 +1,6 @@
 {
   "ansible_playbook": "k8s_setup",
-  "audio_input": "off",
-  "audio_output": "off",
+  "audio": "none",
   "cpus": "8",
   "mac_address": "000000000020",
   "memory": "8192",
