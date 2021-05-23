@@ -5,10 +5,10 @@
     - base-devel # Base development tools
     - bind # Network debugging tools
     - bmon # Network monitor
-    - chromium # Internet browser
     - code # GUI text editor
     - dos2unix # Convert LF <==> CRLF
     - expect # Make scripts pretend they're human
+    - firefox # Internet browser
     - git # All the changes
     - go # A programming language
     - gvim # Vim with mouse support in terminal
