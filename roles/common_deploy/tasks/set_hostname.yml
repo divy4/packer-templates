@@ -1,0 +1,9 @@
+---
+- name: 'set_hostname: Set hostname'
+  hostname:
+    name: '{{ inventory_hostname }}'
+- name: 'set_hostname: Set hosts entries'
+  lineinfile:
+    path: /etc/hosts
+    line: '127.0.0.1   localhost localhost.localdomain localhost4 localhost4.localdomain4 {{ inventory_hostname_short }} {{ inventory_hostname }}'
+    regexp: '127.0.0.1\s'

@@ -1,0 +1,60 @@
+#!/usr/bin/env bash
+set -euf -o pipefail
+
+function main {
+  local server file approach copy_command temp_file password
+  if [[ "$#" -ne 1 ]]; then
+    echo "Usage: $(basename "${BASH_SOURCE[0]}") SERVER"
+    exit 1
+  fi
+  server="$1"
+  pull_config "$server"
+}
+
+function pull_config {
+  local server remote_file temp_file approach copy_command password
+  server="$1"
+  remote_file=/etc/kubernetes/admin.conf
+  temp_file=/tmp/kubeconfig
+  # shellcheck disable=SC2016
+  copy_command="install --group=\"\$(id --group --name)\"\
+    --owner=\"\$(whoami)\" --mode=600 '$remote_file' '$temp_file'"
+  
+  # shellcheck disable=SC2029,SC2034
+  approach="$(ssh "$server" \
+    "$(typeset -f determine_approach); determine_approach '$remote_file'")"
+  case "$approach" in
+  direct)
+    echo "Copying $remote_file directly..."
+    scp "$server:$remote_file" ~/.kube/config
+    ;;
+  sudo_without_password)
+    # shellcheck disable=SC2029
+    ssh "$server" "sudo --stdin $copy_command"
+    scp "$server:$temp_file" ~/.kube/config
+    # shellcheck disable=SC2029
+    ssh "$server" "rm '$temp_file'"
+    ;;
+  sudo_with_password)
+    echo "Please enter the sudo password for $server:"
+    read -rs password
+    # shellcheck disable=SC2029
+    ssh "$server" "echo '$password' | sudo --stdin $copy_command"
+    scp "$server:$temp_file" ~/.kube/config
+    # shellcheck disable=SC2029
+    ssh "$server" "rm '$temp_file'"
+    ;;
+  esac
+}
+
+function determine_approach {
+  if test -r "${1?Please specify a file to copy}"; then
+    echo 'direct'
+  elif sudo --non-interactive true 2> /dev/null; then
+    echo 'sudo_without_password'
+  else
+    echo 'sudo_with_password'
+  fi
+}
+
+main "$@"

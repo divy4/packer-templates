@@ -1,0 +1,46 @@
+[user]
+  name = Dan Ivy
+  email = # populate email
+  signingkey = # populate signingkey
+[core]
+  editor = code --wait
+  encoding = utf-8
+  pager = less -X
+[gpg]
+  program = gpg2
+[alias]
+  lg = log -20 --pretty=format:'%Cred%h%Creset - %s %Cgreen(%cr %an)%Creset%C(yellow)%d%Creset' --abbrev-commit --date=relative
+  lgr = log --graph --decorate --pretty=oneline --abbrev-commit
+  set-upstream = "! \
+    branch="$(git branch --show-current)"; \
+    if git config --get-regex "branch.${branch:?No branch checked out}.remote" > /dev/null; then \
+      echo "Upstream already set to $branch"; \
+    else \
+      git branch --set-upstream-to="origin/$branch" "$branch"; \
+    fi \
+    "
+[color]
+  ui = auto
+  interactive = auto
+[branch]
+  autoSetupMerge = true
+  autoSetupRebase = always
+[commit]
+  gpgsign = true
+[diff]
+  algorithm = histogram
+  compactionHeuristic = true
+  wsErrorHighlight = all
+  renameLimit = 3000
+[fetch]
+  prune = true
+[merge]
+  conflictstyle = diff3
+[pull]
+  rebase = true
+[push]
+  default = current
+[rebase]
+  autoStash = true
+[status]
+  showUntrackedFiles = all

@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+set -euf -o pipefail
+
+for file in "$@"; do
+  cat <<< "$(cat "$file" | jq --sort-keys)" > "$file"
+  echo "Sorted $file"
+done

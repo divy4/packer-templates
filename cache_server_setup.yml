@@ -1,0 +1,10 @@
+---
+- become: 'yes'
+  environment:
+    ftp_proxy: '{{ ftp_proxy | default() }}'
+    http_proxy: '{{ http_proxy | default() }}'
+    https_proxy: '{{ https_proxy | default() }}'
+  hosts: cache_server
+  name: cache_server_setup
+  roles:
+  - cache_server_setup

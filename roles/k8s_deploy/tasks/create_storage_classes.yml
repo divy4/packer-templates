@@ -1,0 +1,14 @@
+---
+- k8s:
+    apply: 'yes'
+    definition: '{{ lookup("file", "storage_classes.yml") }}'
+    kubeconfig: /etc/kubernetes/admin.conf
+  name: 'create_storage_classes : Apply default network policy'
+  when: '"primary_master" in group_names'
+- changed_when: false
+  k8s:
+    definition: '{{ lookup("file", "storage_classes.yml") }}'
+    kubeconfig: /etc/kubernetes/admin.conf
+    wait: 'yes'
+  name: 'create_storage_classes : Wait for resources to become ready'
+  when: '"primary_master" in group_names'

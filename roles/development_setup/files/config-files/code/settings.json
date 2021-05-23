@@ -1,0 +1,42 @@
+{
+  "ConEmu.path": "C:\\Program Files\\ConEmu\\ConEmu64.exe",
+  "cSpell.userWords": [
+    "ansible",
+    "Kubernetes",
+    "lineinfile",
+    "nonrotational",
+    "proto",
+    "remmina",
+    "sata",
+    "sshd",
+    "vboxmanage",
+    "virtualbox",
+    "vram"
+  ],
+  "editor.renderControlCharacters": false,
+  "editor.renderWhitespace": "all",
+  "editor.rulers": [
+    80,
+    100,
+    200,
+    300,
+    400,
+    500,
+    600,
+    700,
+    800,
+    900,
+    1000
+  ],
+  "editor.tabSize": 2,
+  "extensions.ignoreRecommendations": false,
+  "files.associations": {
+    "**/ansible/**/*.yml": "ansible",
+    "**/Dockerfile*": "dockerfile"
+  },
+  "files.eol": "\n",
+  "files.insertFinalNewline": true,
+  "terminal.integrated.shell.windows": "C:\\Program Files\\Git\\bin\\bash.exe",
+  "vscode-yaml-sort.lineWidth": 80,
+  "vscode-yaml-sort.noArrayIndent": true
+}

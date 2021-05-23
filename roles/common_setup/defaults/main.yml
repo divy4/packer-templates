@@ -1,0 +1,6 @@
+---
+common:
+  users:
+    sudo_users:
+    - name: dan
+      password: password
