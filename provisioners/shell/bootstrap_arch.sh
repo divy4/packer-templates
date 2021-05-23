@@ -100,10 +100,11 @@ function create_swapfile {
 
 function select_pacman_mirrors {
   echo_title 'Select pacman mirrors'
-  cp /etc/pacman.d/mirrorlist /tmp/mirrorlist
   chmod a+x /usr/bin/rankmirrors
-  rankmirrors --max-time 1 /tmp/mirrorlist > /etc/pacman.d/mirrorlist
-  rm /tmp/mirrorlist
+  curl --silent "https://archlinux.org/mirrorlist/?country=US&protocol=https" \
+    | sed --expression='s/^#Server/Server/' \
+    | rankmirrors --max-time 1 - \
+    > /etc/pacman.d/mirrorlist
   cat /etc/pacman.d/mirrorlist
 }
 
