@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-set -e
+set -euo pipefail
 
 function main {
   local config_functions interactive config_function
@@ -23,28 +23,8 @@ function config_bash {
     echo_err 'Root bash config not supported!'
     return 1
   else
-    copy file bashrc ~/.bashrc
-    copy file bootstrap.sh ~/.bootstrap.sh
-  fi
-}
-
-function config_chromium {
-  if is_root; then
-    echo_err 'Root chromium config not supported!'
-    return 1
-  else
-    copy file chromium-flags.conf ~/.config/chromium-flags.conf
-    if [[ -f ~/.config/chromium/Default/Preferences ]]; then
-      cp ~/.config/chromium/Default/Preferences /tmp/Preferences
-    else
-      echo '{}' > /tmp/Preferences
-      mkdir --parents ~/.config/chromium/Default/
-    fi
-    jq '.browser.custom_chrome_frame=false' /tmp/Preferences \
-      | jq ".credentials_enable_service=false" \
-      | jq ".download.default_directory=\"$HOME/downloads/\"" \
-      | jq ".savefile.default_directory=\"$HOME/downloads/\"" \
-      > ~/.config/chromium/Default/Preferences
+    install --mode=644 bashrc ~/.bashrc
+    install --mode=755 bootstrap.sh ~/.bootstrap.sh
   fi
 }
 
@@ -53,7 +33,7 @@ function config_code {
     echo_err 'Root code config not supported!'
     return 1
   else
-    copy file code/settings.json ~/.config/Code\ -\ OSS/User/settings.json
+    install --mode=644 -D code/settings.json ~/.config/Code\ -\ OSS/User/settings.json
     cat code/extensions | xargs --max-lines=1 code --install-extension
   fi
 }
@@ -63,7 +43,7 @@ function config_conemu {
     echo_err 'Root conemu config not supported!'
     return 1
   else
-    copy file ConEmu.xml "$APPDATA/ConEmu.xml"
+    install --mode=644 ConEmu.xml "$APPDATA/ConEmu.xml"
   fi
 }
 
@@ -73,10 +53,10 @@ function config_fluxbox {
     echo_err 'Root fluxbox config not supported!'
     return 1
   else
-    copy directory fluxbox/fluxbox ~/.fluxbox
-    copy file fluxbox/xinitrc ~/.xinitrc
-    copy file fluxbox/Xdefaults ~/.Xdefaults
-    copy file fluxbox/Xresources ~/.Xresources
+    cp --recursive fluxbox/fluxbox/* ~/.fluxbox/
+    install --mode=644 fluxbox/xinitrc ~/.xinitrc
+    install --mode=644 fluxbox/Xdefaults ~/.Xdefaults
+    install --mode=644 fluxbox/Xresources ~/.Xresources
     mapfile -t apps < <(\
       grep '# autoexec' ~/.fluxbox/menu \
       | sed --regexp-extended --expression='s/.*\((\w+)\).*/\1/g' \
@@ -95,7 +75,7 @@ function config_git {
     echo_err 'Root git config not supported!'
     return 1
   else
-    copy file gitconfig ~/.gitconfig
+    install --mode=644 gitconfig ~/.gitconfig
     if ! command -v gpg2; then
       sed --in-place 's/gpg2/gpg/g' ~/.gitconfig
     fi
@@ -104,15 +84,16 @@ function config_git {
 
 function config_nano {
   if is_root; then
-    copy file nanorc /etc/nanorc /etc/nano/nanorc
+    install --mode=644 nanorc /etc/nanorc
+    install --mode=644 -D nanorc /etc/nano/nanorc
   else
-    copy file nanorc ~/.nanorc
+    install --mode=644 nanorc ~/.nanorc
   fi
 }
 
 function config_scripts {
   if is_root; then
-    copy directory scripts /usr/local/bin
+    install --mode=755 --owner=root --group=root scripts/* /usr/local/bin/
   else
     echo_err 'Non-root scripts config not supported!'
     return 1
@@ -124,15 +105,16 @@ function config_ssh {
     echo_err 'Root ssh config not supported!'
     return 1
   else
-    copy file sshconfig ~/.ssh/config
+    install --mode=600 -D sshconfig ~/.ssh/config
   fi
 }
 
 function config_vim {
   if is_root; then
-    copy file vimrc /etc/vimrc /etc/vim/vimrc
+    install --mode=644 --owner=root --group=root vimrc /etc/vimrc
+    install --mode=644 --owner=root --group=root -D vimrc /etc/vim/vimrc
   else
-    copy file vimrc ~/.vimrc
+    install --mode=644 vimrc ~/.vimrc
   fi
 }
 
@@ -141,27 +123,6 @@ function get_config_functions {
     | grep --only-matching --perl-regexp '(?<=\s)config_\w*$' \
     | sed 's/config_//g' \
     | sort --ignore-case
-}
-
-function copy {
-  local type source targets target target_parent
-  type="$1"
-  source="$2"
-  targets=("${@:3}")
-  target="$(choose_target file "${targets[@]}")"
-  target_parent="$(realpath --canonicalize-missing "$target/..")"
-  if [[ ! -d "$target_parent" ]]; then
-    mkdir --parents "$target_parent"
-  fi
-  case "$type" in
-  file)
-    cp "$source" "$target";;
-  directory)
-    cp --recursive "$source/." "$target";;
-  *)
-    echo_err "Invalid type: $type"
-    return 1;;
-  esac
 }
 
 function choose_target {
