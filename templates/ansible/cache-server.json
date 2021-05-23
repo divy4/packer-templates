@@ -1,7 +1,6 @@
 {
   "ansible_playbook": "cache_server_setup",
-  "audio_input": "off",
-  "audio_output": "off",
+  "audio": "none",
   "cpus": "2",
   "mac_address": "000000000010",
   "memory": "4096",

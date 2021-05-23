@@ -1,0 +1,9 @@
+---
+all:
+  children:
+    dev:
+      children:
+        development:
+          children:
+            development_echo:
+              hosts: dev.wrk.danivy.com

@@ -1,0 +1,187 @@
+# Find key mods:
+# xmodmap -pm
+#
+# Find key codes (if the name doesn't work):
+# xev
+# or (for just the code)
+# xev | grep --only-matching --perl-regexp '(?<=keycode\s)\w*'
+#
+# Numpad codes:
+# 0 = 90
+# 1 = 87
+# 2 = 88
+# 3 = 89
+# 4 = 83
+# 5 = 84
+# 6 = 85
+# 7 = 79
+# 8 = 80
+# 9 = 81
+
+
+# key commands
+
+
+## App shortcuts
+Control 49 :Exec xterm
+Mod4 a :Exec xterm alsamixer
+Mod4 c :Exec code
+Mod4 d :Exec deluge
+Mod4 f :Exec nemo
+Mod4 b :Exec chromium
+Mod4 Shift b :Exec chromium --incognito
+Mod4 r :Exec remmina
+Mod4 s :Exec slack
+Mod4 t :Exec xterm
+Mod4 v :Exec vmware-view
+
+
+## window snapping
+
+### windows + numpad
+Mod4 90 :Maximize
+
+Mod4 m :MacroCmd  {ResizeTo 33% 40%}  {MoveTo 0%  60%}
+Mod4 59 :MacroCmd {ResizeTo 34% 40%}  {MoveTo 33% 60%}
+Mod4 60 :MacroCmd {ResizeTo 33% 40%}  {MoveTo 67% 60%}
+
+Mod4 j :MacroCmd {ResizeTo 33% 100%} {MoveTo 0%  0%}
+Mod4 k :MacroCmd {ResizeTo 34% 100%} {MoveTo 33% 0%}
+Mod4 l :MacroCmd {ResizeTo 33% 100%} {MoveTo 67% 0%}
+
+Mod4 u :MacroCmd {ResizeTo 33% 60%}  {MoveTo 0%  0%}
+Mod4 i :MacroCmd {ResizeTo 34% 60%}  {MoveTo 33% 0%}
+Mod4 o :MacroCmd {ResizeTo 33% 60%}  {MoveTo 67% 0%}
+
+### control + windows + numpad
+Control Mod4 90 :Maximize
+
+Control Mod4 m  :MacroCmd {ResizeTo 33% 40%}  {MoveTo 0%  60%}
+Control Mod4 59 :MacroCmd {ResizeTo 44% 40%}  {MoveTo 23% 60%}
+Control Mod4 60 :MacroCmd {ResizeTo 43% 40%}  {MoveTo 57% 60%}
+
+Control Mod4 j :MacroCmd {ResizeTo 33% 100%} {MoveTo 0%  0%}
+Control Mod4 k :MacroCmd {ResizeTo 44% 100%} {MoveTo 23% 0%}
+Control Mod4 l :MacroCmd {ResizeTo 43% 100%} {MoveTo 57% 0%}
+
+Control Mod4 u :MacroCmd {ResizeTo 33% 60%}  {MoveTo 0%  0%}
+Control Mod4 i :MacroCmd {ResizeTo 44% 60%}  {MoveTo 23% 0%}
+Control Mod4 o :MacroCmd {ResizeTo 43% 60%}  {MoveTo 57% 0%}
+
+### alt + windows + numpad
+Mod1 Mod4 90 :Maximize
+
+Mod1 Mod4 m  :MacroCmd {ResizeTo 43% 40%}  {MoveTo 0%  60%}
+Mod1 Mod4 59 :MacroCmd {ResizeTo 44% 40%}  {MoveTo 33% 60%}
+Mod1 Mod4 60 :MacroCmd {ResizeTo 33% 40%}  {MoveTo 67% 60%}
+
+Mod1 Mod4 j :MacroCmd {ResizeTo 43% 100%} {MoveTo 0%  0%}
+Mod1 Mod4 k :MacroCmd {ResizeTo 44% 100%} {MoveTo 33% 0%}
+Mod1 Mod4 l :MacroCmd {ResizeTo 33% 100%} {MoveTo 67% 0%}
+
+Mod1 Mod4 u :MacroCmd {ResizeTo 43% 60%}  {MoveTo 0%  0%}
+Mod1 Mod4 i :MacroCmd {ResizeTo 44% 60%}  {MoveTo 33% 0%}
+Mod1 Mod4 o :MacroCmd {ResizeTo 33% 60%}  {MoveTo 67% 0%}
+
+### control + alt + windows + numpad
+Control Mod1 Mod4 90 :Maximize
+
+Control Mod1 Mod4 m :MacroCmd {ResizeTo 67%  40%}  {MoveTo 0%  60%}
+Control Mod1 Mod4 59 :MacroCmd {ResizeTo 100% 40%}  {MoveTo 0%  60%}
+Control Mod1 Mod4 60 :MacroCmd {ResizeTo 67%  40%}  {MoveTo 33% 60%}
+
+Control Mod1 Mod4 j :MacroCmd {ResizeTo 67%  100%} {MoveTo 0%  0%}
+Control Mod1 Mod4 k :MacroCmd {ResizeTo 100% 100%} {MoveTo 0%  0%}
+Control Mod1 Mod4 l :MacroCmd {ResizeTo 67%  100%} {MoveTo 33% 0%}
+
+Control Mod1 Mod4 u :MacroCmd {ResizeTo 67%  60%}  {MoveTo 0%  0%}
+Control Mod1 Mod4 i :MacroCmd {ResizeTo 100% 60%}  {MoveTo 0%  0%}
+Control Mod1 Mod4 o :MacroCmd {ResizeTo 67%  60%}  {MoveTo 33% 0%}
+
+
+## current window/tab
+
+Mod1 F4 :Close
+Mod4 q :Close
+Mod1 F5 :Kill
+Mod1 F9 :Minimize
+Mod1 F10 :Maximize
+Mod1 F11 :Fullscreen
+
+## tabs
+
+### switch active tab
+Control Tab :NextTab
+Control Shift Tab :PrevTab
+
+## windows
+
+### switch active window (win + up or down)
+Mod4 111 :NextWindow {groups} (workspace=[current])
+Mod4 116 :PrevWindow {groups} (workspace=[current])
+
+## workspace
+
+### switch workspace
+Mod4 Left :PrevWorkspace
+Mod4 Right :NextWorkspace
+
+### switch workspace and bring current window along
+Control Mod4 Left :TakeToPrevWorkspace
+Control Mod4 Right :TakeToNextWorkspace
+
+## other
+
+### volume settings
+### if these don't work, use xev to find out real keycodes
+176 :Exec amixer sset Master,0 1+
+174 :Exec amixer sset Master,0 1-
+160 :Exec amixer sset Master,0 toggle
+
+### exit fluxbox
+Control Mod1 Delete :Exit
+Shift Mod4 q :Exit
+
+
+# mouse commands
+
+
+## tabs
+
+### attach windows (i.e. tabs)
+OnTitlebar Control Mouse1 :StartTabbing
+
+## windows
+
+### move/resize/tab window
+OnWindow Mod4 Mouse1 :MacroCmd {Raise} {Focus} {StartMoving}
+OnWindow Mod4 Mouse2 :MacroCmd {Raise} {Focus} {StartTabbing}
+OnWindow Mod4 Mouse3 :MacroCmd {Raise} {Focus} {StartResizing NearestCorner}
+
+### move window
+OnTitlebar Mouse1 :MacroCmd {Raise} {Focus} {ActivateTab}
+OnTitlebar Move1  :StartMoving
+
+### lower window
+OnTitlebar Mouse2 :Lower
+
+### window menu
+OnTitlebar Mouse3 :WindowMenu
+
+
+## desktop
+
+### desktop menus
+OnDesktop Mouse1 :HideMenus
+OnDesktop Mouse2 :WorkspaceMenu
+OnDesktop Mouse3 :RootMenu
+
+
+## Misc
+
+# Print Screen = Screenshot
+Print :Exec import ~/screenshot.png
+# win + page up = enable transparency
+Mod4 112  :Exec ps -u "$(whoami)" | grep xcompmgr || nohup xcompmgr > /dev/null &
+# win + page down = disable transparency
+Mod4 117  :Exec killall xcompmgr

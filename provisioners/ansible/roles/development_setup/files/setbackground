@@ -1,0 +1,69 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+# Force X server info so the display can be found
+export DISPLAY=:0.0
+export XAUTHORITY="$HOME/.Xauthority"
+
+MONITOR_EVENTS=(\
+  --event close_write \
+  --event moved_to \
+)
+
+VALID_FILE_PATTERN='\.(jpeg|jpg|png)$'
+
+function main {
+  if [[ "$#" -ne 1 ]]; then
+    display_help "$@"
+  elif [[ -f "$1" ]]; then
+    set_background "$1"
+  elif [[ -d "$1" ]]; then
+    monitor_directory "$1"
+  else
+    display_help "$@"
+  fi
+}
+
+function display_help {
+  cat <<EOF
+Usage:
+  $(basename "${BASH_SOURCE[0]}") FILE
+  $(basename "${BASH_SOURCE[0]}") DIRECTORY
+
+In the first form, this command will assign the background to FILE.
+In the second form, this command will monitor DIRECTORY and assign any newly
+created files in that directory as the background.
+EOF
+  return 1
+}
+
+function monitor_directory {
+  local dir line curr_file last_file curr_time last_time 
+  dir="$1"
+  last_file=''
+  last_time="$(($(date +%s%N) - 10000000000))"
+  while read -r line; do
+    curr_file="$dir/$line"
+    curr_time="$(date +%s%N)"
+    if [[ ! -f "$curr_file" ]]; then
+      echo "$curr_file is not a file, skipping."
+    elif [[ "$curr_file" == "$last_file" ]] && [[ "$((curr_time - last_time))" -lt 1000000000 ]]; then
+      echo "Repeat update for $curr_file, skipping."
+    elif set_background "$curr_file"; then
+      last_file="$curr_file"
+    fi
+    last_time="$curr_time"
+  done < <(inotifywait "${MONITOR_EVENTS[@]}" --format %f --monitor "$1")
+}
+
+function set_background {
+  if echo "$1" | grep --quiet --perl-regexp "$VALID_FILE_PATTERN"; then
+    echo "Setting background to $1..."
+    fbsetbg -a "$1"
+  else
+    echo "Invalid file type for file $1"
+    return 1
+  fi
+}
+
+main "$@"

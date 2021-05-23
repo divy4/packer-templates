@@ -1,0 +1,98 @@
+#
+# ~/.bashrc
+#
+
+# fix gpg
+export GPG_TTY=$(tty)
+if [[ -n "$SSH_CONNECTION" ]]; then
+  export PINENTRY_USER_DATA="USE_CURSES=1"
+fi
+
+# set VS Code as default editor
+export VISUAL='code --wait'
+export EDITOR='code --wait'
+
+# If not running interactively, don't do anything
+[[ $- != *i* ]] && return
+
+# enable docker buildkit
+export DOCKER_BUILDKIT=1
+
+# prompt
+PS1='\[\033[32m\]\u@\h \[\033[33m\]\W\[\033[0m\] \$ '
+
+# clipboard
+alias clipboard='xclip -selection clipboard'
+alias primary='xclip -selection primary'
+alias secondary='xclip -selection secondary'
+
+# compressing/decompressing
+alias   compresstar='tar -cf'
+alias decompresstar='tar -xf'
+alias   compressgz='tar -czf'
+alias decompressgz='tar -xzf'
+
+# git
+alias ga='git add'
+alias gaa='git add -A'
+alias gaacapfwl='git add -A; git commit --amend --no-edit; git push --force-with-lease'
+alias gb='git branch'
+alias gc='git commit -m'
+alias gupstream='git set-upstream'
+alias gca='git commit --amend --no-edit'
+alias gd='git diff'
+alias gf='git fetch --all'
+alias gl='git lg'
+alias gmv='git mv'
+alias gpull='git pull'
+alias gpush='git push'
+alias gpushfwl='git push --force-with-lease'
+alias grb='git rebase'
+alias grbi='git rebase -i'
+alias grbmaster='git fetch origin; git rebase origin/master; git push --force-with-lease'
+alias grm='git rm'
+alias gs='git status'
+
+# internet
+alias pingtest='ping -c 4 google.com'
+alias wifi='sudo wifi-menu'
+
+# misc
+alias cl='clear;'
+alias cl2='clear;clear;'
+alias cls='clear;ls'
+alias df='df -h'
+alias du='du -cah --apparent-size'
+alias gdiff='git diff --no-index'
+alias k='kubectl'
+alias l='ls'
+alias ls='ls --color=auto'
+alias la='ls -a'
+alias ll='ls -l'
+alias lla='ls -la'
+alias l1='ls -1'
+alias vim='vim -o' #always open multiple files in split mode
+
+# os-specific settings
+case "$(uname -s)" in
+  Linux*)
+    export PACKER_CACHE_DIR='/tmp/packer'
+    export PACKER_VM_DIR='/var/vms'
+    ;;
+  CYGWIN*|MINGW*)
+    export PACKER_CACHE_DIR='/c/packer'
+    export PACKER_VM_DIR='/t/packer_vms'
+    ;;
+  *)
+    echo "Unrecognized OS: $(uname -s)"
+    ;;
+esac
+
+# First time setup
+if [[ -f ~/.bootstrap.sh ]]; then
+  if ~/.bootstrap.sh; then
+    rm ~/.bootstrap.sh
+  else
+    echo 'Failed to bootstrap configs'
+  fi
+fi

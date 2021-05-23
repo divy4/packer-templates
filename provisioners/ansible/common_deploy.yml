@@ -1,0 +1,10 @@
+---
+- become: 'yes'
+  environment:
+    ftp_proxy: '{{ ftp_proxy | default() }}'
+    http_proxy: '{{ http_proxy | default() }}'
+    https_proxy: '{{ https_proxy | default() }}'
+  hosts: all
+  name: common_deploy
+  roles:
+  - common_deploy

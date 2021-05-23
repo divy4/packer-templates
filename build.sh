@@ -14,12 +14,6 @@ function validate_setup {
     echo 'Usage: ./build.sh TEMPLATE_VARIANT_JSON'
     return 1
   fi
-  if [[ ! -f 'provisioners/ansible/.git' ]]; then
-    echo 'Error: provisioners/ansible/.git not found!'
-    echo 'Please execute the following to install the ansible repo:'
-    echo '"git submodule update --init --recursive"'
-    return 2
-  fi
 }
 
 function build_template {

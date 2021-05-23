@@ -1,0 +1,24 @@
+#!/bin/sh
+
+# Keymap
+xmodmap "/home/dan/.Xmodmap"
+
+# Set background
+~/.fluxbox/setbackground.sh
+
+# Start VirtualBox guest additions
+if command -v VBoxClient-all; then
+  VBoxClient-all
+fi
+
+# Fetch a new background
+if command -v fetchbackground; then
+  fetchbackground
+fi
+
+# Clock
+xclock -strftime '%A %m/%d/%Y %I:%M:%S %p' &
+
+# Run fluxbox
+exec fluxbox
+# exec fluxbox -log "/home/dan/.fluxbox/log"

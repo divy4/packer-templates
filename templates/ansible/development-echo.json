@@ -1,7 +1,6 @@
 {
   "ansible_playbook": "development_echo_setup",
-  "audio_input": "off",
-  "audio_output": "on",
+  "audio": "none",
   "cpus": "8",
   "mac_address": "000000000040",
   "memory": "8192",

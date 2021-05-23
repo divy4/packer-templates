@@ -19,10 +19,8 @@
         [
           "modifyvm",
           "{{.Name}}",
-          "--audioin",
-          "{{user `audio_input`}}",
-          "--audioout",
-          "{{user `audio_output`}}",
+          "--audio",
+          "{{user `audio`}}",
           "--cpus",
           "{{user `cpus`}}",
           "--macaddress1",

@@ -1,0 +1,16 @@
+---
+all:
+  children:
+    stg:
+      children:
+        development:
+          hosts: dev.stg.danivy.com
+        k8s:
+          children:
+            masters:
+              children:
+                primary_master:
+                  hosts: k8s.stg.danivy.com
+              hosts: k8s.stg.danivy.com
+            workers:
+              hosts: k8s.stg.danivy.com

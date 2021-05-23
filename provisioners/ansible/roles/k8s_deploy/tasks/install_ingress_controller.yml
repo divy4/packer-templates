@@ -1,0 +1,14 @@
+---
+- k8s:
+    apply: 'yes'
+    definition: '{{ lookup("template", "nginx_ingress_baremetal.yaml.j2") }}'
+    kubeconfig: /etc/kubernetes/admin.conf
+  name: 'install_ingress_controller : Apply nginx ingress controller'
+  when: '"primary_master" in group_names'
+- changed_when: false
+  k8s:
+    definition: '{{ lookup("template", "nginx_ingress_baremetal.yaml.j2") }}'
+    kubeconfig: /etc/kubernetes/admin.conf
+    wait: 'yes'
+  name: 'install_ingress_controller : Wait for resources to become ready'
+  when: '"primary_master" in group_names'
