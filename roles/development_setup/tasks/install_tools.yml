@@ -70,7 +70,6 @@
   vars:
     modules:
     - bash
-    - chromium
     - code
     - git
     - ssh
