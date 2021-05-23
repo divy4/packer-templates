@@ -1,0 +1,7 @@
+---
+all:
+  children:
+    management:
+      children:
+        cache_server:
+          hosts: cache.bld.danivy.com

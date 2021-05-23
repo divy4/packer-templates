@@ -1,0 +1,12 @@
+[Unit]
+Description=Background Updater Service
+Wants=default.target
+After=default.target
+StartLimitIntervalSec=0
+
+[Service]
+Type=simple
+ExecStart=bash -c '/usr/local/bin/setbackground "$HOME/.fluxbox/background/"'
+
+[Install]
+WantedBy=default.target

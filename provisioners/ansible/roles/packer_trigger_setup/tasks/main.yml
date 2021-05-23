@@ -1,0 +1,31 @@
+---
+- name: Copy Ansible code
+  become: yes
+  synchronize:
+    dest: /packer
+    rsync_opts:
+    - '--no-motd'
+    - '--exclude=.git'
+    src: '{{ playbook_dir }}'
+- name: Copy trigger script
+  become: yes
+  copy:
+    dest: /usr/local/sbin/packer-trigger
+    group: root
+    mode: '744'
+    owner: root
+    src: packer-trigger
+- name: Setup trigger service
+  become: yes
+  copy:
+    dest: /etc/systemd/system/packer-trigger.service
+    group: root
+    mode: '644'
+    owner: root
+    src: packer-trigger.service
+- name: Enable trigger service
+  become: yes
+  systemd:
+    daemon_reload: yes
+    enabled: yes
+    name: packer-trigger

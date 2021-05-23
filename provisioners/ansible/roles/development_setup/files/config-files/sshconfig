@@ -1,0 +1,10 @@
+Host *
+  ServerAliveInterval 300
+  ServerAliveCountMax 2
+
+Host github.com
+  IdentityFile ~/.ssh/git
+  User git
+
+Host localhost
+  IdentityFile ~/.ssh/localhost

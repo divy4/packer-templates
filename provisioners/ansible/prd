@@ -1,0 +1,16 @@
+---
+all:
+  children:
+    prd:
+      children:
+        development:
+          hosts: dev.prd.danivy.com
+        k8s:
+          children:
+            masters:
+              children:
+                primary_master:
+                  hosts: k8s.prd.danivy.com
+              hosts: k8s.prd.danivy.com
+            workers:
+              hosts: k8s.prd.danivy.com

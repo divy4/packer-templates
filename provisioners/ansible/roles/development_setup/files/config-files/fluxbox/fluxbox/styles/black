@@ -1,0 +1,10 @@
+# Defaults
+*.color:         #000000
+*.textColor:     #808080
+*.font:          UbuntuMono-12
+*.bevelWidth:    0
+*.borderWidth:   0
+*.handleWidth:   0
+
+# Exceptions
+menu.frame.color: #202020

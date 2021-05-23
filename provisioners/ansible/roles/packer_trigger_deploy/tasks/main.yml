@@ -1,0 +1,14 @@
+---
+- name: Disable trigger service
+  become: yes
+  systemd:
+    enabled: no
+    name: packer-trigger
+- name: Delete trigger service
+  become: yes
+  file:
+    path: /etc/systemd/system/packer-trigger.service
+    state: absent
+- name: Reload systemd daemon list
+  systemd:
+    daemon_reload: yes

@@ -1,0 +1,20 @@
+---
+- assert:
+    fail_msg: 'Environment "{{ env }}" is not dev, stg, or prd.'
+    that:
+    - env is match("^((dev)|(stg)|(prd))$")
+- assert:
+    fail_msg: 'Mode "{{ mode }}" is not apply or delete.'
+    that:
+    - mode is match("^((apply)|(delete))$")
+- git:
+    depth: 1
+    dest: /tmp/kubernetes-apps
+    repo: 'git@github.com:divy4/kubernetes-apps.git'
+    version: '{{ version }}'
+  name: 'clone kubernetes-apps repo'
+- include_tasks: apply_kubernetes_manifests.yml
+- file:
+    path: /tmp/kubernetes-apps
+    state: absent
+  name: 'delete kubernetes-apps repo'

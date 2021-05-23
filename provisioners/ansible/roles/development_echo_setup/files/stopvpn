@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+set -e
+
+PID_FILE='/var/run/openconnect.pid'
+
+function main {
+  if [[ -f "$PID_FILE" ]]; then
+    sudo kill -15 "$(cat "$PID_FILE")"
+  else
+    echo 'No PID found!'
+    return 1
+  fi
+}
+
+main "$@"

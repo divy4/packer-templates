@@ -1,0 +1,12 @@
+---
+- name: 'add_config_modules ({{ modules }}) : Copy config-files repo'
+  copy:
+    dest: /tmp/config-files
+    src: config-files/
+
+- name: 'add_config_modules ({{ modules }}) : Load config module'
+  become_user: '{{ item[0] }}'
+  shell: '"/tmp/config-files/install.sh" "{{ item[1] }}"'
+  with_nested:
+  - '{{ users }}'
+  - '{{ modules }}'

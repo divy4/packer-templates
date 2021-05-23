@@ -1,0 +1,7 @@
+---
+k8s_deploy_role:
+  ingress:
+    ports:
+      http: '30080'
+      https: '30443'
+  pod_network_cidr: '10.244.0.0/16'
