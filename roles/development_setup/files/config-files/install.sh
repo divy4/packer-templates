@@ -23,8 +23,8 @@ function config_bash {
     echo_err 'Root bash config not supported!'
     return 1
   else
-    install --mode=644 bashrc ~/.bashrc
-    install --mode=755 bootstrap.sh ~/.bootstrap.sh
+    install --mode=644 bash/bashrc ~/.bashrc
+    install --mode=755 bash/bootstrap.sh ~/.bootstrap.sh
   fi
 }
 
