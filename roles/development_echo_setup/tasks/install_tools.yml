@@ -6,6 +6,7 @@
     - helm # An additional kubectl 
     - openconnect # Open source version of Cisco's AnyConnect
     - remmina # A remote connection manager
+    - ruby # Programming language
 
 - name: 'install_tools : Install yay packages'
   become: yes
@@ -15,6 +16,18 @@
     - slack-desktop
     - sops
     - vmware-horizon-client
+
+- name: 'install_tools : Install ruby gems'
+  gem:
+    name: bundler
+    user_install: no
+
+- name: 'install_tools : Copy ruby profile script'
+  copy:
+    dest: /etc/profile.d/
+    mode: '755'
+    owner: root
+    src: ruby_profile.sh
 
 - name: 'install_tools : Copy startvpn script'
   copy:
