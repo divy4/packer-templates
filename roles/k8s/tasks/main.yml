@@ -1,0 +1,9 @@
+---
+- include_tasks: setup.yml
+  when: setup
+- include_tasks: reset.yml
+  when: reset
+- include_tasks: deploy.yml
+  when: deploy
+- include_tasks: app_deploy.yml
+  when: app_deploy

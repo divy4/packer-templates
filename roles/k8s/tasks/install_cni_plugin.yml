@@ -1,0 +1,14 @@
+---
+- k8s:
+    apply: 'yes'
+    definition: '{{ lookup("file", "calico.yaml") }}'
+    kubeconfig: /etc/kubernetes/admin.conf
+  name: 'Apply Calico network plugin'
+  when: '"primary_master" in group_names'
+- changed_when: false
+  k8s:
+    definition: '{{ lookup("file", "calico.yaml") }}'
+    kubeconfig: /etc/kubernetes/admin.conf
+    wait: 'yes'
+  name: 'Wait for resources to become ready'
+  when: '"primary_master" in group_names'

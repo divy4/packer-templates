@@ -1,0 +1,12 @@
+---
+- name: 'Install useful tools'
+  package:
+    name:
+    - jq
+    - nmap
+    - tc
+    - telnet
+    state: present
+- name: 'Install python modules'
+  pip:
+    name: openshift

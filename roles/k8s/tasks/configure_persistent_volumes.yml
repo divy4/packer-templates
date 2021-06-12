@@ -1,0 +1,6 @@
+---
+- file:
+    mode: '777'
+    path: /data
+    state: directory
+  name: 'Create data directory'

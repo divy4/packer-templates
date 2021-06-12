@@ -1,0 +1,65 @@
+---
+- name: 'Install packages'
+  package:
+    name:
+    - alsa-utils # Audio drivers and controls
+    - feh # Image viewer, needed for setting the background
+    - fluxbox # Window manager
+    - imagemagick # Image command line tool/screenshots
+    - inotify-tools # Tools for monitoring filesystem changes
+    - ttf-ubuntu-font-family # Fonts, needed for fluxbox to start successfully
+    - xclip # clipboard
+    - xcompmgr # Transparency
+    - xorg-apps # A bunch of X utilities
+    - xorg-server # The X server, makes the world go round
+    - xorg-xclock # Clock
+    - xorg-xinit # xinit, starts X server
+    - xorg-xmessage # X server message display, needed for when things go bad
+    - xterm # A terminal
+
+- name: 'Copy xinitrc'
+  copy:
+    dest: /etc/X11/xinit/xinitrc
+    mode: '644'
+    owner: root
+    src: xinitrc
+
+- name: 'Create ~/.fluxbox/background/'
+  loop: '{{ development.dev_users }}'
+  file:
+    group: '{{ item }}'
+    mode: '755'
+    owner: '{{ item }}'
+    path: '~{{ item }}/.fluxbox/background/'
+    state: directory
+
+- name: 'Install background tools'
+  loop:
+  - fetchbackground
+  - setbackground
+  copy:
+    dest: /usr/local/bin/
+    group: root
+    mode: '755'
+    owner: root
+    src: '{{ item }}'
+
+- name: 'Install background-updater service'
+  copy:
+    dest: /etc/systemd/user/background-updater.service
+    group: root
+    mode: '644'
+    owner: root
+    src: background-updater.service
+
+- name: 'Reload Systemd units'
+  systemd:
+    daemon_reload: yes
+
+- name: 'Enable background-updater service for all users'
+  loop: '{{ development.dev_users }}'
+  become_user: '{{ item }}'
+  systemd:
+    enabled: yes
+    name: background-updater
+    scope: user

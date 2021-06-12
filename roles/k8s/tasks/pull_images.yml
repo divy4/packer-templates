@@ -1,0 +1,5 @@
+---
+- changed_when: false
+  name: 'Pull kubeadm images'
+  shell:
+    cmd: kubeadm config images pull

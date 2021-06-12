@@ -1,0 +1,17 @@
+---
+- modprobe:
+    name: br_netfilter
+  name: 'Load br_netfilter module'
+- lineinfile:
+    create: 'yes'
+    line: br_netfilter
+    path: /etc/modules-load.d/br_netfilter.conf
+  name: 'Enable br_netfilter module'
+- name: 'Allow iptables to see bridged, ipv4 traffic'
+  sysctl:
+    name: net.bridge.bridge-nf-call-iptables
+    value: '1'
+- name: 'Allow iptables to see bridged, ipv6 traffic'
+  sysctl:
+    name: net.bridge.bridge-nf-call-ip6tables
+    value: '1'

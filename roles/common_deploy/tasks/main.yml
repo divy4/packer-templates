@@ -1,3 +1,0 @@
----
-- include_tasks: set_hostname.yml
-- include_tasks: configure_sshd.yml

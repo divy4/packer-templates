@@ -1,0 +1,22 @@
+---
+- name: 'Install squid package'
+  package:
+    name:
+    - squid
+- copy:
+    dest: /etc/squid/squid.conf
+    mode: '644'
+    owner: root
+    src: squid.conf
+  name: 'Copy squid config'
+- name: 'Enable squid service'
+  service:
+    enabled: 'yes'
+    name: squid
+    state: started
+- name: 'Allow traffic on port 3128'
+  ufw:
+    direction: in
+    proto: tcp
+    rule: allow
+    to_port: '3128'

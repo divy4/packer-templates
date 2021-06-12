@@ -1,0 +1,11 @@
+---
+- changed_when: false
+  k8s:
+    kind: Namespace
+    kubeconfig: /etc/kubernetes/admin.conf
+    name: default
+    state: present
+  name: 'check if cluster is currently running'
+- name: 'Reset node'
+  shell:
+    cmd: kubeadm reset --force

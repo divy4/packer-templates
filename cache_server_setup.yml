@@ -7,4 +7,7 @@
   hosts: cache_server
   name: cache_server_setup
   roles:
-  - cache_server_setup
+  - cache_server
+  vars:
+    deploy: no
+    setup: yes
