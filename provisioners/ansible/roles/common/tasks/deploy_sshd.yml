@@ -1,0 +1,13 @@
+---
+- lineinfile:
+    line: PasswordAuthentication no
+    path: /etc/ssh/sshd_config
+    regexp: PasswordAuthentication (yes|no)
+  name: 'Disable password authentication'
+  register: password_auth
+- name: 'Restart and enable sshd'
+  service:
+    enabled: 'yes'
+    name: sshd
+    state: restarted
+  when: password_auth is changed

@@ -1,0 +1,12 @@
+---
+- name: 'Install packages'
+  package:
+    name:
+    - kubectl
+    - minikube
+
+- name: 'Set vm-driver'
+  become_user: '{{ item }}'
+  loop: '{{ development.dev_users }}'
+  shell:
+    cmd: minikube config set vm-driver docker

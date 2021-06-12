@@ -1,0 +1,8 @@
+---
+- name: 'Reject incoming SSH traffic'
+  ufw:
+    delete: 'yes'
+    direction: in
+    proto: tcp
+    rule: limit
+    to_port: '22'

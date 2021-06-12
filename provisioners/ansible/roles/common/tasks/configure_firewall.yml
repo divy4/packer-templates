@@ -1,0 +1,23 @@
+---
+- name: 'ufw : Install packages'
+  package:
+    name:
+    - ufw
+- name: 'ufw : Deny incoming traffic by default'
+  ufw:
+    default: deny
+    direction: incoming
+- name: 'ufw : Limit ssh traffic'
+  ufw:
+    direction: in
+    proto: tcp
+    rule: limit
+    to_port: '22'
+- name: 'ufw : Start and enable firewall'
+  ufw:
+    state: enabled
+- name: 'ufw : Start and enable firewall for real (ufw bug)'
+  service:
+    enabled: 'yes'
+    name: ufw
+    state: started

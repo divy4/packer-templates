@@ -1,0 +1,24 @@
+---
+- name: 'Add docker registry'
+  yum_repository:
+    baseurl: 'https://download.docker.com/linux/centos/7/x86_64/stable'
+    description: docker-ce-stable
+    gpgcheck: 'yes'
+    gpgkey: 'https://download.docker.com/linux/centos/gpg'
+    name: docker-ce-stable
+- changed_when: '"Nothing to do" not in yum_install.stdout'
+  name: 'Install packages'
+  register: yum_install
+  shell:
+    cmd: yum install --assumeyes --nobest docker-ce
+- copy:
+    dest: /etc/docker/
+    mode: '644'
+    owner: root
+    src: daemon.json
+  name: 'Copy daemon.json'
+- name: 'Start and enable docker service'
+  service:
+    enabled: 'yes'
+    name: docker
+    state: started
