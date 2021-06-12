@@ -1,9 +1,0 @@
----
-- copy:
-    dest: /etc/cron.weekly/
-    group: root
-    mode: '744'
-    owner: root
-    src: 0install_yum_security_updates.sh
-  name: 'enable_automatic_updates : CentOS'
-  when: 'hostvars[inventory_hostname].ansible_distribution == "CentOS"'

@@ -1,0 +1,87 @@
+---
+- name: 'Install packages'
+  package:
+    name:
+    - base-devel # Base development tools
+    - bind # Network debugging tools
+    - bmon # Network monitor
+    - code # GUI text editor
+    - dos2unix # Convert LF <==> CRLF
+    - expect # Make scripts pretend they're human
+    - firefox # Internet browser
+    - git # All the changes
+    - go # A programming language
+    - gvim # Vim with mouse support in terminal
+    - htop # System monitor
+    - jq # JSON command line tool
+    - man # Manuals
+    - nano # Basic text editor
+    - nemo # File browser
+    - nmap # Port scanning tool
+    - packer # VM template builder
+    - shellcheck # Shell linter
+    - terraform # IaC provisioner
+    - tmux # Teminal multiplexer
+    - ttf-dejavu # More fonts
+    - unzip # Unzip zip files
+    - zip # Zip zip files
+
+- name: 'Create builder user'
+  user:
+    create_home: no
+    home: /tmp
+    name: aur_builder
+    password_lock: 'yes'
+    system: yes
+
+- name: 'Grant builder user sudo access'
+  lineinfile:
+    path: /etc/sudoers.d/11-aur_builder
+    line: 'aur_builder ALL=(ALL) NOPASSWD: /usr/bin/pacman'
+    create: yes
+    validate: 'visudo -cf %s'
+
+- name: 'Install yay'
+  become: yes
+  become_user: aur_builder
+  aur:
+    name:
+    - yay # YAML command line tool
+    use: makepkg
+
+- name: 'Install yay packages'
+  become: yes
+  become_user: aur_builder
+  aur:
+    name:
+    - go-yq # YAML command line tool
+    use: yay
+
+- include_tasks: add_config_modules.yml
+  vars:
+    modules:
+    - nano
+    - scripts
+    - vim
+    users:
+    - root
+
+- include_tasks: add_config_modules.yml
+  vars:
+    modules:
+    - bash
+    - code
+    - git
+    - ssh
+    users: '{{ development.dev_users }}'
+
+- name: 'Create directories'
+  become_user: '{{ item[0] }}'
+  file:
+    mode: '755'
+    owner: '{{ item[0] }}'
+    path: '{{ item[1] }}'
+    state: directory
+  with_nested:
+  - '{{ development.dev_users }}'
+  - - '~/projects'

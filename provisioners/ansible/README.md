@@ -15,31 +15,9 @@ for it's layout, as well as the entire best practices guide in general
 No role can be dependent on another role by any code-based means.
 i.e. they are allowed to be dependent on the artifacts other roles produce
 (e.g. almost all deployment roles have a dependency that the hostname has been
-set by the `common_deploy` role), but they cannot be dependent on each other
+set by the `common` role), but they cannot be dependent on each other
 in terms of code (e.g. variables). This is to prevent, or at least reduce,
 roles from getting tangled together over time.
-
-### Setup vs Deploy Roles
-
-Almost every role is split up into 2 separate roles: a `_setup` and a `_deploy`
-role. This distinction between setup and deploy roles is made to make
-role templates possible (i.e. my
-[packer-templates](https://github.com/divy4/packer-templates) project).
-Deploy roles contain actions that do at least one of the following:
-
-- produce artifacts that are...
-  - host sensitive (e.g. the hostname)
-  - security sensitive (e.g. ssh keys)
-  - highly time-sensitive (e.g. installing _the latest_ updates
-    since building a template)
-- must be executed multiple times over the lifespan of a host
-  (e.g. updating the time on a machine that doesn't have ntp enabled)
-- depend on actions that meet at least one of the above criteria
-
-As you can probably guess by now, setup roles contain actions that do not
-qualify to be in deploy roles. Note that installing updates should be part of
-setup roles, as deploy roles are only concerned with deploying what is
-_currently_ installed by it's setup role.
 
 ### Variable Layout and Precedence
 

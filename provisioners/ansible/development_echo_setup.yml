@@ -7,4 +7,7 @@
   hosts: development_echo
   name: development_echo_setup
   roles:
-  - development_echo_setup
+  - development_echo
+  vars:
+    deploy: no
+    setup: yes

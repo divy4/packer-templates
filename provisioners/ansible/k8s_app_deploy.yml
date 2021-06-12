@@ -1,0 +1,16 @@
+---
+# To deploy master branch to dev:
+# ansible-playbook -e version=master -e env=dev -e mode=apply k8s_apps_deploy.yml
+- environment:
+    ftp_proxy: '{{ ftp_proxy | default() }}'
+    http_proxy: '{{ http_proxy | default() }}'
+    https_proxy: '{{ https_proxy | default() }}'
+  hosts: localhost,
+  name: k8s_apps_deploy
+  roles:
+  - k8s_apps
+  vars:
+    app_deploy: yes
+    deploy: no
+    reset: no
+    setup: no

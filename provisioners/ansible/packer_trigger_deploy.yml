@@ -7,4 +7,7 @@
   hosts: all
   name: packer_trigger_deploy
   roles:
-  - packer_trigger_deploy
+  - packer_trigger
+  vars:
+    deploy: yes
+    setup: no

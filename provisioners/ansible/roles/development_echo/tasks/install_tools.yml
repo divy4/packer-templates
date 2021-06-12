@@ -1,0 +1,44 @@
+---
+- name: 'Install pacman packages'
+  package:
+    name:
+    - freerdp # RDP protocol support for remmina
+    - helm # An additional kubectl 
+    - openconnect # Open source version of Cisco's AnyConnect
+    - remmina # A remote connection manager
+    - ruby # Programming language
+
+- name: 'Install yay packages'
+  become: yes
+  become_user: aur_builder
+  aur:
+    name:
+    - slack-desktop
+    - sops
+    - vmware-horizon-client
+
+- name: 'Install ruby gems'
+  gem:
+    name: bundler
+    user_install: no
+
+- name: 'Copy ruby profile script'
+  copy:
+    dest: /etc/profile.d/
+    mode: '755'
+    owner: root
+    src: ruby_profile.sh
+
+- name: 'Copy startvpn script'
+  copy:
+    dest: /usr/local/bin/
+    mode: '755'
+    owner: root
+    src: startvpn
+  
+- name: 'Copy stopvpn script'
+  copy:
+    dest: /usr/local/bin/
+    mode: '755'
+    owner: root
+    src: stopvpn

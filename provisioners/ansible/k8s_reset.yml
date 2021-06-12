@@ -7,4 +7,9 @@
   hosts: k8s
   name: k8s_reset
   roles:
-  - k8s_reset
+  - k8s
+  vars:
+    app_deploy: no
+    deploy: no
+    reset: yes
+    setup: no

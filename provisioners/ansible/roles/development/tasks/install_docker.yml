@@ -1,0 +1,19 @@
+---
+- name: 'Install packages'
+  package:
+    name:
+    - docker
+
+- name: 'Enable docker service'
+  service:
+    enabled: 'yes'
+    name: docker
+    state: started
+
+- name: 'Add users to docker group'
+  loop: '{{ development.dev_users }}'
+  user:
+    append: 'yes'
+    groups:
+    - docker
+    name: '{{ item }}'

@@ -1,0 +1,45 @@
+---
+- changed_when: false
+  ignore_errors: 'yes'
+  k8s:
+    kind: Namespace
+    kubeconfig: /etc/kubernetes/admin.conf
+    name: default
+    state: present
+  name: 'check if cluster is currently running'
+  register: cluster_check
+- name: 'Initialize first master'
+  shell:
+    cmd: >-
+      kubeadm init --control-plane-endpoint="{{
+      k8s_deploy_group.control_plane_endpoint }}" --pod-network-cidr="{{
+      k8s_deploy_role.pod_network_cidr }}"
+  when: cluster_check.failed and "primary_master" in group_names
+- k8s:
+    kind: '{{ item.kind }}'
+    kubeconfig: /etc/kubernetes/admin.conf
+    name: '{{ item.name }}'
+    namespace: kube-system
+    wait: 'yes'
+  loop:
+  - kind: DaemonSet
+    name: kube-proxy
+  - kind: Pod
+    name: 'kube-apiserver-{{ inventory_hostname }}'
+  - kind: Pod
+    name: 'kube-controller-manager-{{ inventory_hostname }}'
+  - kind: Pod
+    name: 'kube-scheduler-{{ inventory_hostname }}'
+  - kind: Pod
+    name: 'etcd-{{ inventory_hostname }}'
+  name: 'Wait for kube-system resources'
+  when: '"masters" in group_names'
+- changed_when: result is succeeded
+  ignore_errors: 'yes'
+  name: 'Remove taint from masters that are also workers'
+  register: result
+  shell:
+    cmd: >-
+      kubectl taint node {{ inventory_hostname }}
+      node-role.kubernetes.io/master-
+  when: '"masters" in group_names and "workers" in group_names'

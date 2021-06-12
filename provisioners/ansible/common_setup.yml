@@ -7,4 +7,7 @@
   hosts: all
   name: common_setup
   roles:
-  - common_setup
+  - common
+  vars:
+    deploy: no
+    setup: yes
