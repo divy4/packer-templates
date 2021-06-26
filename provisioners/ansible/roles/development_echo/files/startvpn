@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -e
 
-AUTH_GROUP='ECHO-VPN-ACCESS'
+AUTH_GROUP='VPN-Policy-OneLogin-IT'
 PID_FILE='/var/run/openconnect.pid'
 SERVER_CERTIFICATE='pin-sha256:v//AK7zXrODNO9JTvbCBSNo82Z20dBmfd5L4zsJegEo='
 SERVER='vpn.echo.com'
