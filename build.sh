@@ -2,22 +2,32 @@
 set -euo pipefail
 
 function main {
-  validate_setup "$@"
-  build_template "$@"
+  local template
+  if  [[ "$#" -eq 0 ]]; then
+    echo 'Usage: ./build.sh TEMPLATE_VARIANT_JSON'
+    return 1
+  fi
+  # 2 separate loops because finding out about a typo an hour later isn't great
+  for template in "$@"; do
+    validate_setup "$template"
+  done
+  for template in "$@"; do
+    build_template "$template"
+  done
 }
 
 function validate_setup {
-  if [[ "$#" -ne 1 ]] \
-      || [[ ! -f "$1" ]] \
+  if [[ ! -f "$1" ]] \
       || [[ "$1" != *.json ]] \
       || [[ "$(basename "$1")" == "template.json" ]]; then
-    echo 'Usage: ./build.sh TEMPLATE_VARIANT_JSON'
+    echo "Error: '$1' is not a template variable file."
     return 1
   fi
 }
 
 function build_template {
-  local args var_file name
+  local old_directory args var_file name
+  old_directory="$(pwd)"
   var_file="$(realpath "$1")"
   name="$(get_name "$var_file")"
   cd "$(dirname "$1")"
@@ -31,6 +41,7 @@ function build_template {
   )
   packer validate "${args[@]}"
   packer build -force "${args[@]}"
+  cd "$old_directory"
 }
 
 function get_name {
