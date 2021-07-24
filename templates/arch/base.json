@@ -8,7 +8,7 @@
   "disk_size_mb": "102400",
   "drag_and_drop": "bidirectional",
   "firmware": "efi64",
-  "first_boot_wait": "60s",
+  "first_boot_wait": "70s",
   "format": "ovf",
   "iso_checksum": "09c1ce7dfc548f18291ec7b080b57301a476e63b",
   "iso_checksum_type": "sha1",
