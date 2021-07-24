@@ -118,11 +118,12 @@
       "type": "shell"
     },
     {
-      "command": "vboxmanage storageattach \"{{user `name`}}\" --storagectl \"SATA Controller\" --port 1 --medium emptydrive",
+      "command": "vboxmanage storageattach \"{{user `name`}}\" --storagectl \"SATA Controller\" --port 15 --medium emptydrive",
       "type": "shell-local"
     },
     {
       "command": "vboxmanage startvm \"{{user `name`}}\"",
+      "pause_before": "5s",
       "type": "shell-local"
     },
     {
