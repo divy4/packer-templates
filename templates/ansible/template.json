@@ -5,6 +5,7 @@
         "--manifest"
       ],
       "guest_additions_mode": "disable",
+      "headless": true,
       "import_flags": [
         "--basefolder",
         "{{user `vm_base_directory`}}"
