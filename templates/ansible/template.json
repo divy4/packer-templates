@@ -80,7 +80,6 @@
         "PLAYBOOK={{user `ansible_playbook`}}",
         "SSH_PASSWORD={{user `ssh_password`}}"
       ],
-      "execute_command": "echo '{{user `ssh_password`}}' | sudo -S sh -c '{{ .Vars }} {{ .Path }}'",
       "script": "../../provisioners/shell/install_and_run_ansible.sh",
       "type": "shell"
     }
