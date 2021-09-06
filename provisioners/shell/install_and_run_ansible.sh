@@ -2,9 +2,10 @@
 set -euo pipefail
 
 function main {
+  cd /tmp/ansible
   install_ansible
   run_ansible
-  rm -rf /tmp/ansible
+  rm --recursive --force /tmp/ansible ~/.ansible/collections/ansible_collections/*
 }
 
 function get_os {
@@ -27,17 +28,16 @@ function install_ansible {
       ;;
     esac
   fi
+  ansible-galaxy collection install --requirements-file requirements.yml
 }
 
 function run_ansible {
   local playbooks
-  cd /tmp/ansible
   export ANSIBLE_HOST_KEY_CHECKING=False
   playbooks=("$PLAYBOOK.yml")
   if ! [[ -f /usr/local/sbin/packer-trigger ]]; then
     playbooks+=(packer_trigger_setup.yml)
   fi
-  ansible-galaxy install kewlfft.aur
   #shellcheck disable=SC2154
   ansible-playbook \
     --connection=local \
