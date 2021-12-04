@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
-set -e
+set -euo pipefail
 
-AUTH_GROUP='VPN-Policy-OneLogin-IT'
+AUTH_GROUP='VPN-Policy-OneLogin-BYOD-IT'
 PID_FILE='/var/run/openconnect.pid'
-SERVER_CERTIFICATE='pin-sha256:v//AK7zXrODNO9JTvbCBSNo82Z20dBmfd5L4zsJegEo='
-SERVER='vpn.echo.com'
+SERVER_CERTIFICATE='pin-sha256:845k6dzZ+MIu9goIyGPoTLgeopHTFYAPJw5zbUpNG2A='
+SERVER='vpn1.echo.com'
 
 function main {
   sudo openconnect "$SERVER" \
