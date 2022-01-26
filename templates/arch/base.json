@@ -7,7 +7,7 @@
   "cpus": "4",
   "disk_size_mb": "102400",
   "drag_and_drop": "bidirectional",
-  "firmware": "efi64",
+  "firmware": "bios",
   "first_boot_wait": "70s",
   "format": "ovf",
   "iso_checksum": "efc9c33087e756ba1c7f326e67bfaa685eb51be3",

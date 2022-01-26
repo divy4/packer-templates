@@ -52,20 +52,33 @@ function enable_ntp {
 
 function partition_disks {
   echo_title 'Partition disks'
+  # TODO: Switch back to EFI setup when Arch's iso boots in efi mode again
+  # g            # create GPT partition table
+  # n            # new partition (efi)
+  # 1            # partition 1
+  #              # start at beginning of disk (default)
+  # +512M        # 512MB size
+  # t            # change parition type
+  # 1            # type=EFI System
+  # n            # new partition (boot)
+  # 2            # partition 2
+  #              # start after previous (default)
+  # +128M        # 128MB size
+  # n            # new partition (root)
+  # 3            # partition 3
+  #              # start after previous (default)
+  #              # fill remaining space (default)
+  # w            # write to disk and exit
   emulate_human_input << EOF | fdisk /dev/sda
-  g            # create GPT partition table
-  n            # new partition (efi)
+  o            # create DOS partition table
+  n            # new partition (boot)
+  p            # primary partition
   1            # partition 1
                # start at beginning of disk (default)
-  +512M        # 512MB size
-  t            # change parition type
-  1            # type=EFI System
-  n            # new partition (boot)
-  2            # partition 2
-               # start after previous (default)
   +128M        # 128MB size
   n            # new partition (root)
-  3            # partition 3
+  p            # primary partition
+  2            # partition 2
                # start after previous (default)
                # fill remaining space (default)
   w            # write to disk and exit
@@ -75,18 +88,26 @@ EOF
 
 function format_partitions {
   echo_title 'Format partitions'
-  mkfs.fat -F32 /dev/sda1
+  # TODO: Switch back to EFI setup when Arch's iso boots in efi mode again
+  # mkfs.fat -F32 /dev/sda1
+  # mkfs.ext4 /dev/sda2
+  # mkfs.ext4 /dev/sda3
+  mkfs.ext4 /dev/sda1
   mkfs.ext4 /dev/sda2
-  mkfs.ext4 /dev/sda3
 }
 
 function mount_filesystems {
   echo_title 'Mount the file systems'
-  mount /dev/sda3 /mnt
+  # TODO: Switch back to EFI setup when Arch's iso boots in efi mode again
+  # mount /dev/sda3 /mnt
+  # mkdir /mnt/efi
+  # mount /dev/sda1 /mnt/efi
+  # mkdir /mnt/boot
+  # mount /dev/sda2 /mnt/boot
+  mount /dev/sda2 /mnt
   mkdir /mnt/efi
-  mount /dev/sda1 /mnt/efi
   mkdir /mnt/boot
-  mount /dev/sda2 /mnt/boot
+  mount /dev/sda1 /mnt/boot
   findmnt | grep sda
 }
 
@@ -246,7 +267,9 @@ EOF
 function configure_boot_loader {
   echo_title 'Boot loader'
   replace /etc/default/grub 'GRUB_TIMEOUT=5' 'GRUB_TIMEOUT=0\nGRUB_HIDDEN_TIMEOUT=0'
-  grub-install --target=x86_64-efi --efi-directory=/efi --bootloader-id=GRUB --removable
+  # TODO: Switch back to EFI setup when Arch's iso boots in efi mode again
+  # grub-install --target=x86_64-efi --efi-directory=/efi --bootloader-id=GRUB --removable
+  grub-install --target=i386-pc /dev/sda
   grub-mkconfig -o /boot/grub/grub.cfg
 }
 
