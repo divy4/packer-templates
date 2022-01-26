@@ -46,7 +46,7 @@
           "--boot1",
           "disk",
           "--boot2",
-          "none",
+          "dvd",
           "--boot3",
           "none",
           "--boot4",
