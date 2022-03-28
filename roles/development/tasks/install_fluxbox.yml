@@ -8,6 +8,7 @@
     - imagemagick # Image command line tool/screenshots
     - inotify-tools # Tools for monitoring filesystem changes
     - ttf-ubuntu-font-family # Fonts, needed for fluxbox to start successfully
+    - wmctrl # Interact with windows from scripts
     - xclip # clipboard
     - xcompmgr # Transparency
     - xorg-apps # A bunch of X utilities
