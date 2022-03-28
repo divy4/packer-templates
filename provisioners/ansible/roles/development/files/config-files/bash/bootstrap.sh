@@ -37,7 +37,11 @@ function populate_git {
   local email fingerprint comment
   if ! is_populated ~/.gitconfig; then
     echo_tty 'Populating git config...'
-    email="$(read_with_confirm email)"
+    if command -v slack > /dev/null; then
+      email='daniel.ivy@echo.com'
+    else
+      email='danivy4@gmail.com'
+    fi
     comment="$(get_machine_id)-git"
     fingerprint="$(generate_gpg_key "$NAME" "$comment" "$email" 1d)"
     populate ~/.gitconfig email "$email"
@@ -211,32 +215,6 @@ function populate {
 
 function is_populated {
   ! grep --quiet '# populate \w\+$' "$1"
-}
-
-function read_with_confirm {
-  local value
-  while [[ -z "$confirmed" ]]; do
-    if [[ "$#" -ne 0 ]]; then
-      echo_tty 'Input' "$@"
-    fi
-    read -r value
-    if confirm "Confirm '$value'?"; then
-      confirmed=0
-    fi
-  done
-  echo "$value"
-}
-
-function confirm {
-  local answer
-  if [[ "$#" -ne 0 ]]; then
-    echo_tty "$@"
-  fi
-  while [[ ! "$answer" =~ ^((yes)|(y)|(no)|(n))$ ]]; do
-    read -r answer
-    answer="${answer,,}"
-  done
-  [[ "$answer" =~ ^(yes)|(y)$ ]]
 }
 
 function append_line_if_not_present {
