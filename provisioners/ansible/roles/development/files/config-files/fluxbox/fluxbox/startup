@@ -1,5 +1,20 @@
 #!/bin/sh
 
+move_window() {
+  name="$1"
+  position_size="$2"
+  count=0
+  while ! wmctrl -l | grep -i "$name"; do
+    sleep 1
+    count="$((count + 1))"
+    if [ "$count" -gt 100 ]; then
+      echo "Failed to locate window named '$name'"
+      return 1
+    fi
+  done
+  wmctrl -r "$name" -e "$position_size"
+}
+
 # Keymap
 xmodmap "/home/dan/.Xmodmap"
 
@@ -18,6 +33,25 @@ fi
 
 # Clock
 xclock -strftime '%A %m/%d/%Y %I:%M:%S %p' &
+
+# Stuff I use every time
+if command -v slack > /dev/null; then
+  code ~/projects/ &
+  firefox &
+  slack &
+  xterm &
+  move_window code 0,791,0,1514,1440 &
+  move_window firefox 0,2305,0,1135,864 &
+  move_window slack 0,0,0,1135,1440 &
+  move_window xterm 0,2305,864,1135,576 &
+else
+  code ~/projects/ &
+  firefox &
+  xterm &
+  move_window code 0,2305,0,1135,1440 &
+  move_window firefox 0,0,0,1135,1440 &
+  move_window xterm 0,1135,864,1170,576 &
+fi
 
 # Run fluxbox
 exec fluxbox
