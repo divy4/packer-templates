@@ -1,0 +1,8 @@
+---
+- copy:
+    dest: /etc/systemd/system/getty@.service.d/
+    group: root
+    mode: '744'
+    owner: root
+    src: activate-numlock.conf
+  name: 'Enable numlock'
