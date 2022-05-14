@@ -13,7 +13,6 @@
   "iso_checksum": "3700a16d4fcabbd29e9a7fbc97da732c4577dc2a",
   "iso_checksum_type": "sha1",
   "iso_url": "http://mirrors.mit.edu/archlinux/iso/2022.05.01/archlinux-2022.05.01-x86_64.iso",
-  "mac_address": "auto",
   "memory": "8192",
   "mouse": "usbtablet",
   "post_shutdown_delay": "10s",

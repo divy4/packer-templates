@@ -24,8 +24,6 @@
           "{{user `audio`}}",
           "--cpus",
           "{{user `cpus`}}",
-          "--macaddress1",
-          "{{user `mac_address`}}",
           "--memory",
           "{{user `memory`}}",
           "--vram",
