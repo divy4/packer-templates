@@ -2,7 +2,6 @@
   "ansible_playbook": "cache_server_setup",
   "audio": "none",
   "cpus": "2",
-  "mac_address": "000000000010",
   "memory": "4096",
   "parent_template": "ansible-common-centos8",
   "proxy": "http://cache.bld.danivy.com:3128",

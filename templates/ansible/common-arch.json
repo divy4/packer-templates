@@ -2,7 +2,6 @@
   "ansible_playbook": "common_setup",
   "audio": "none",
   "cpus": "8",
-  "mac_address": "auto",
   "memory": "8192",
   "parent_template": "arch-base",
   "proxy": "http://cache.bld.danivy.com:3128",

@@ -61,8 +61,6 @@
           "{{user `firmware`}}",
           "--graphicscontroller",
           "vboxsvga",
-          "--macaddress1",
-          "{{user `mac_address`}}",
           "--mouse",
           "{{user `mouse`}}",
           "--natpf1",

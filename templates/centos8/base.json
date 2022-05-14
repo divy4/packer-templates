@@ -14,7 +14,6 @@
   "iso_checksum": "3FAA1B3D6F2C553224F4FAE31C07582F38097D86",
   "iso_checksum_type": "sha1",
   "iso_url": "http://mirror.steadfastnet.com/centos/8.2.2004/isos/x86_64/CentOS-8.2.2004-x86_64-boot.iso",
-  "mac_address": "auto",
   "memory": "4096",
   "mouse": "usbtablet",
   "post_shutdown_delay": "60s",
