@@ -182,4 +182,9 @@ function echo_title {
   echo "$buffer_string"
 }
 
-time main "$@"
+if ! time main "$@"; then
+  echo 'Error occured during template build. See details above.'
+fi
+
+echo 'Press enter to continue...'
+read -r
