@@ -175,7 +175,7 @@ function prepare_for_reboot {
 # Chroot-level operations
 
 function chroot_command {
-  set -e
+  set -euo pipefail
   add_master_signing_keys
   set_time_zone
   set_localization
