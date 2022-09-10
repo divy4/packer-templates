@@ -235,7 +235,7 @@ EOF
   systemctl enable time-zone-sync.service
   systemctl enable systemd-timesyncd
   hwclock --systohc # sync hardware clock
-  timedatectl
+  hwclock
 }
 
 function set_localization {
