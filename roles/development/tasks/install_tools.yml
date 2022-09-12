@@ -1,11 +1,23 @@
 ---
+- name: Throw error after Oct 12, 2022
+  shell:
+    cmd: >-
+      if [[ "$(date +%s)" -gt 1665619200 ]]; then
+        echo 'Please update VS code to latest version and see if the segmentation fault error is resolved.'
+        exit 1
+      fi
+    executable: bash
+  changed_when: false
+
 - name: 'Install packages'
   package:
     name:
     - base-devel # Base development tools
     - bind # Network debugging tools
     - bmon # Network monitor
-    - code # GUI text editor
+    # TODO: Remove when https://github.com/microsoft/vscode/issues/160046 is resolved and deployed
+    # - code # GUI text editor
+    - https://archive.archlinux.org/packages/c/code/code-1.67.2-1-x86_64.pkg.tar.zst
     - dos2unix # Convert LF <==> CRLF
     - expect # Make scripts pretend they're human
     - firefox # Internet browser
