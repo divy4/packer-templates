@@ -175,7 +175,7 @@ function prepare_for_reboot {
 # Chroot-level operations
 
 function chroot_command {
-  set -e
+  set -euo pipefail
   add_master_signing_keys
   set_time_zone
   set_localization
@@ -235,7 +235,7 @@ EOF
   systemctl enable time-zone-sync.service
   systemctl enable systemd-timesyncd
   hwclock --systohc # sync hardware clock
-  timedatectl
+  hwclock
 }
 
 function set_localization {

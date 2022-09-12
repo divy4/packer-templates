@@ -18,7 +18,7 @@
       "hard_drive_discard": true,
       "hard_drive_interface": "sata",
       "hard_drive_nonrotational": true,
-      "iso_checksum": "{{user `iso_checksum_type`}}:{{user `iso_checksum`}}",
+      "iso_checksum": "{{user `iso_checksum`}}",
       "iso_interface": "sata",
       "iso_url": "{{user `iso_url`}}",
       "memory": "{{user `memory`}}",
@@ -110,13 +110,12 @@
       "type": "shell"
     },
     {
-      "expect_disconnect": "true",
-      "inline": "shutdown now",
-      "pause_after": "10s",
-      "type": "shell"
+      "command": "vboxmanage controlvm \"{{user `name`}}\" acpipowerbutton",
+      "type": "shell-local"
     },
     {
       "command": "vboxmanage storageattach \"{{user `name`}}\" --storagectl \"SATA Controller\" --port 15 --medium emptydrive",
+      "pause_before": "10s",
       "type": "shell-local"
     },
     {

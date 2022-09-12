@@ -39,6 +39,7 @@ function build_template {
     "name=$name"
     template.json \
   )
+  echo_title "Building $var_file"
   packer validate "${args[@]}"
   packer build -force "${args[@]}"
   cd "$old_directory"
@@ -60,6 +61,15 @@ function get_vbox_vm_directory {
   VBoxManage list systemproperties \
     | grep '^Default machine folder:' \
     | sed 's/^Default machine folder:\s*//g'
+}
+
+function echo_title {
+  local args_string buffer_string
+  args_string="##### $* #####"
+  buffer_string="${args_string//?/#}"
+  echo "$buffer_string"
+  echo "$args_string"
+  echo "$buffer_string"
 }
 
 function echo_err {
