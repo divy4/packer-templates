@@ -1,0 +1,48 @@
+---
+- name: 'Install firefox'
+  package:
+    name:
+    - firefox
+    - sqlite
+
+- name: 'Initialize firefox profile'
+  loop: '{{ development.dev_users }}'
+  become_user: '{{ item }}'
+  shell: |
+    if [[ ! -d ~/.mozilla ]]; then
+      firefox --headless &
+      sleep 5
+      killall --signal SIGTERM firefox
+    fi
+  register: profile
+  changed_when: '"You are running in headless mode" in profile.stderr'
+
+- name: 'Configure firefox profile'
+  when: profile.changed
+  block:
+
+  - name: 'Find firefox profile directory'
+    when: profile.changed
+    loop: '{{ development.dev_users }}'
+    find:
+      file_type: directory
+      paths: ~{{ item }}/.mozilla/firefox/
+      patterns: '*.default-release'
+    register: find
+    changed_when: no
+    failed_when: find.files | length != 1
+
+  - name: 'Delete default firefox bookmarks'
+    loop: '{{ find.results }}'
+    shell: |
+      sqlite3 {{ item.files[0].path | quote }}/places.sqlite \
+      'DELETE FROM moz_bookmarks; VACUUM'
+
+  - name: 'Set firefox profile preferences (user.js)'
+    loop: '{{ find.results }}'
+    copy:
+      src: firefox_user.js
+      dest: '{{ item.files[0].path }}/user.js'
+      mode: '755'
+      group: '{{ item.item }}'
+      owner: '{{ item.item }}'
