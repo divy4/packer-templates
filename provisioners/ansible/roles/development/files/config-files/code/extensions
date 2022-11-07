@@ -1,4 +1,7 @@
 DavidAnson.vscode-markdownlint
 eamodio.gitlens
+golang.go
+hashicorp.terraform
+redhat.ansible
 streetsidesoftware.code-spell-checker
 timonwong.shellcheck
