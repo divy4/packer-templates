@@ -4,7 +4,7 @@ set -euo pipefail
 CACHE_SERVER_START_TYPE='headless'
 CACHE_SERVER='cache.bld.danivy.com'
 RAMDISK_FILESYSTEM='ntfs'
-RAMDISK_LETTER='T'
+RAMDISK_LETTER='W'
 RAMDISK_SIZE='24G'
 TEMPLATE_DIR='templates'
 COPY_EXCEPTIONS='templates/arch/base.json|templates/debian/11.json'
