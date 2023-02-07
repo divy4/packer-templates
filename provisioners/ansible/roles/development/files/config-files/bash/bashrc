@@ -83,7 +83,7 @@ case "$(uname -s)" in
     ;;
   CYGWIN*|MINGW*)
     export PACKER_CACHE_DIR='/c/packer'
-    export PACKER_VM_DIR='/t/packer_vms'
+    export PACKER_VM_DIR='/w/packer_vms'
     ;;
   *)
     echo "Unrecognized OS: $(uname -s)"

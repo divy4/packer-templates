@@ -1,8 +1,8 @@
 ---
-- name: Throw error after Feb 1, 2023
+- name: Throw error after Mar 1, 2023
   shell:
     cmd: >-
-      if [[ "$(date +%s)" -gt 1675123200 ]]; then
+      if [[ "$(date +%s)" -gt 1677628800 ]]; then
         echo 'Please update VS code to latest version and see if the segmentation fault error is resolved.'
         exit 1
       fi
