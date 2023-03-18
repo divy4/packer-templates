@@ -72,14 +72,7 @@ function build_templates {
   printf '%s\n' "${templates[@]}"
 
   echo_title 'Building templates'
-  for template in "${templates[@]}"; do
-    get_template_output_dir "$template"
-    if [[ -d "$(get_template_output_dir "$template")" ]]; then
-      echo "Skipping $template, template is already built."
-    else
-      ./build.sh "$template"
-    fi
-  done
+  ./build.sh "${templates[@]}"
 }
 
 function copy_templates {
@@ -144,14 +137,14 @@ function traverse_forest {
 # Helpers
 
 function get_templates {
-  find "$TEMPLATE_DIR" -type f -not -name 'template.json' | sort
+  find "$TEMPLATE_DIR" -type f -name '*.pkrvars.hcl' | sort
 }
 
 function get_template_parent {
   local name
-  name="$(jq --raw-output .parent_template "$1")"
-  if [[ "$name" != null ]]; then
-    echo "$TEMPLATE_DIR/${name/-/\/}.json"
+  if grep '^parent_template\s' "$1" --quiet; then
+    name="$(grep '^parent_template\s' "$1" | sed 's/.*=\s*"\(.*\)"/\1/g')"
+    echo "$TEMPLATE_DIR/${name/-/\/}.pkrvars.hcl"
   fi
 }
 

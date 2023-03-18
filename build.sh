@@ -2,54 +2,52 @@
 set -euo pipefail
 
 function main {
-  local template
+  local var_file
   if  [[ "$#" -eq 0 ]]; then
-    echo 'Usage: ./build.sh TEMPLATE_VARIANT_JSON'
+    echo 'Usage: ./build.sh TEMPLATE_VAR_FILE ...'
     return 1
   fi
   # 2 separate loops because finding out about a typo an hour later isn't great
-  for template in "$@"; do
-    validate_setup "$template"
+  for var_file in "$@"; do
+    validate_setup "$var_file"
   done
-  for template in "$@"; do
-    build_template "$template"
+  for var_file in "$@"; do
+    build_template "$var_file"
   done
 }
 
 function validate_setup {
-  if [[ ! -f "$1" ]] \
-      || [[ "$1" != *.json ]] \
-      || [[ "$(basename "$1")" == "template.json" ]]; then
-    echo "Error: '$1' is not a template variable file."
+  if [[ ! -f "$1" ]] || [[ "$1" != *.pkrvars.hcl ]]; then
+    echo "Error: '$1' is not a variable file."
     return 1
   fi
 }
 
 function build_template {
-  local old_directory args var_file name
-  old_directory="$(pwd)"
+  local var_file  args
   var_file="$(realpath "$1")"
-  name="$(get_name "$var_file")"
-  cd "$(dirname "$1")"
   args=(\
     "-var-file=$var_file" \
     -var \
     "vm_base_directory=$(get_vm_base_directory)" \
     -var \
-    "name=$name"
-    template.json \
+    "name=$(get_name "$var_file")"
+    "$(get_template "$var_file")" \
   )
   echo_title "Building $var_file"
   packer validate "${args[@]}"
   packer build -force "${args[@]}"
-  cd "$old_directory"
+}
+
+function get_template {
+  echo "$(dirname "$(realpath "$1")")/template.pkr.hcl"
 }
 
 function get_name {
   local var_file template role
   var_file="$1"
   template="$(basename "$(dirname "$var_file")")"
-  role="$(basename "$var_file" | sed 's/\.json$//g')"
+  role="$(basename "$var_file" | sed 's/\.pkrvars.hcl$//g')"
   echo "$template-$role"
 }
 
