@@ -1,13 +1,14 @@
 ---
-- name: Throw error after Mar 1, 2023
-  shell:
-    cmd: >-
-      if [[ "$(date +%s)" -gt 1677628800 ]]; then
-        echo 'Please update VS code to latest version and see if the segmentation fault error is resolved.'
-        exit 1
-      fi
-    executable: bash
-  changed_when: false
+- name: 'Install base-devel (temporary)'
+  become: true
+  shell: |
+    if [[ -n "$(pacman --sync --group base-devel)" ]]; then
+      pacman --sync --noconfirm base-devel
+    else
+      echo 'All base-devel packages have been removed from the group!'
+      echo 'Resolve https://bugs.archlinux.org/task/78108 and https://github.com/divy4/ansible/issues/65 and remove this block.'
+      exit 1
+    fi
 
 - name: 'Install packages'
   package:
@@ -15,9 +16,7 @@
     - base-devel # Base development tools
     - bind # Network debugging tools
     - bmon # Network monitor
-    # TODO: Remove when https://github.com/microsoft/vscode/issues/160046 is resolved and deployed
-    # - code # GUI text editor
-    - https://archive.archlinux.org/packages/c/code/code-1.67.2-1-x86_64.pkg.tar.zst
+    - code # GUI text editor
     - dos2unix # Convert LF <==> CRLF
     - expect # Make scripts pretend they're human
     - git # All the changes
