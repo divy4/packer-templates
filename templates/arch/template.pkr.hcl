@@ -1,103 +1,30 @@
 
-variable "acceleration_2d" {
-  type = string
-}
-
-variable "acceleration_3d" {
-  type = string
-}
-
-variable "audio" {
-  type = string
-}
-
-variable "bios_boot_menu" {
-  type = string
-}
-
-variable "clipboard" {
-  type = string
-}
-
-variable "cpus" {
-  type = number
-}
-
-variable "disk_size_mb" {
-  type = number
-}
-
-variable "drag_and_drop" {
-  type = string
-}
-
-variable "firmware" {
-  type = string
-}
-
-variable "first_boot_wait" {
-  type = string
-}
-
-variable "format" {
-  type = string
-}
-
-variable "guest_additions_path" {
-  type = string
-}
-
-variable "iso_checksum" {
-  type = string
-}
-
-variable "iso_url" {
-  type = string
-}
-
-variable "memory" {
-  type = number
-}
-
-variable "mouse" {
-  type = string
-}
-
-variable "name" {
-  type = string
-}
-
-variable "post_shutdown_delay" {
-  type = string
-}
-
-variable "proxy" {
-  type = string
-}
-
-variable "root_password" {
-  type = string
-}
-
-variable "shutdown_timeout" {
-  type = string
-}
-
-variable "ssh_password" {
-  type = string
-}
-
-variable "ssh_username" {
-  type = string
-}
-
-variable "vm_base_directory" {
-  type = string
-}
-
-variable "vram" {
-  type = number
-}
+variable "acceleration_2d" { type = string }
+variable "acceleration_3d" { type = string }
+variable "audio" { type = string }
+variable "bios_boot_menu" { type = string }
+variable "clipboard" { type = string }
+variable "cpus" { type = number }
+variable "disk_size_mb" { type = number }
+variable "drag_and_drop" { type = string }
+variable "firmware" { type = string }
+variable "first_boot_wait" { type = string }
+variable "format" { type = string }
+variable "guest_additions_path" { type = string }
+variable "iso_checksum" { type = string }
+variable "iso_url" { type = string }
+variable "memory" { type = number }
+variable "mouse" { type = string }
+variable "name" { type = string }
+variable "post_shutdown_delay" { type = string }
+variable "proxy" { type = string }
+variable "root_password" { type = string }
+variable "seed_usb_serial" { type = string }
+variable "shutdown_timeout" { type = string }
+variable "ssh_password" { type = string }
+variable "ssh_username" { type = string }
+variable "vm_base_directory" { type = string }
+variable "vram" { type = number }
 
 source "virtualbox-iso" "this" {
   # Hardware
@@ -141,46 +68,34 @@ source "virtualbox-iso" "this" {
     [
       "modifyvm",
       "{{ .Name }}",
-      "--accelerate2dvideo",
-      "${var.acceleration_2d}",
-      "--accelerate3d",
-      "${var.acceleration_3d}",
-      "--audio",
-      var.audio,
-      "--audiocontroller",
-      "ac97",
-      "--biosbootmenu",
-      var.bios_boot_menu,
-      "--boot1",
-      "disk",
-      "--boot2",
-      "dvd",
-      "--boot3",
-      "none",
-      "--boot4",
-      "none",
-      "--clipboard-mode",
-      var.clipboard,
-      "--cpuexecutioncap",
-      "100",
-      "--draganddrop",
-      var.drag_and_drop,
-      "--firmware",
-      var.firmware,
-      "--graphicscontroller",
-      "vboxsvga",
-      "--mouse",
-      var.mouse,
-      "--natpf1",
-      "SSH,tcp,,22,,22",
-      "--nested-hw-virt",
-      "on",
-      "--rtcuseutc",
-      "on",
-      "--vram",
-      var.vram,
-      "--vrde",
-      "off"
+      # Audio
+      "--audio", var.audio,
+      "--audiocontroller", "ac97",
+      # Video
+      "--accelerate2dvideo", "${var.acceleration_2d}",
+      "--accelerate3d", "${var.acceleration_3d}",
+      "--graphicscontroller", "vboxsvga",
+      "--vram", var.vram,
+      # Bios
+      "--biosbootmenu", var.bios_boot_menu,
+      "--boot1", "disk",
+      "--boot2", "dvd",
+      "--boot3", "none",
+      "--boot4", "none",
+      "--firmware", var.firmware,
+      # Clipboard
+      "--clipboard-mode", var.clipboard,
+      "--draganddrop", var.drag_and_drop,
+      # Hardware
+      "--cpuexecutioncap", "100",
+      "--mouse", var.mouse,
+      "--nested-hw-virt", "on",
+      "--rtcuseutc", "on",
+      "--usb", "on",
+      "--usbehci", "on",
+      "--vrde", "off",
+      # Network
+      "--natpf1", "SSH,tcp,,22,,22"
     ],
     [
       "setextradata",
@@ -193,6 +108,14 @@ source "virtualbox-iso" "this" {
       "{{ .Name }}",
       "GUI/ShowMiniToolBar",
       "false"
+    ],
+    [
+      "usbfilter",
+      "add",
+      "0",
+      "--target", "{{ .Name }}",
+      "--name", "Seed drive",
+      "--serialnumber", var.seed_usb_serial
     ]
   ]
 }
