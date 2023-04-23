@@ -19,6 +19,7 @@ variable "name" { type = string }
 variable "post_shutdown_delay" { type = string }
 variable "proxy" { type = string }
 variable "root_password" { type = string }
+variable "seed_usb_serial" { type = string }
 variable "shutdown_timeout" { type = string }
 variable "ssh_password" { type = string }
 variable "ssh_username" { type = string }
@@ -90,6 +91,8 @@ source "virtualbox-iso" "this" {
       "--mouse", var.mouse,
       "--nested-hw-virt", "on",
       "--rtcuseutc", "on",
+      "--usb", "on",
+      "--usbehci", "on",
       "--vrde", "off",
       # Network
       "--natpf1", "SSH,tcp,,22,,22"
@@ -105,6 +108,14 @@ source "virtualbox-iso" "this" {
       "{{ .Name }}",
       "GUI/ShowMiniToolBar",
       "false"
+    ],
+    [
+      "usbfilter",
+      "add",
+      "0",
+      "--target", "{{ .Name }}",
+      "--name", "Seed drive",
+      "--serialnumber", var.seed_usb_serial
     ]
   ]
 }
