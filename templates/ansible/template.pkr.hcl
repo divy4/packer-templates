@@ -36,16 +36,15 @@ source "virtualbox-ovf" "this" {
     [
       "modifyvm",
       "{{ .Name }}",
-      "--audio",
-      var.audio,
-      "--cpus",
-      var.cpus,
-      "--memory",
-      var.memory,
-      "--vram",
-      var.vram,
-      "--vrde",
-      "off"
+      # Audio
+      "--audio", var.audio,
+      # Video
+      "--vram", var.vram,
+      # Hardware
+      "--cpus", var.cpus,
+      "--memory", var.memory,
+      # Network
+      "--vrde", "off"
     ],
     [
       "setextradata",
