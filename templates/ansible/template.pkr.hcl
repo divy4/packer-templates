@@ -1,51 +1,16 @@
 
-variable "ansible_playbook" {
-  type = string
-}
-
-variable "audio" {
-  type = string
-}
-
-variable "cpus" {
-  type = number
-}
-
-variable "memory" {
-  type = number
-}
-
-variable "name" {
-  type = string
-}
-
-variable "parent_template" {
-  type = string
-}
-
-variable "proxy" {
-  type = string
-}
-
-variable "ssh_password" {
-  type = string
-}
-
-variable "ssh_username" {
-  type = string
-}
-
-variable "swap" {
-  type = string
-}
-
-variable "vm_base_directory" {
-  type = string
-}
-
-variable "vram" {
-  type = number
-}
+variable "ansible_playbook" { type = string }
+variable "audio" { type = string }
+variable "cpus" { type = number }
+variable "memory" { type = number }
+variable "name" { type = string }
+variable "parent_template" { type = string }
+variable "proxy" { type = string }
+variable "ssh_password" { type = string }
+variable "ssh_username" { type = string }
+variable "swap" { type = string }
+variable "vm_base_directory" { type = string }
+variable "vram" { type = number }
 
 source "virtualbox-ovf" "this" {
   # Hardware

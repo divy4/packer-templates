@@ -1,103 +1,29 @@
 
-variable "acceleration_2d" {
-  type = string
-}
-
-variable "acceleration_3d" {
-  type = string
-}
-
-variable "audio" {
-  type = string
-}
-
-variable "bios_boot_menu" {
-  type = string
-}
-
-variable "clipboard" {
-  type = string
-}
-
-variable "cpus" {
-  type = number
-}
-
-variable "disk_size_mb" {
-  type = number
-}
-
-variable "drag_and_drop" {
-  type = string
-}
-
-variable "firmware" {
-  type = string
-}
-
-variable "first_boot_wait" {
-  type = string
-}
-
-variable "format" {
-  type = string
-}
-
-variable "guest_additions_path" {
-  type = string
-}
-
-variable "iso_checksum" {
-  type = string
-}
-
-variable "iso_url" {
-  type = string
-}
-
-variable "memory" {
-  type = number
-}
-
-variable "mouse" {
-  type = string
-}
-
-variable "name" {
-  type = string
-}
-
-variable "post_shutdown_delay" {
-  type = string
-}
-
-variable "proxy" {
-  type = string
-}
-
-variable "root_password" {
-  type = string
-}
-
-variable "shutdown_timeout" {
-  type = string
-}
-
-variable "ssh_password" {
-  type = string
-}
-
-variable "ssh_username" {
-  type = string
-}
-
-variable "vm_base_directory" {
-  type = string
-}
-
-variable "vram" {
-  type = number
-}
+variable "acceleration_2d" { type = string }
+variable "acceleration_3d" { type = string }
+variable "audio" { type = string }
+variable "bios_boot_menu" { type = string }
+variable "clipboard" { type = string }
+variable "cpus" { type = number }
+variable "disk_size_mb" { type = number }
+variable "drag_and_drop" { type = string }
+variable "firmware" { type = string }
+variable "first_boot_wait" { type = string }
+variable "format" { type = string }
+variable "guest_additions_path" { type = string }
+variable "iso_checksum" { type = string }
+variable "iso_url" { type = string }
+variable "memory" { type = number }
+variable "mouse" { type = string }
+variable "name" { type = string }
+variable "post_shutdown_delay" { type = string }
+variable "proxy" { type = string }
+variable "root_password" { type = string }
+variable "shutdown_timeout" { type = string }
+variable "ssh_password" { type = string }
+variable "ssh_username" { type = string }
+variable "vm_base_directory" { type = string }
+variable "vram" { type = number }
 
 source "virtualbox-iso" "this" {
   # Hardware
