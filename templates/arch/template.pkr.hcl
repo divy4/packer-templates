@@ -69,7 +69,7 @@ source "virtualbox-iso" "this" {
       "modifyvm",
       "{{ .Name }}",
       # Audio
-      "--audio", var.audio,
+      "--audio-driver", var.audio,
       "--audiocontroller", "ac97",
       # Video
       "--accelerate2dvideo", "${var.acceleration_2d}",

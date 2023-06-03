@@ -37,7 +37,7 @@ source "virtualbox-ovf" "this" {
       "modifyvm",
       "{{ .Name }}",
       # Audio
-      "--audio", var.audio,
+      "--audio-driver", var.audio,
       # Video
       "--vram", var.vram,
       # Hardware

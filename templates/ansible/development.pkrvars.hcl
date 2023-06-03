@@ -1,5 +1,5 @@
 ansible_playbook = "development_setup"
-audio            = "dsound"
+audio            = "pulse"
 cpus             = "8"
 memory           = "8192"
 parent_template  = "ansible-common-arch"
