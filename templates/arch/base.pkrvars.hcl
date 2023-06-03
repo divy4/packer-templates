@@ -15,7 +15,6 @@ iso_url              = "https://mirrors.mit.edu/archlinux/iso/2023.03.01/archlin
 memory               = 8192
 mouse                = "usbtablet"
 post_shutdown_delay  = "10s"
-proxy                = "http://cache.bld.danivy.com:3128"
 root_password        = "password"
 seed_usb_serial      = "070D21A0A8530861"
 shutdown_timeout     = "30s"
