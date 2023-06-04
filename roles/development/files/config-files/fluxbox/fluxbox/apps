@@ -3,8 +3,14 @@
   [Layer]	{2}
 [end]
 [app] (name=xclock) (class=XClock)
-  [Alpha] {255}
-  [Layer]	{9}
   [Position]	(TOP)	{0% 0%}
   [Sticky]	{yes}
+  [Layer]	{9}
+  [Alpha]	{255}
+[end]
+[app] (name=VirtualBoxVM) (class=VirtualBoxVM)
+  [Alpha]	{255}
+[end]
+[app] (name=VirtualBox Machine)
+  [Alpha]	{255}
 [end]

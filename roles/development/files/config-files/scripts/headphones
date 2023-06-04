@@ -1,0 +1,23 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+MAC='F8:4E:17:95:2F:A0'
+
+if [[ ! "${1:-}" =~ ^(connect|disconnect)$ ]]; then
+  echo "Error: argument '${1:-}' can only be either 'connect' or 'disconnect'."
+  exit 1
+fi
+
+if bluetoothctl endpoint.list | grep --quiet "${MAC//:/_}"; then
+  if [[ "$1" == "connect" ]]; then
+    echo "Already connected to $MAC"
+  else
+    bluetoothctl disconnect "$MAC"
+  fi
+else
+  if [[ "$1" == "connect" ]]; then
+    bluetoothctl connect "$MAC"
+  else
+    echo "Already disconnected from $MAC"
+  fi
+fi

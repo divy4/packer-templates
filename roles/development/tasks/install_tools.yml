@@ -1,15 +1,4 @@
 ---
-- name: 'Install base-devel (temporary)'
-  become: true
-  shell: |
-    if [[ -n "$(pacman --sync --group base-devel)" ]]; then
-      pacman --sync --noconfirm base-devel
-    else
-      echo 'All base-devel packages have been removed from the group!'
-      echo 'Resolve https://bugs.archlinux.org/task/78108 and https://github.com/divy4/ansible/issues/65 and remove this block.'
-      exit 1
-    fi
-
 - name: 'Install packages'
   package:
     name:

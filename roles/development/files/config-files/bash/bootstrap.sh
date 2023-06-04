@@ -11,8 +11,6 @@ function main {
     echo_tty 'Running first time setup...'
     populate_passwords
     populate_git
-    # Disabled until I use tripple monitors again
-    # populate_fluxbox
     populate_ssh
   else
     echo_tty "Please start an X session before running first time setup."
@@ -47,36 +45,6 @@ function populate_git {
     populate ~/.gitconfig email "$email"
     populate ~/.gitconfig signingkey "$fingerprint"
     generate_ssh_key "$comment" ~/.ssh/git
-  fi
-}
-
-function populate_fluxbox {
-  local full third tenth mappings
-  if [[ -f ~/.fluxbox/keys ]]; then
-    echo_tty 'Populating Fluxbox config...'
-    full="$(get_screen_width)"
-    third=$((full / 3))
-    tenth=$((full / 10))
-    mappings=(\
-      23% $((third - tenth))
-      24% $((full - 2 * third - tenth))
-      33% "$third"
-      34% $((full - 2 * third))
-      43% $((third + tenth))
-      44% $((full - 2 * third + tenth))
-      56% $((2 * third - tenth))
-      57% $((full - third - tenth))
-      66% $((2 * third))
-      67% $((full - third))
-      76% $((2 * third + tenth))
-      77% $((full - third + tenth))
-    )
-    keys="$(cat ~/.fluxbox/keys)"
-    for ((i=0; i<${#mappings[@]}; i=i+2)); do
-      keys="${keys//${mappings[i]}/${mappings[i+1]}}"
-    done
-    echo "$keys" > ~/.fluxbox/keys
-    echo_tty 'Please reload Fluxbox configs to see proper settings'
   fi
 }
 
