@@ -3,15 +3,23 @@
   package:
     name:
     - alsa-utils # Audio drivers and controls
+    - bluez # Bluetooth protocol support
+    - bluez-utils # bluetoothctl
     - feh # Image viewer, needed for setting the background
     - fluxbox # Window manager
     - imagemagick # Image command line tool/screenshots
     - inotify-tools # Tools for monitoring filesystem changes
     - numlockx # Enable numlock
+    - pavucontrol # GUI audio controls
+    - pulseaudio # Audio middleware for individual window controls
+    - pulseaudio-alsa # Bluetooth support for pulseaudio
+    - pulseaudio-bluetooth # Bluetooth support to pulseaudio
+    - pulsemixer # Terminal audio controls
     - ttf-ubuntu-font-family # Fonts, needed for fluxbox to start successfully
     - wmctrl # Interact with windows from scripts
     - xclip # clipboard
     - xcompmgr # Transparency
+    - xdg-user-dirs # Default user directories
     - xorg-apps # A bunch of X utilities
     - xorg-server # The X server, makes the world go round
     - xorg-xclock # Clock

@@ -17,6 +17,15 @@
 # 7 = 79
 # 8 = 80
 # 9 = 81
+#
+# Other codes
+#
+# ; = 47
+# , = 59
+# . = 60
+# space = 65
+# up = 111
+# down = 116
 
 
 # key commands
@@ -24,79 +33,84 @@
 
 ## App shortcuts
 Control 49 :Exec xterm
-Mod4 a :Exec xterm alsamixer
+Mod4 a :Exec pavucontrol
+Mod4 b :Exec headphones connect
 Mod4 c :Exec code
-Mod4 d :Exec deluge
+Mod4 d :Exec discord
 Mod4 f :Exec firefox
 Mod4 Shift f :Exec firefox --private-window
 Mod4 n :Exec nemo
 Mod4 r :Exec remmina
-Mod4 s :Exec slack
+Mod4 s :Exec slack || steam-native
 Mod4 t :Exec xterm
-Mod4 v :Exec vmware-view
+Mod4 v :Exec vmware-view || virtualbox
 
 
 ## window snapping
 
-### windows + numpad
-Mod4 90 :Maximize
+### windows + ...
+Mod4 65 :MacroCmd {Maximize}          {SetHead 1}
+Mod4 47 :MacroCmd {Maximize}          {SetHead 2}
 
-Mod4 m :MacroCmd  {ResizeTo 33% 40%}  {MoveTo 0%  60%}
-Mod4 59 :MacroCmd {ResizeTo 34% 40%}  {MoveTo 33% 60%}
-Mod4 60 :MacroCmd {ResizeTo 33% 40%}  {MoveTo 67% 60%}
+Mod4 m  :MacroCmd {ResizeTo 33% 40%}  {MoveTo 0%  60%} {SetHead 1}
+Mod4 59 :MacroCmd {ResizeTo 34% 40%}  {MoveTo 33% 60%} {SetHead 1}
+Mod4 60 :MacroCmd {ResizeTo 33% 40%}  {MoveTo 67% 60%} {SetHead 1}
 
-Mod4 j :MacroCmd {ResizeTo 33% 100%} {MoveTo 0%  0%}
-Mod4 k :MacroCmd {ResizeTo 34% 100%} {MoveTo 33% 0%}
-Mod4 l :MacroCmd {ResizeTo 33% 100%} {MoveTo 67% 0%}
+Mod4 j  :MacroCmd {ResizeTo 33% 100%} {MoveTo 0%  0%}  {SetHead 1}
+Mod4 k  :MacroCmd {ResizeTo 34% 100%} {MoveTo 33% 0%}  {SetHead 1}
+Mod4 l  :MacroCmd {ResizeTo 33% 100%} {MoveTo 67% 0%}  {SetHead 1}
 
-Mod4 u :MacroCmd {ResizeTo 33% 60%}  {MoveTo 0%  0%}
-Mod4 i :MacroCmd {ResizeTo 34% 60%}  {MoveTo 33% 0%}
-Mod4 o :MacroCmd {ResizeTo 33% 60%}  {MoveTo 67% 0%}
+Mod4 u  :MacroCmd {ResizeTo 33% 60%}  {MoveTo 0%  0%}  {SetHead 1}
+Mod4 i  :MacroCmd {ResizeTo 34% 60%}  {MoveTo 33% 0%}  {SetHead 1}
+Mod4 o  :MacroCmd {ResizeTo 33% 60%}  {MoveTo 67% 0%}  {SetHead 1}
 
-### control + windows + numpad
-Control Mod4 90 :Maximize
+### control + windows + ... (left lean)
+Control Mod4 65 :MacroCmd {Maximize}          {SetHead 1}
+Control Mod4 47 :MacroCmd {Maximize}          {SetHead 2}
 
-Control Mod4 m  :MacroCmd {ResizeTo 33% 40%}  {MoveTo 0%  60%}
-Control Mod4 59 :MacroCmd {ResizeTo 44% 40%}  {MoveTo 23% 60%}
-Control Mod4 60 :MacroCmd {ResizeTo 43% 40%}  {MoveTo 57% 60%}
+Control Mod4 m  :MacroCmd {ResizeTo 23% 40%}  {MoveTo 0%  60%} {SetHead 1}
+Control Mod4 59 :MacroCmd {ResizeTo 44% 40%}  {MoveTo 23% 60%} {SetHead 1}
+Control Mod4 60 :MacroCmd {ResizeTo 43% 40%}  {MoveTo 57% 60%} {SetHead 1}
 
-Control Mod4 j :MacroCmd {ResizeTo 33% 100%} {MoveTo 0%  0%}
-Control Mod4 k :MacroCmd {ResizeTo 44% 100%} {MoveTo 23% 0%}
-Control Mod4 l :MacroCmd {ResizeTo 43% 100%} {MoveTo 57% 0%}
+Control Mod4 j  :MacroCmd {ResizeTo 23% 100%} {MoveTo 0%  0%}  {SetHead 1}
+Control Mod4 k  :MacroCmd {ResizeTo 44% 100%} {MoveTo 23% 0%}  {SetHead 1}
+Control Mod4 l  :MacroCmd {ResizeTo 43% 100%} {MoveTo 57% 0%}  {SetHead 1}
 
-Control Mod4 u :MacroCmd {ResizeTo 33% 60%}  {MoveTo 0%  0%}
-Control Mod4 i :MacroCmd {ResizeTo 44% 60%}  {MoveTo 23% 0%}
-Control Mod4 o :MacroCmd {ResizeTo 43% 60%}  {MoveTo 57% 0%}
+Control Mod4 u  :MacroCmd {ResizeTo 23% 60%}  {MoveTo 0%  0%}  {SetHead 1}
+Control Mod4 i  :MacroCmd {ResizeTo 44% 60%}  {MoveTo 23% 0%}  {SetHead 1}
+Control Mod4 o  :MacroCmd {ResizeTo 43% 60%}  {MoveTo 57% 0%}  {SetHead 1}
 
-### alt + windows + numpad
-Mod1 Mod4 90 :Maximize
+### alt + windows + ... (right lean)
+Mod1 Mod4 65 :MacroCmd {Maximize}          {SetHead 1}
+Mod1 Mod4 47 :MacroCmd {Maximize}          {SetHead 2}
 
-Mod1 Mod4 m  :MacroCmd {ResizeTo 43% 40%}  {MoveTo 0%  60%}
-Mod1 Mod4 59 :MacroCmd {ResizeTo 44% 40%}  {MoveTo 33% 60%}
-Mod1 Mod4 60 :MacroCmd {ResizeTo 33% 40%}  {MoveTo 67% 60%}
+Mod1 Mod4 m  :MacroCmd {ResizeTo 43% 40%}  {MoveTo 0%  60%} {SetHead 1}
+Mod1 Mod4 59 :MacroCmd {ResizeTo 44% 40%}  {MoveTo 33% 60%} {SetHead 1}
+Mod1 Mod4 60 :MacroCmd {ResizeTo 23% 40%}  {MoveTo 77% 60%} {SetHead 1}
 
-Mod1 Mod4 j :MacroCmd {ResizeTo 43% 100%} {MoveTo 0%  0%}
-Mod1 Mod4 k :MacroCmd {ResizeTo 44% 100%} {MoveTo 33% 0%}
-Mod1 Mod4 l :MacroCmd {ResizeTo 33% 100%} {MoveTo 67% 0%}
+Mod1 Mod4 j  :MacroCmd {ResizeTo 43% 100%} {MoveTo 0%  0%}  {SetHead 1}
+Mod1 Mod4 k  :MacroCmd {ResizeTo 44% 100%} {MoveTo 33% 0%}  {SetHead 1}
+Mod1 Mod4 l  :MacroCmd {ResizeTo 23% 100%} {MoveTo 77% 0%}  {SetHead 1}
 
-Mod1 Mod4 u :MacroCmd {ResizeTo 43% 60%}  {MoveTo 0%  0%}
-Mod1 Mod4 i :MacroCmd {ResizeTo 44% 60%}  {MoveTo 33% 0%}
-Mod1 Mod4 o :MacroCmd {ResizeTo 33% 60%}  {MoveTo 67% 0%}
+Mod1 Mod4 u  :MacroCmd {ResizeTo 43% 60%}  {MoveTo 0%  0%}  {SetHead 1}
+Mod1 Mod4 i  :MacroCmd {ResizeTo 44% 60%}  {MoveTo 33% 0%}  {SetHead 1}
+Mod1 Mod4 o  :MacroCmd {ResizeTo 23% 60%}  {MoveTo 77% 0%}  {SetHead 1}
 
-### control + alt + windows + numpad
-Control Mod1 Mod4 90 :Maximize
+### control + alt + windows + ... (expand)
+Control Mod1 Mod4 65 :MacroCmd {Maximize}          {SetHead 1}
+Control Mod1 Mod4 47 :MacroCmd {Maximize}          {SetHead 2}
 
-Control Mod1 Mod4 m :MacroCmd {ResizeTo 67%  40%}  {MoveTo 0%  60%}
-Control Mod1 Mod4 59 :MacroCmd {ResizeTo 100% 40%}  {MoveTo 0%  60%}
-Control Mod1 Mod4 60 :MacroCmd {ResizeTo 67%  40%}  {MoveTo 33% 60%}
+Control Mod1 Mod4 m  :MacroCmd {ResizeTo 67%  40%}  {MoveTo 0%  60%} {SetHead 1}
+Control Mod1 Mod4 59 :MacroCmd {ResizeTo 100% 40%}  {MoveTo 0%  60%} {SetHead 1}
+Control Mod1 Mod4 60 :MacroCmd {ResizeTo 67%  40%}  {MoveTo 33% 60%} {SetHead 1}
 
-Control Mod1 Mod4 j :MacroCmd {ResizeTo 67%  100%} {MoveTo 0%  0%}
-Control Mod1 Mod4 k :MacroCmd {ResizeTo 100% 100%} {MoveTo 0%  0%}
-Control Mod1 Mod4 l :MacroCmd {ResizeTo 67%  100%} {MoveTo 33% 0%}
+Control Mod1 Mod4 j  :MacroCmd {ResizeTo 67%  100%} {MoveTo 0%  0%}  {SetHead 1}
+Control Mod1 Mod4 k  :MacroCmd {ResizeTo 100% 100%} {MoveTo 0%  0%}  {SetHead 1}
+Control Mod1 Mod4 l  :MacroCmd {ResizeTo 67%  100%} {MoveTo 33% 0%}  {SetHead 1}
 
-Control Mod1 Mod4 u :MacroCmd {ResizeTo 67%  60%}  {MoveTo 0%  0%}
-Control Mod1 Mod4 i :MacroCmd {ResizeTo 100% 60%}  {MoveTo 0%  0%}
-Control Mod1 Mod4 o :MacroCmd {ResizeTo 67%  60%}  {MoveTo 33% 0%}
+Control Mod1 Mod4 u  :MacroCmd {ResizeTo 67%  60%}  {MoveTo 0%  0%}  {SetHead 1}
+Control Mod1 Mod4 i  :MacroCmd {ResizeTo 100% 60%}  {MoveTo 0%  0%}  {SetHead 1}
+Control Mod1 Mod4 o  :MacroCmd {ResizeTo 67%  60%}  {MoveTo 33% 0%}  {SetHead 1}
 
 
 ## current window/tab
@@ -153,10 +167,10 @@ OnTitlebar Control Mouse1 :StartTabbing
 
 ## windows
 
-### move/resize/tab window
+### move/tab/edit window
 OnWindow Mod4 Mouse1 :MacroCmd {Raise} {Focus} {StartMoving}
 OnWindow Mod4 Mouse2 :MacroCmd {Raise} {Focus} {StartTabbing}
-OnWindow Mod4 Mouse3 :MacroCmd {Raise} {Focus} {StartResizing NearestCorner}
+OnWindow Mod4 Mouse3 :MacroCmd {Raise} {Focus} {WindowMenu}
 
 ### move window
 OnTitlebar Mouse1 :MacroCmd {Raise} {Focus} {ActivateTab}
