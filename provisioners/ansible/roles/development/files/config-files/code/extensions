@@ -2,7 +2,9 @@ DavidAnson.vscode-markdownlint
 eamodio.gitlens
 golang.go
 hashicorp.terraform
+ms-python.python
 redhat.ansible
+redhat.vscode-yaml
 richie5um2.vscode-sort-json
 streetsidesoftware.code-spell-checker
 timonwong.shellcheck

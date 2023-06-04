@@ -1,6 +1,6 @@
-#
-# ~/.bashrc
-#
+#!/usr/bin/env bash
+
+export PATH="$PATH:/home/dan/.local/bin"
 
 # fix gpg
 export GPG_TTY=$(tty)
@@ -8,12 +8,22 @@ if [[ -n "$SSH_CONNECTION" ]]; then
   export PINENTRY_USER_DATA="USE_CURSES=1"
 fi
 
-# set VS Code as default editor
-export VISUAL='code --wait'
-export EDITOR='code --wait'
+# Ruby settings
+if command -v ruby > /dev/null; then
+  export GEM_HOME="$(ruby -e 'puts Gem.user_dir')"
+  export PATH="$PATH:$GEM_HOME/bin"
+fi
+
+# Set nano as default editor
+export VISUAL='nano'
+export EDITOR='nano'
 
 # If not running interactively, don't do anything
 [[ $- != *i* ]] && return
+
+# Set VS Code as default editor
+export VISUAL='code --wait'
+export EDITOR='code --wait'
 
 # enable docker buildkit
 export DOCKER_BUILDKIT=1

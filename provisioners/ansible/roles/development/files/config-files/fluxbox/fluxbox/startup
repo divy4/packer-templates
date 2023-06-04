@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 move_window() {
   name="$1"
@@ -30,7 +30,14 @@ eval_if_command fetchbackground &
 # Enable numlock
 eval_if_command numlockx &
 # Clock
-xclock -strftime '%A %m/%d/%Y %I:%M:%S %p' &
+eval_if_command xclock -strftime '%A %m/%d/%Y %I:%M:%S %p' &
+
+# Set background
+if [[ -f ~/.fluxbox/background/default.png ]]; then
+  setbackground ~/.fluxbox/background/default.png
+else
+  eval_if_command fetchbackground &
+fi
 
 # Stuff I use every time
 if command -v slack > /dev/null; then
@@ -48,7 +55,7 @@ else
   xterm &
   move_window code 0,2305,0,1135,1440 &
   move_window firefox 0,0,0,1135,1440 &
-  move_window xterm 0,1135,864,1170,576 &
+  move_window xterm 0,1135,0,1170,864 &
 fi
 
 # Run fluxbox

@@ -38,15 +38,6 @@ function config_code {
   fi
 }
 
-function config_conemu {
-  if is_root; then
-    echo_err 'Root conemu config not supported!'
-    return 1
-  else
-    install --mode=644 ConEmu.xml "$APPDATA/ConEmu.xml"
-  fi
-}
-
 function config_fluxbox {
   local apps app exp
   if is_root; then
@@ -54,12 +45,13 @@ function config_fluxbox {
     return 1
   else
     cp --recursive fluxbox/fluxbox/* ~/.fluxbox/
+    install --mode=644 fluxbox/user-dirs.dirs ~/.config/user-dirs.dirs
     install --mode=644 fluxbox/xinitrc ~/.xinitrc
     install --mode=644 fluxbox/Xdefaults ~/.Xdefaults
     install --mode=644 fluxbox/Xresources ~/.Xresources
     mapfile -t apps < <(\
       grep '# autoexec' ~/.fluxbox/menu \
-      | sed --regexp-extended --expression='s/.*\((\w+)\).*/\1/g' \
+      | sed --regexp-extended --expression='s/.*\{([A-Za-z0-9_-]*).*/\1/g' \
     )
     for app in "${apps[@]}"; do
       if command -v "$app" > /dev/null; then
