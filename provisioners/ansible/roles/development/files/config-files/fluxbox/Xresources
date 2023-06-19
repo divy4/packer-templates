@@ -11,6 +11,6 @@ xterm*faceSize:            12
 xterm*foreground:          white
 xterm*renderFont:          true
 xterm.VT100.allowTitleOps: false
-xterm*VT100.Translations:  # override copy/paste
+xterm*VT100.Translations:  #override \
   Ctrl Shift <Key>V:       insert-selection(CLIPBOARD) \n\
   Ctrl Shift <Key>C:       copy-selection(CLIPBOARD)

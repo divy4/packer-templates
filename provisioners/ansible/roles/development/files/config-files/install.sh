@@ -18,6 +18,8 @@ function main {
   done
 }
 
+# Configs
+
 function config_bash {
   if is_root; then
     echo_err 'Root bash config not supported!'
@@ -55,7 +57,7 @@ function config_fluxbox {
     )
     for app in "${apps[@]}"; do
       if command -v "$app" > /dev/null; then
-        exp="s/#\sautoexec\s*(.*\($app\))/\1/g"
+        exp="s/#\sautoexec\s*(.*\{$app.*)/\1/g"
         sed --in-place --regexp-extended --expression="$exp" ~/.fluxbox/menu
       fi
     done
@@ -109,6 +111,8 @@ function config_vim {
     install --mode=644 vimrc ~/.vimrc
   fi
 }
+
+# Helpers
 
 function get_config_functions {
   declare -F \

@@ -19,6 +19,7 @@
   # autoexec [exec] (Blender) {blender}
   # autoexec [exec] (Code) {code}
   # autoexec [exec] (Discord) {discord}
+  # autoexec [exec] (Gimp) {gimp}
   # autoexec [exec] (Nemo) {nemo}
   # autoexec [exec] (Remmina) {remmina}
   # autoexec [exec] (Slack) {slack}
