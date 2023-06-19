@@ -32,18 +32,26 @@
 
 
 ## App shortcuts
-Control 49 :Exec xterm
+
+### windows + ...
 Mod4 a :Exec pavucontrol
-Mod4 b :Exec headphones connect
+Mod4 b :Exec blender
 Mod4 c :Exec code
 Mod4 d :Exec discord
 Mod4 f :Exec firefox
-Mod4 Shift f :Exec firefox --private-window
+Mod4 g :Exec gimp
 Mod4 n :Exec nemo
 Mod4 r :Exec remmina
 Mod4 s :Exec slack || steam-native
 Mod4 t :Exec xterm
-Mod4 v :Exec vmware-view || virtualbox
+Mod4 v :Exec vlc
+
+### control + windows + ...
+Control Mod4 b :Exec headphones connect
+Control Mod4 f :Exec firefox --private-window
+Control Mod4 n :Exec nvidia-settings
+Control Mod4 t :Exec teams
+Control Mod4 v :Exec vmware-view || virtualbox
 
 
 ## window snapping

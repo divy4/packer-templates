@@ -1,8 +1,11 @@
 #!/bin/bash
 
-move_window() {
+function move_window {
   name="$1"
-  position_size="$2"
+  position="$2"
+  size="$3"
+
+  # Wait for the window to appear
   count=0
   while ! wmctrl -l | grep -i "$name"; do
     sleep 1
@@ -12,10 +15,12 @@ move_window() {
       return 1
     fi
   done
-  wmctrl -r "$name" -e "$position_size"
+
+  # Position it
+  wmctrl -r "$name" -e "0,$position,$size"
 }
 
-eval_if_command() {
+function eval_if_command {
   if command -v "$1"; then
     "$@"
   fi
@@ -40,23 +45,51 @@ else
 fi
 
 # Stuff I use every time
-if command -v slack > /dev/null; then
-  code ~/projects/ &
-  firefox &
+case "$(hostname)" in
+glados)
+  # Weekends
+  if [[ "$(date +%A)" =~ ^(Saturday|Sunday)$ ]]; then
+    firefox &
+    xterm &
+    code ~/projects/ &
+    move_window firefox 0,0    1135,1440 &
+    move_window xterm   1135,0 1170,864 &
+    move_window code    2305,0 1135,1440 &
+  # Weekdays
+  else
+    hour="$(date +%H)"
+    if [[ "$hour" -lt 6 ]]; then
+      true
+    elif [[ "$hour" -lt 4 ]]; then
+      vlc &
+      virtualbox &
+      firefox &
+      teams &
+      move_window vlc        0,0      1135,1440 &
+      move_window virtualbox 1135,0   1170,864 &
+      move_window firefox    1135,864 1170,576 &
+      move_window teams      2305,0   1135,1440 &
+    else
+      firefox &
+      xterm &
+      code ~/projects/ &
+      move_window firefox 0,0    1135,1440 &
+      move_window xterm   1135,0 1170,1440 &
+      move_window code    2305,0 1135,1440 &
+    fi
+  fi
+  ;;
+dev.wrk.danivy.com)
   slack &
-  xterm &
-  move_window code 0,791,0,1514,1440 &
-  move_window firefox 0,2305,0,1135,864 &
-  move_window slack 0,0,0,1135,1440 &
-  move_window xterm 0,2305,864,1135,576 &
-else
   code ~/projects/ &
   firefox &
   xterm &
-  move_window code 0,2305,0,1135,1440 &
-  move_window firefox 0,0,0,1135,1440 &
-  move_window xterm 0,1135,0,1170,864 &
-fi
+  move_window slack   0,0      1135,1440 &
+  move_window code    791,0    1514,1440 &
+  move_window firefox 2305,0   1135,864 &
+  move_window xterm   2305,864 1135,576 &
+  ;;
+esac
 
 # Run fluxbox
 exec fluxbox

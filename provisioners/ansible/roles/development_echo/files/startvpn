@@ -3,7 +3,7 @@ set -euo pipefail
 
 AUTH_GROUP='VPN-Policy-OneLogin-BYOD-IT'
 PID_FILE='/var/run/openconnect.pid'
-SERVER_CERTIFICATE='pin-sha256:nCmyk2uNlIOV1RhIsy4eySzVoT0+QLh0eFA+j4pGTaA='
+SERVER_CERTIFICATE='pin-sha256:5RTb96qLMg8LTtqkWDiOJkFMqxRK7qlczYovSzeQmrI='
 SERVER='vpn1.echo.com'
 
 function main {
