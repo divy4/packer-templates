@@ -32,9 +32,7 @@ function get_template {
 # VMs
 
 function get_variant_temp_dir {
-  local short_name
-  short_name="$(echo "$1" | sed 's/templates\///g;s/\.json$//g;s/\//-/g')"
-  echo "/tmp/packer_vms/$short_name" | sed 's/\/\//\//g'
+  echo "$VM_TEMP_DIR/$(get_vm_name "$1")"
 }
 
 function get_vm_name {
